@@ -12,6 +12,20 @@ The maze will shift regularly presenting itself in 3 configurations. The differe
 
 ## Labyrinth
 
+### Layout
+
+We will need to design the different configurations for the map. As of now, we plan to have 3 different configurations. These will need to link in the proper way in the proper places to allow for passage between each region properly. We will need to include in the design what differentiates the three configurations. This could be resources, enemy types, puzzle mechanics.
+
+We will need to make sure players need to go through the 3 different configurations to get out of the labyrinth. One way of achieving this is having "levels" in the configurations. Say we name the configurations A, B and C; with levels being a number associated with the letters, e.g. A1, A2, C3, B1, etc. We can make it so that A2 is only accessible from B1 or C1, that C3 is only accessible from B2 or A2. When going up a level, you access part of a configuration you couldn't get to using this configuration's lower level. In order to make it slightly simpler and actually forcing players to go through the 3 different configurations, we would force them to go a certain way:
+
+- A1 -> B2 -> C3
+- B1 -> C2 -> A3
+- C1 -> A2 -> B3
+
+This only leaves a limited amount of ways to escape the labyrinth and simplifies its design.
+
+![SCHEMATIC](schematic.png)
+
 ### Special zones:
 
 - Puzzle zones (water puzzle, lever puzzle, crates puzzle): gives access to specific reward or new zone
@@ -64,4 +78,28 @@ During our outside the combat, the player will probably need to heal in some way
 
 ## Map
 
-We will need to design the different configurations for the map. As of now, we plan to have 3 different configurations. These will need to link in the proper way in the proper places to allow for passage between each region properly.
+We will need the map to reflect the different configurations and allow good visualisation of each. This could mean overlaying the three configurations, having three separate maps, having good landmarks for the player to know where they're going, etc.
+
+The player will need to fill in the map by exploring the labyrinth. The initial idea was that going back to the center of the maze allows the player to save the exploration progression and that if they lose, they also lose part of what they managed to explore. This would put some more pressure on the player, making death more punitive and thus more menacing.
+
+The map would also display the player's position and the way they are facing at all times. This will be very important to make the maze less a hassle to get through, especially if players get lost. It should also display symbols where the special zones are and what kind of zone they are. Since players need to go through 3 special zones, the zones could change according to the cycle in order to give the player something to choose from when planning their route out. On the same screen could also be displayed player info, such as health, inventory, etc.
+
+## Art
+
+We will be using 3D pixel-art. Using software like Blender and Blockbench, making the models will not be too hard. We need to devise a way to identify the three different configurations: symbols, colours, etc.
+
+Sound design will be very important as we want the music not to be the biggest focus of the game. This means we will try to have sound design for pretty much any interaction with the environment: triggers, walking, running, enemies, fighting and environmental sounds.
+
+## Polish
+
+UI & menus
+
+Control mapping/remapping
+
+Music:
+- ambiance: start, labyrinth, end, being searched, near patrolling enemy
+- fighting: regular enemies, events, big enemy
+
+Save system
+
+[Accessibility options](https://gameaccessibilityguidelines.com/)
