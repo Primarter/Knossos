@@ -1,6 +1,6 @@
-# Untitled Maze Game
+# Knossos
 
-This is the repository for the untitled maze game made for Rafale25 and my Master's project. It will be developped over the course of our 3rd semester in Heriot-Watt University's Games Design & Development MDes.
+This is the repository for the *Knossos* game made for Rafale25 and my Master's project. It will be developped over the course of our 3rd semester in Heriot-Watt University's Games Design & Development MDes.
 
 This game will be an exploration game centered around discovering a labyrinth and escaping it. It will work in a 3D pseudo-isometric view with a 3D pixel-art style (similar to Cloud Gardens).
 
