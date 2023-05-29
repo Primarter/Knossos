@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class StateMachine
+{
+    public State[] states;
+    public GameObject obj;
+    public int currentState;
+
+    public StateMachine(GameObject obj, System.Type enumStateType)
+    {
+        this.obj = obj;
+        int numStates = System.Enum.GetNames(enumStateType).Length;
+        // Debug.Log(("numStates", numStates));
+        states = new State[numStates];
+    }
+
+    public void RegisterState<T>(System.Enum id)
+    where T : State, new()
+    {
+        T state = new T();
+        state.obj = obj;
+        state.Init();
+
+        int index = (int)(object)id;
+        states[index] = state;
+    }
+
+    public State GetState(int stateId)
+    {
+        int index = (int)stateId;
+        return states[index];
+    }
+
+    public void FixedUpdate()
+    {
+        GetState(currentState)?.FixedUpdate();
+    }
+
+    public void Update()
+    {
+        GetState(currentState)?.Update();
+    }
+
+    public void ChangeState(System.Enum newState)
+    {
+        GetState(currentState)?.Exit();
+        currentState = (int)(object)newState;
+        GetState(currentState)?.Enter();
+    }
+}
