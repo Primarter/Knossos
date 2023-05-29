@@ -1,22 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyAgent : StateMachineAgent
+public class EnemyAgent : MonoBehaviour
 {
-    [SerializeField] EnemyState currentState;
+    public StateMachine stateMachine;
+
+    [SerializeField] public EnemyConfig config;
+    [SerializeField] public EnemyState currentState;
+
+    // public bool isAttacking;
+    // public bool canAttack;
+
+    [HideInInspector]
+    public TargetingSystem targetingSystem;
+    [HideInInspector]
+    public LocomotionSystem locomotionSystem;
+
+    void Awake()
+    {
+        targetingSystem = GetComponent<TargetingSystem>();
+        locomotionSystem = GetComponent<LocomotionSystem>();
+    }
 
     void Start()
     {
-        stateMachine = new StateMachine(this, typeof(EnemyState));
+        stateMachine = new StateMachine(this.gameObject, typeof(EnemyState));
 
-        stateMachine.RegisterState(new EnemyStateIdle());
+        stateMachine.RegisterState<EnemyIdleState>(EnemyState.Idle);
+        // stateMachine.RegisterState<EnemyPatrolState>(EnemyState.Patrol);
+        stateMachine.RegisterState<EnemyChargeAttackState>(EnemyState.ChargeAttack);
+        stateMachine.RegisterState<EnemyAttackingState>(EnemyState.Attacking);
+        stateMachine.RegisterState<EnemyStagerredState>(EnemyState.Stagerred);
 
-        // stateMachine.ChangeState(initialState);
-        stateMachine.ChangeState((int)EnemyState.Idle);
+        stateMachine.ChangeState(config.initialState);
     }
 
+    void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
+    }
 
     void Update()
     {

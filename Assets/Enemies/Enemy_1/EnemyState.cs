@@ -4,5 +4,5 @@ public enum EnemyState
     Patrol,
     ChargeAttack,
     Attacking,
-    EndAttack,
+    Stagerred,
 }

@@ -5,38 +5,48 @@ using UnityEngine;
 public class StateMachine
 {
     public State[] states;
-    public StateMachineAgent agent;
+    public GameObject obj;
     public int currentState;
 
-    public StateMachine(StateMachineAgent agent, System.Type enumStateType)
+    public StateMachine(GameObject obj, System.Type enumStateType)
     {
-        this.agent = agent;
+        this.obj = obj;
         int numStates = System.Enum.GetNames(enumStateType).Length;
         // Debug.Log(("numStates", numStates));
         states = new State[numStates];
     }
 
-    public void RegisterState(State state)
+    public void RegisterState<T>(System.Enum id)
+    where T : State, new()
     {
-        int index = (int)(object)state.GetId();
+        T state = new T();
+        state.obj = obj;
+        state.Init();
+
+        int index = (int)(object)id;
         states[index] = state;
     }
 
     public State GetState(int stateId)
     {
-        int index = (int) stateId;
+        int index = (int)stateId;
         return states[index];
+    }
+
+    public void FixedUpdate()
+    {
+        GetState(currentState)?.FixedUpdate();
     }
 
     public void Update()
     {
-        GetState(currentState)?.Update(agent);
+        GetState(currentState)?.Update();
     }
 
-    public void ChangeState(int newState)
+    public void ChangeState(System.Enum newState)
     {
-        GetState(currentState)?.Exit(agent);
-        currentState = newState;
-        GetState(currentState)?.Enter(agent);
+        GetState(currentState)?.Exit();
+        currentState = (int)(object)newState;
+        GetState(currentState)?.Enter();
     }
 }

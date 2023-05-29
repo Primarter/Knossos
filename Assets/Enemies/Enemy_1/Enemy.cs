@@ -8,18 +8,10 @@ public class Enemy : MonoBehaviour
     public Transform target;
     NavMeshAgent agent;
 
-    public float triggerAttackDistance = 5f;
-    public float startAttackCooldown = 0.3f;
-    public float attackTime = 0.3f;
-    public float endAttackCooldown = 0.3f;
-    public float nextAttackCooldown = 2f;
+    public EnemyConfig config;
 
     public bool isAttacking;
     public bool canAttack;
-
-    float attackSpeed = 12f;
-    // float defaultSpeed = 1f;
-    // float speed;
 
     void Awake()
     {
@@ -42,23 +34,22 @@ public class Enemy : MonoBehaviour
         // speed = 0f;
         // agent.isStopped = true;
 
-        yield return new WaitForSeconds(startAttackCooldown);
+        yield return new WaitForSeconds(config.startAttackCooldown);
 
         // state: attack
         isAttacking = true;
         // set speed to 10
         // speed = attackSpeed;
-        yield return new WaitForSeconds(attackTime);
-
+        yield return new WaitForSeconds(config.attackDuration);
 
         // state endOfAttack
         // speed = 0f;
-        yield return new WaitForSeconds(endAttackCooldown);
+        yield return new WaitForSeconds(config.endAttackCooldown);
 
         // state cooldownForNextAttack
         agent.isStopped = false;
         isAttacking = false;
-        yield return new WaitForSeconds(nextAttackCooldown);
+        yield return new WaitForSeconds(config.nextAttackCooldown);
 
         // state: after attack cooldown
         // go back to initial state
@@ -70,7 +61,7 @@ public class Enemy : MonoBehaviour
         if (canAttack)
         {
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
-            if (distanceToTarget < triggerAttackDistance)
+            if (distanceToTarget < config.triggerAttackDistance)
             {
                 print("YOLODWO");
                 StartCoroutine(Attack());
@@ -85,7 +76,7 @@ public class Enemy : MonoBehaviour
         {
             // transform.
             Vector3 dir = new Vector3(transform.forward.x, 0f, transform.forward.z);
-            agent.Move(dir * attackSpeed * Time.deltaTime);
+            agent.Move(dir * config.attackSpeed * Time.deltaTime);
         }
     }
 }
