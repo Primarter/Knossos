@@ -14,6 +14,7 @@ public class EnemyChargeAttackState : State
     public override void Enter()
     {
         agent.locomotionSystem.navMeshAgent.speed = 0f;
+        agent.locomotionSystem.navMeshAgent.isStopped = true;
 
         Vector3 dir = agent.targetingSystem.target.position - agent.transform.position;
         dir.y = 0f;
