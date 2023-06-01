@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad00b8dfaa90aa40864dc9b6f5b0c54, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   maxStamina: 3
   dashStrength: 2.5
-  dashDuration: 0.35
-  dashCooldown: 0.05
+  dashDuration: 0.6
+  dashCooldown: 0.45
   dashCost: 1
   staminaRegenPerSec: 1
