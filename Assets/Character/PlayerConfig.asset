@@ -14,8 +14,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   maxStamina: 3
-  dashStrength: 2.5
+  DashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.04539816
+      value: 0.7990627
+      inSlope: 3.5206268
+      outSlope: 3.5206268
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.722313
+      outWeight: 0.13946547
+    - serializedVersion: 3
+      time: 0.14917463
+      value: 0.958964
+      inSlope: 0.1216581
+      outSlope: 0.1216581
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.14504926
+    - serializedVersion: 3
+      time: 0.5554321
+      value: 0.98308575
+      inSlope: 0.026912395
+      outSlope: 0.026912395
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11676832
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.7038279
+      value: 0.22808933
+      inSlope: -1.0898386
+      outSlope: -1.0898386
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16570163
+      outWeight: 0.2800454
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.0232735
+      outSlope: -1.0232735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13999107
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dashStrength: 2
   dashDuration: 0.6
-  dashCooldown: 0.45
+  dashCooldown: 0.2
   dashCost: 1
   staminaRegenPerSec: 1
+  DodgeAnimationSpeedMultiplier: 1.7499999

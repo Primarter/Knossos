@@ -34,10 +34,10 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: 0TPose
-      takeName: CharacterArmature_test|0TPose
+      takeName: CharacterArmature_test|TestDodge
       internalID: 3672713693086162146
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
