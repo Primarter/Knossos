@@ -43,6 +43,7 @@ public class EnemyStagerredState : State
     IEnumerator StaggeredTimer()
     {
         yield return new WaitForSeconds(agent.config.endAttackCooldown);
-        agent.stateMachine.ChangeState(EnemyState.Idle);
+        // agent.stateMachine.ChangeState(EnemyState.Idle);
+        agent.stateMachine.ChangeState(EnemyState.Patrol);
     }
 }

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 25
   defaultSpeed: 2
-  triggerAttackDistance: 5
-  startAttackCooldown: 0.3
+  triggerAttackDistance: 6
+  startAttackCooldown: 0.6
   attackDuration: 0.5
   endAttackCooldown: 1
   nextAttackCooldown: 2
-  initialState: 0
+  initialState: 1

@@ -28,7 +28,7 @@ public class EnemyAgent : MonoBehaviour
         stateMachine = new StateMachine(this.gameObject, typeof(EnemyState));
 
         stateMachine.RegisterState<EnemyIdleState>(EnemyState.Idle);
-        // stateMachine.RegisterState<EnemyPatrolState>(EnemyState.Patrol);
+        stateMachine.RegisterState<EnemyPatrolState>(EnemyState.Patrol);
         stateMachine.RegisterState<EnemyChargeAttackState>(EnemyState.ChargeAttack);
         stateMachine.RegisterState<EnemyAttackingState>(EnemyState.Attacking);
         stateMachine.RegisterState<EnemyStagerredState>(EnemyState.Stagerred);
