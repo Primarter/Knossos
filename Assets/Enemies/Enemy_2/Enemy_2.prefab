@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 982a815af5eda474c8e694454fd4b378, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,8 +113,9 @@ GameObject:
   - component: {fileID: 3882211738945492237}
   - component: {fileID: 3882211738945492236}
   - component: {fileID: 3882211738945492235}
+  - component: {fileID: 5162653091762640739}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +165,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 982a815af5eda474c8e694454fd4b378, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f183e6be71484c91bf80ea4dce712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 348e48f3093596343896bc3034e21bf5, type: 2}
+  config: {fileID: 11400000, guid: db36f17103820774187f52f875335b9c, type: 2}
   currentState: 0
   targetingSystem: {fileID: 0}
   locomotionSystem: {fileID: 0}
@@ -265,3 +266,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
+--- !u!114 &5162653091762640739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882211738945492244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6440e1ef55a3c4c975ea233d301abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 1ca46884e5c795b4f8f6977740c31146, type: 2}
