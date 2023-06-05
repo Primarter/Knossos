@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(AnimationController))]
+[RequireComponent(typeof(CharacterController), typeof(AnimationController), typeof(LockOnEnemy))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]

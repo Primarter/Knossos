@@ -37,7 +37,7 @@ BlendTree:
     m_Motion: {fileID: -8661246007852926740, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
       type: 3}
     m_Threshold: 0
-    m_Position: {x: 0, y: 0.85}
+    m_Position: {x: 0, y: 0.2}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
@@ -46,7 +46,7 @@ BlendTree:
     m_Motion: {fileID: 2183151537708490903, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
       type: 3}
     m_Threshold: 0.25
-    m_Position: {x: 0, y: -0.85}
+    m_Position: {x: 0, y: -0.2}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
@@ -55,7 +55,7 @@ BlendTree:
     m_Motion: {fileID: 7485411089107431783, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
       type: 3}
     m_Threshold: 0.5
-    m_Position: {x: -0.85, y: 0}
+    m_Position: {x: -0.2, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
@@ -64,7 +64,7 @@ BlendTree:
     m_Motion: {fileID: -1580809914527210563, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
       type: 3}
     m_Threshold: 0.75
-    m_Position: {x: 0.85, y: 0}
+    m_Position: {x: 0.2, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Speed
@@ -203,31 +203,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: MoveX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: MoveZ
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: DodgeSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

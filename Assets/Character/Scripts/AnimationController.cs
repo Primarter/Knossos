@@ -22,12 +22,14 @@ public class AnimationController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 movement = new Vector2(InputManager.inputs.horizontal, InputManager.inputs.vertical);
-
-        animator.SetFloat("MoveX", movement.x);
-        animator.SetFloat("MoveZ", movement.y);
+        Vector3 movement = new Vector3(InputManager.inputs.horizontal, 0f, InputManager.inputs.vertical);
 
         animator.SetFloat("Speed", movement.magnitude);
+
+        movement = Quaternion.LookRotation(transform.forward, Vector3.up) * movement;
+
+        animator.SetFloat("MoveX", movement.x);
+        animator.SetFloat("MoveZ", movement.z);
 
         #if UNITY_EDITOR
             animator.SetFloat("DodgeSpeed", config.DodgeAnimationSpeedMultiplier);
