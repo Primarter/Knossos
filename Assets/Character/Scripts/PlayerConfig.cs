@@ -9,6 +9,9 @@ public class PlayerConfig : ScriptableObject
     public float speed = 10f;
     public float maxStamina = 2f;
 
+    [Header("ControllerConfig")]
+    public float rotationSpeed = 10f;
+
     [Header("Dash config")]
     public AnimationCurve DashSpeedCurve = new AnimationCurve();
     public float dashStrength = 20f;
