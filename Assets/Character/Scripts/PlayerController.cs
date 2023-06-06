@@ -97,11 +97,4 @@ public class PlayerController : MonoBehaviour
         if (!dashing)
             stamina += config.staminaRegenPerSec * Time.deltaTime;
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 15f);
-        // Gizmos.DrawRay(transform.position, )
-    }
 }
