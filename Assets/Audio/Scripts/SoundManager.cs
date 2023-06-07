@@ -100,6 +100,7 @@ public class SoundManager : MonoBehaviour
         float volume = 1.0f,
         float pitch = 1.0f,
         float spatialBlend = 1.0f,
+        float minDistance = 1.0f,
         float maxDistance = 20.0f)
         // AudioType type
     {
@@ -117,6 +118,7 @@ public class SoundManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.spatialBlend = spatialBlend;
+        audioSource.minDistance = minDistance;
         audioSource.maxDistance = maxDistance;
         audioSource.Play();
     }

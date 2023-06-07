@@ -441,9 +441,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c62a7c16dc4013409a18ac0b367c2ad, type: 3}
+--- !u!4 &1454860425490082323 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3036529389644513312, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 4750355613025326579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5072775288519471640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 4750355613025326579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5323645433448554528 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 580335509360653779, guid: 9c62a7c16dc4013409a18ac0b367c2ad,
     type: 3}
   m_PrefabInstance: {fileID: 4750355613025326579}
   m_PrefabAsset: {fileID: 0}
@@ -464,7 +476,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &4750355611779194071
 CharacterController:
@@ -505,6 +517,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &688736277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5561328245949163682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300140955f82e9040875de98d6754caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  leftFoot: {fileID: 1454860425490082323}
+  rightFoot: {fileID: 5323645433448554528}
+  footstepSounds:
+  - {fileID: 8300000, guid: e9f4e73b352003d469bb1aa28b92036b, type: 3}
+  - {fileID: 8300000, guid: 6f71085f222b706468ec81738551c0f0, type: 3}
+  - {fileID: 8300000, guid: 774685cd522a7f84b8197dbe70ead977, type: 3}
+  - {fileID: 8300000, guid: ef47c61f06bc6c54a8af13ea26d29151, type: 3}
+  - {fileID: 8300000, guid: 8b3029aeafda8604b87143e53fa956f8, type: 3}
+  - {fileID: 8300000, guid: 629769803100ed94eb99ccda18cd71b2, type: 3}
+  - {fileID: 8300000, guid: d595962a7f25a54449e2182f0aabc99f, type: 3}
 --- !u!114 &2718463659167094877
 MonoBehaviour:
   m_ObjectHideFlags: 0
