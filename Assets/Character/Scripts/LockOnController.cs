@@ -44,7 +44,6 @@ public class LockOnController : MonoBehaviour
                 Debug.LogError("LockOnEnemy: " + other.name + " doesn't have Enemy component, discarded");
                 return;
             }
-            print("Added " + other.name);
             enemies.Add(enemy);
         }
     }
@@ -59,9 +58,23 @@ public class LockOnController : MonoBehaviour
                 return;
 
             enemies.Remove(enemy);
-            print("Removed " + other.name);
             if (lockedEnemy == enemy)
                 lockedEnemy = null;
         }
     }
+
+    // In player update:
+    // if (movement.magnitude > 0)
+    // {
+    //     if (movement.magnitude > .85 || lockOnController.lockedEnemy == null)
+    //         targetRotation = Quaternion.LookRotation(movement, Vector3.up);
+    //     else
+    //     {
+    //         targetRotation.SetLookRotation(lockOnController.lockedEnemy.transform.position - transform.position);
+    //     }
+    // }
+    // else if (lockOnController.lockedEnemy != null)
+    // {
+    //     targetRotation.SetLookRotation(lockOnController.lockedEnemy.transform.position - transform.position, Vector3.up);
+    // }
 }

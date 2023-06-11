@@ -458,26 +458,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.79891
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!135 &3000225110171045477
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694165254857749305}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 15
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3000225110171045475
 Animator:
   serializedVersion: 5
@@ -524,18 +511,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8b3029aeafda8604b87143e53fa956f8, type: 3}
   - {fileID: 8300000, guid: 629769803100ed94eb99ccda18cd71b2, type: 3}
   - {fileID: 8300000, guid: d595962a7f25a54449e2182f0aabc99f, type: 3}
---- !u!114 &3000225110171045473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694165254857749305}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2e873b2360064e45afe6223ca43f8c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3000225110171045484
 MonoBehaviour:
   m_ObjectHideFlags: 0

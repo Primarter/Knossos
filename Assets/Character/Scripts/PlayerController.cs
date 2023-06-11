@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(AnimationController), typeof(LockOnController))]
+[RequireComponent(typeof(CharacterController), typeof(AnimationController))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController characterController;
     private AnimationController animationController;
-    private LockOnController lockOnController;
 
     private Stopwatch dashTimer = new Stopwatch();
     private bool dashing = false;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animationController = GetComponent<AnimationController>();
-        lockOnController = GetComponent<LockOnController>();
     }
 
     private void Start()
@@ -77,16 +75,7 @@ public class PlayerController : MonoBehaviour
 
         if (movement.magnitude > 0)
         {
-            if (movement.magnitude > .85 || lockOnController.lockedEnemy == null)
-                targetRotation = Quaternion.LookRotation(movement, Vector3.up);
-            else
-            {
-                targetRotation.SetLookRotation(lockOnController.lockedEnemy.transform.position - transform.position);
-            }
-        }
-        else if (lockOnController.lockedEnemy != null)
-        {
-            targetRotation.SetLookRotation(lockOnController.lockedEnemy.transform.position - transform.position, Vector3.up);
+            targetRotation = Quaternion.LookRotation(movement, Vector3.up);
         }
         targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, config.rotationSpeed * Time.deltaTime);
