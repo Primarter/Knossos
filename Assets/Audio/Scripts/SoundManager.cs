@@ -83,7 +83,7 @@ public class SoundManager : MonoBehaviour
 
         obj.transform.localPosition = Vector3.zero;
         obj.transform.rotation = Quaternion.identity;
-        obj.transform.SetParent(null, false);
+        // obj.transform.SetParent(null, false);
 
         audioSource.clip = s.clip;
         audioSource.outputAudioMixerGroup = instance.audioMixerGroupEffects; // effect audioMixer by default
@@ -129,6 +129,7 @@ public class SoundManager : MonoBehaviour
         float volume = 1.0f,
         float pitch = 1.0f,
         float spatialBlend = 1.0f,
+        float minDistance = 1.0f,
         float maxDistance = 30.0f)
     {
         GameObject obj = instance.audioPool.getAvailablePoolObject();
@@ -144,6 +145,7 @@ public class SoundManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.pitch = pitch;
         audioSource.spatialBlend = spatialBlend;
+        audioSource.minDistance = minDistance;
         audioSource.maxDistance = maxDistance;
         audioSource.Play();
     }
@@ -188,11 +190,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case AudioType.Music:
                 instance.audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
-                // musicSource.volume = volume;
                 break;
             case AudioType.Effect:
                 instance.audioMixer.SetFloat("EffectsVolume", Mathf.Log10(volume) * 20);
-                // effectsSource.volume = volume;
                 break;
             default:
                 Debug.LogError("Audio type " + type + " doesn't exist!");

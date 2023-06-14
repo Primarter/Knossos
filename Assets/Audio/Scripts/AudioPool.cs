@@ -11,14 +11,22 @@ public class AudioPool
     public int poolCount => audioSourcePool.Count;
     public int playingCount => audioSourcePlaying.Count;
 
+    public GameObject poolParent;
+
     public void Initialize()
     {
         audioSourcePool = new Stack<GameObject>(maxPoolSize);
         audioSourcePlaying = new List<GameObject>();
 
+        poolParent = new GameObject("AudioSourcePool");
+
         for (int i = 0 ; i < maxPoolSize ; ++i)
         {
             GameObject obj = new GameObject();
+            obj.name = "AudioSourcePoolObject";
+            obj.transform.SetParent(poolParent.transform, false);
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.rotation = Quaternion.identity;
 
             AudioSource audioSource = obj.AddComponent<AudioSource>();
 
@@ -42,7 +50,10 @@ public class AudioPool
             AudioSource audioSource = obj.GetComponent<AudioSource>();
             if (!audioSource.isPlaying)
             {
-                obj.transform.SetParent(null, false);
+                obj.transform.SetParent(poolParent.transform, false);
+                obj.transform.localPosition = Vector3.zero;
+                obj.transform.rotation = Quaternion.identity;
+
                 audioSourcePool.Push(obj);
                 return true;
             }
