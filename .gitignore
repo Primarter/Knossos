@@ -58,6 +58,16 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+# Lightmaps
+*.exr
+*.exr.meta
+Lightmap*.png
+Lightmap*.png.meta
+LightmapSnapshot.asset
+LightmapSnapshot.asset.meta
+LightingData.asset
+LightingData.asset.meta
+
 # Builds
 *.apk
 *.aab
