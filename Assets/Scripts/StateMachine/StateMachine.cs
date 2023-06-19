@@ -2,51 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine
-{
-    public State[] states;
-    public GameObject obj;
-    public int currentState;
-
-    public StateMachine(GameObject obj, System.Type enumStateType)
+// namespace MyStateMachine
+// {
+    public class StateMachine
     {
-        this.obj = obj;
-        int numStates = System.Enum.GetNames(enumStateType).Length;
-        // Debug.Log(("numStates", numStates));
-        states = new State[numStates];
-    }
+        public State[] states;
+        public GameObject obj;
+        public int currentState;
 
-    public void RegisterState<T>(System.Enum id)
-    where T : State, new()
-    {
-        T state = new T();
-        state.obj = obj;
-        state.Init();
+        public StateMachine(GameObject obj, System.Type enumStateType)
+        {
+            this.obj = obj;
+            int numStates = System.Enum.GetNames(enumStateType).Length;
+            // Debug.Log(("numStates", numStates));
+            states = new State[numStates];
+        }
 
-        int index = (int)(object)id;
-        states[index] = state;
-    }
+        public void RegisterState<T>(System.Enum id)
+        where T : State, new()
+        {
+            T state = new T();
+            state.obj = obj;
+            state.Init();
 
-    public State GetState(int stateId)
-    {
-        int index = (int)stateId;
-        return states[index];
-    }
+            int index = (int)(object)id;
+            states[index] = state;
+        }
 
-    public void FixedUpdate()
-    {
-        GetState(currentState)?.FixedUpdate();
-    }
+        public State GetState(int stateId)
+        {
+            int index = (int)stateId;
+            return states[index];
+        }
 
-    public void Update()
-    {
-        GetState(currentState)?.Update();
-    }
+        public void FixedUpdate()
+        {
+            GetState(currentState)?.FixedUpdate();
+        }
 
-    public void ChangeState(System.Enum newState)
-    {
-        GetState(currentState)?.Exit();
-        currentState = (int)(object)newState;
-        GetState(currentState)?.Enter();
+        public void Update()
+        {
+            GetState(currentState)?.Update();
+        }
+
+        public void ChangeState(System.Enum newState)
+        {
+            GetState(currentState)?.Exit();
+            currentState = (int)(object)newState;
+            GetState(currentState)?.Enter();
+        }
     }
-}
+// }
