@@ -15,29 +15,6 @@ patrol:
     go until intersection
 */
 
-// public class MinotaurAI : MonoBehaviour
-// {
-//     NavMeshAgent agent;
-//     [SerializeField] GameObject player;
-
-//     void Awake()
-//     {
-//         agent = GetComponent<NavMeshAgent>();
-//     }
-
-//     void Update()
-//     {
-//         if (player.GetComponent<Hiding>().isHidding)
-//         {
-//             agent.isStopped = true;
-//         }
-//         else
-//         {
-//             agent.isStopped = false;
-//             agent.destination = player.transform.position;
-//         }
-//     }
-// }
 
 namespace Knossos.Minotaur
 {
@@ -59,10 +36,10 @@ namespace Knossos.Minotaur
         {
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
-            // stateMachine.RegisterState<EnemyStatePatrol>(State.Patrol);
-            // stateMachine.RegisterState<EnemyStateAttacking>(State.Follow);
+            stateMachine.RegisterState<StatePatrol>(State.Patrol);
+            stateMachine.RegisterState<StateFollow>(State.Follow);
 
-            // stateMachine.ChangeState(config.initialState);
+            stateMachine.ChangeState(State.Follow);
         }
 
         void FixedUpdate()
