@@ -439,6 +439,41 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04516983
+      objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071072
+      objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071064
+      objectReference: {fileID: 0}
+    - target: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -89.99994
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc0a4c54f6e07264ea72c907ca283e34, type: 3}
 --- !u!4 &2412636042799542878 stripped
@@ -583,12 +618,12 @@ ParentConstraint:
   m_GameObject: {fileID: 6504913030523998614}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0.44631916, y: 0.54565424, z: -0.1469468}
-  m_RotationAtRest: {x: -65.18268, y: 14.928154, z: 17.739521}
+  m_TranslationAtRest: {x: 0.84, y: 1.41, z: -0.04516983}
+  m_RotationAtRest: {x: 0, y: 0, z: -89.99994}
   m_TranslationOffsets:
-  - {x: 0.1017766, y: -0.26701272, z: 0.91491395}
+  - {x: 0, y: 0.1266681, z: 0.050568104}
   m_RotationOffsets:
-  - {x: -6.207245, y: -155.92377, z: 121.342804}
+  - {x: -0.000063179206, y: -90.000015, z: 0.00006659432}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1

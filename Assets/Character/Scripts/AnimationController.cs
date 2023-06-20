@@ -31,15 +31,6 @@ public class AnimationController : MonoBehaviour
 
         animator.SetFloat("Speed", movement.magnitude);
 
-        // var rot = Quaternion.Euler(0f, Mathf.Acos(Mathf.Clamp(Vector3.Dot(transform.forward, movement.normalized), -1f, 1f)), 0f);
-
-        // movement = rot * new Vector3(InputManager.inputs.horizontal, 0f, InputManager.inputs.vertical);
-
-        // movement = Quaternion.Euler(0f, -transform.rotation.eulerAngles.y, 0f) * movement;
-
-        // animator.SetFloat("MoveX", movement.x);
-        // animator.SetFloat("MoveZ", movement.z);
-
         #if UNITY_EDITOR
             animator.SetFloat("DodgeSpeed", config.DodgeAnimationSpeedMultiplier);
         #endif
@@ -48,5 +39,10 @@ public class AnimationController : MonoBehaviour
     public void TriggerDodge()
     {
         animator.SetTrigger("Dodge");
+    }
+
+    public void TriggerAttack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
