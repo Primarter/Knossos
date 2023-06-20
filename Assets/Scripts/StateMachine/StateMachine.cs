@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// namespace MyStateMachine
-// {
+namespace Knossos.FSM
+{
     public class StateMachine
     {
         public State[] states;
@@ -52,4 +52,4 @@ using UnityEngine;
             GetState(currentState)?.Enter();
         }
     }
-// }
+}

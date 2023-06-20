@@ -1,8 +1,11 @@
-public enum EnemyState
+namespace Knossos.Enemy
 {
-    Idle,
-    Patrol,
-    ChargeAttack,
-    Attacking,
-    Stagerred,
+    public enum State
+    {
+        Idle,
+        Patrol,
+        ChargeAttack,
+        Attacking,
+        Stagerred,
+    }
 }

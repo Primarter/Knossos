@@ -2,33 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetingSystem : MonoBehaviour
+namespace Knossos.Enemy
 {
-    EnemyAgent agent;
-    public Transform target;
-
-    public bool hasTarget;
-
-    void Awake()
+    public class TargetingSystem : MonoBehaviour
     {
-        agent = GetComponent<EnemyAgent>();
-    }
+        EnemyAgent agent;
+        public Transform target;
 
-    void Start()
-    {
-        target = GameObject.FindWithTag("Player").transform;
-        hasTarget = false;
-    }
+        public bool hasTarget;
 
-    void FixedUpdate()
-    {
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+        void Awake()
+        {
+            agent = GetComponent<EnemyAgent>();
+        }
 
-        hasTarget = distanceToTarget < agent.config.triggerAttackDistance;
-    }
+        void Start()
+        {
+            target = GameObject.FindWithTag("Player").transform;
+            hasTarget = false;
+        }
 
-    void Update()
-    {
+        void FixedUpdate()
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
+            hasTarget = distanceToTarget < agent.config.triggerAttackDistance;
+        }
+
+        void Update()
+        {
+
+        }
     }
 }

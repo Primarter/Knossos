@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Knossos;
 
 /*
 Minotaur AI
@@ -38,39 +39,41 @@ patrol:
 //     }
 // }
 
+namespace Knossos.Minotaur
+{
+    public class MinotaurAgent : MonoBehaviour
+    {
+        public FSM.StateMachine stateMachine;
 
-// public class MinotaurAgent : MonoBehaviour
-// {
-//     public StateMachine stateMachine;
+        [SerializeField] public State currentState;
 
-//     // [SerializeField] public EnemyState currentState;
+        [HideInInspector]
+        public LocomotionSystem locomotionSystem;
 
-//     [HideInInspector]
-//     public LocomotionSystem locomotionSystem;
+        void Awake()
+        {
+            locomotionSystem = GetComponent<LocomotionSystem>();
+        }
 
-//     void Awake()
-//     {
-//         locomotionSystem = GetComponent<LocomotionSystem>();
-//     }
+        void Start()
+        {
+            stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
-//     void Start()
-//     {
-//         stateMachine = new StateMachine(this.gameObject, typeof(EnemyState));
+            // stateMachine.RegisterState<EnemyStatePatrol>(State.Patrol);
+            // stateMachine.RegisterState<EnemyStateAttacking>(State.Follow);
 
-//         stateMachine.RegisterState<EnemyPatrolState>(EnemyState.Patrol);
-//         stateMachine.RegisterState<EnemyAttackingState>(EnemyState.Attacking);
+            // stateMachine.ChangeState(config.initialState);
+        }
 
-//         stateMachine.ChangeState(config.initialState);
-//     }
+        void FixedUpdate()
+        {
+            stateMachine.FixedUpdate();
+        }
 
-//     void FixedUpdate()
-//     {
-//         stateMachine.FixedUpdate();
-//     }
-
-//     void Update()
-//     {
-//         stateMachine.Update();
-//         currentState = (EnemyState)stateMachine.currentState;
-//     }
-// }
+        void Update()
+        {
+            stateMachine.Update();
+            currentState = (State)stateMachine.currentState;
+        }
+    }
+}

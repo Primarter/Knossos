@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// namespace MyStateMachine
-// {
+namespace Knossos.FSM
+{
     public abstract class State
     {
         public GameObject obj;
@@ -22,4 +22,4 @@ using UnityEngine;
         // Called when State become the active
         public abstract void Exit();
     }
-// }
+}
