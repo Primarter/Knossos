@@ -18,6 +18,7 @@ namespace Knossos.Minotaur
 
         public override void Enter()
         {
+            agent.locomotionSystem.navMeshAgent.speed = 5f;
             // agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed;
         }
 
@@ -27,14 +28,12 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
-            if (player.GetComponent<Hiding>().isHidding)
+            if (!agent.visionSystem.hasTarget)
             {
-                // agent.locomotionSystem.navMeshAgent.isStopped = true;
                 agent.stateMachine.ChangeState(State.Patrol);
             }
             else
             {
-                agent.locomotionSystem.navMeshAgent.isStopped = false;
                 agent.locomotionSystem.navMeshAgent.destination = player.transform.position;
             }
         }

@@ -15,7 +15,6 @@ patrol:
     go until intersection
 */
 
-
 namespace Knossos.Minotaur
 {
     public class MinotaurAgent : MonoBehaviour
@@ -26,20 +25,24 @@ namespace Knossos.Minotaur
 
         [HideInInspector]
         public LocomotionSystem locomotionSystem;
+        [HideInInspector]
+        public VisionSystem visionSystem;
 
         void Awake()
         {
             locomotionSystem = GetComponent<LocomotionSystem>();
+            visionSystem = GetComponent<VisionSystem>();
         }
 
         void Start()
         {
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
+            // stateMachine.RegisterState<StateIdle>(State.Idle);
             stateMachine.RegisterState<StatePatrol>(State.Patrol);
             stateMachine.RegisterState<StateFollow>(State.Follow);
 
-            stateMachine.ChangeState(State.Follow);
+            stateMachine.ChangeState(State.Patrol);
         }
 
         void FixedUpdate()

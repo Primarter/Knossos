@@ -9,9 +9,8 @@ namespace Knossos.Minotaur
     public class StatePatrol : FSM.State
     {
         MinotaurAgent agent;
-        IEnumerator patrolCoroutine;
 
-        const float speed = 2f;
+        GameObject targetWaypoint;
 
         public override void Init()
         {
@@ -20,33 +19,28 @@ namespace Knossos.Minotaur
 
         public override void Enter()
         {
-            agent.locomotionSystem.navMeshAgent.speed = speed;
+            agent.locomotionSystem.navMeshAgent.speed = 3f;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
-            patrolCoroutine = Patrol();
-            agent.StartCoroutine(patrolCoroutine);
+            // patrolCoroutine = Patrol();
+            // agent.StartCoroutine(patrolCoroutine);
         }
 
         public override void Exit()
         {
-            agent.StopCoroutine(patrolCoroutine);
+            // agent.StopCoroutine(patrolCoroutine);
         }
 
         public override void FixedUpdate()
         {
+            if (agent.visionSystem.hasTarget)
+            {
+                agent.stateMachine.ChangeState(State.Follow);
+            }
         }
 
         public override void Update()
         {
-        }
-
-        IEnumerator Patrol()
-        {
-            while (true)
-            {
-                agent.locomotionSystem.navMeshAgent.SetDestination(findNewDestination());
-                yield return new WaitForSeconds(10f);
-            }
         }
 
         Vector3 findNewDestination()
