@@ -11,9 +11,11 @@ public class AnimationController : MonoBehaviour
     Animator animator;
     Vector3 smoothInput = Vector3.zero;
     Vector3 velocity = Vector3.zero;
+    Camera mainCam;
 
     private void Awake()
     {
+        mainCam = Camera.main;
         animator = GetComponent<Animator>();
     }
 
@@ -26,7 +28,7 @@ public class AnimationController : MonoBehaviour
     {
         Vector3 movement = new Vector3(InputManager.inputs.horizontal, 0f, InputManager.inputs.vertical);
         smoothInput = Vector3.SmoothDamp(smoothInput, movement, ref velocity, 5 * Time.deltaTime);
-        movement = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0) * smoothInput;
+        movement = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * smoothInput;
         movement = Vector3.ClampMagnitude(movement, 1);
 
         animator.SetFloat("Speed", movement.magnitude);
@@ -45,4 +47,8 @@ public class AnimationController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+
+    //TODO
+    // bend back hand when running
+    // close hand on idle
 }

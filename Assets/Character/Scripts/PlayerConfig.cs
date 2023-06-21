@@ -7,6 +7,8 @@ public class PlayerConfig : ScriptableObject
 {
     [Header("Player stats")]
     public float speed = 10f;
+    public float attackMoveSpeedMultiplier = .01f;
+    public float attackRotationSpeedMultiplier = .2f;
     public float maxStamina = 2f;
 
     [Header("ControllerConfig")]

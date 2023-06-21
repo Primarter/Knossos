@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(AnimationController))]
+[RequireComponent(typeof(PlayerController), typeof(AnimationController))]
 public class AttackController : MonoBehaviour
 {
-    CharacterController characterController;
+    PlayerController playerController;
     AnimationController animationController;
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        playerController = GetComponent<PlayerController>();
         animationController = GetComponent<AnimationController>();
     }
 
     private void Update()
     {
-        if (InputManager.inputs.attack)
+        if (!playerController.dashing && InputManager.CheckBuffer(BufferedInput.Attack))
             animationController.TriggerAttack();
         // TODO
         // Set PlayerController.active to false sor the duration of the attack
