@@ -24,7 +24,7 @@ namespace Knossos.Minotaur
 
             foreach (var w in waypoints)
             {
-                Vector3 offset = w.transform.position - transform.position
+                Vector3 offset = w.transform.position - transform.position;
                 float sqrDist = offset.sqrMagnitude;
 
                 if (sqrDist < closestSqrDist)
