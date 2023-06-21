@@ -22,13 +22,11 @@ namespace Knossos.Minotaur
             agent.locomotionSystem.navMeshAgent.speed = 3f;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
-            // patrolCoroutine = Patrol();
-            // agent.StartCoroutine(patrolCoroutine);
+            targetWaypoint = null;
         }
 
         public override void Exit()
         {
-            // agent.StopCoroutine(patrolCoroutine);
         }
 
         public override void FixedUpdate()
@@ -37,22 +35,52 @@ namespace Knossos.Minotaur
             {
                 agent.stateMachine.ChangeState(State.Follow);
             }
+
+            if (targetWaypoint == null)
+            {
+                GameObject waypoint = agent.pathSystem.getClosestWaypoint();
+                targetWaypoint = waypoint;
+
+                agent.locomotionSystem.navMeshAgent.destination = targetWaypoint.transform.position;
+            }
+            else
+            {
+                Vector3 targetWaypoint2D = new Vector3(targetWaypoint.transform.position.x, 0f, targetWaypoint.transform.position.z);
+                Vector3 agentPosition2D = new Vector3(agent.transform.position.x, 0f, agent.transform.position.z);
+
+                if (Vector3.Distance(targetWaypoint2D, agentPosition2D) < 1f)
+                {
+                    GameObject newTarget = findNewTarget();
+                    setTarget(newTarget);
+                }
+            }
         }
 
         public override void Update()
         {
         }
 
-        Vector3 findNewDestination()
+        void setTarget(GameObject target)
         {
-            float minRange = 20f;
-            float maxRange = 70f;
-            Vector3 point = Random.onUnitSphere * Random.Range(minRange, maxRange);
+            targetWaypoint = target;
+            agent.locomotionSystem.navMeshAgent.destination = target.transform.position;
+        }
 
-            NavMeshHit hit;
-            NavMesh.SamplePosition(agent.transform.position + point, out hit, 30f, 1);
+        GameObject findNewTarget()
+        {
+            GameObject[] linkedWaypoints = agent.pathSystem.getLinkedWaypoints(targetWaypoint);
+            GameObject randomWaypoint = linkedWaypoints[Random.Range(0, linkedWaypoints.Length)];
 
-            return hit.position;
+            return randomWaypoint;
+
+            // float minRange = 20f;
+            // float maxRange = 70f;
+            // Vector3 point = Random.onUnitSphere * Random.Range(minRange, maxRange);
+
+            // NavMeshHit hit;
+            // NavMesh.SamplePosition(agent.transform.position + point, out hit, 30f, 1);
+
+            // return hit.position;
         }
     }
 }

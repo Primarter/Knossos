@@ -27,11 +27,14 @@ namespace Knossos.Minotaur
         public LocomotionSystem locomotionSystem;
         [HideInInspector]
         public VisionSystem visionSystem;
+        [HideInInspector]
+        public PathSystem pathSystem;
 
         void Awake()
         {
             locomotionSystem = GetComponent<LocomotionSystem>();
             visionSystem = GetComponent<VisionSystem>();
+            pathSystem = GetComponent<PathSystem>();
         }
 
         void Start()

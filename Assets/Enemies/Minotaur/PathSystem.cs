@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace Knossos.Minotaur
 {
@@ -16,25 +17,40 @@ namespace Knossos.Minotaur
     {
         [SerializeField] GameObject[] waypoints;
         [SerializeField] Link[] links;
+        [SerializeField] LayerMask obstructionLayer;
 
         public GameObject getClosestWaypoint()
         {
-            float closestSqrDist = Mathf.Infinity;
-            GameObject closestWaypoint = null;
+            GameObject[] orderedWaypoints = waypoints.OrderBy( x => Vector3.Distance(transform.position, x.transform.position) ).ToArray();
 
-            foreach (var w in waypoints)
+            foreach (var w in orderedWaypoints)
             {
-                Vector3 offset = w.transform.position - transform.position;
-                float sqrDist = offset.sqrMagnitude;
+                Vector3 dir = w.transform.position - transform.position;
+                float distance = dir.magnitude;
+                dir.Normalize();
 
-                if (sqrDist < closestSqrDist)
-                {
-                    closestSqrDist = sqrDist;
-                    closestWaypoint = w;
-                }
+                bool hit = Physics.Raycast(transform.position, dir, distance, obstructionLayer);
+
+                if (hit == false) // if no wall is obstructing
+                    return w;
             }
 
-            return closestWaypoint;
+            return null;
+        }
+
+        public GameObject[] getLinkedWaypoints(GameObject waypoint)
+        {
+            List<GameObject> linkedWaypoints = new List<GameObject>();
+
+            foreach (Link link in links)
+            {
+                if (link.waypointA == waypoint)
+                    linkedWaypoints.Add(link.waypointB);
+                else if (link.waypointB == waypoint)
+                    linkedWaypoints.Add(link.waypointA);
+            }
+
+            return linkedWaypoints.ToArray();
         }
 
         void OnDrawGizmos()
@@ -47,6 +63,14 @@ namespace Knossos.Minotaur
             //         Gizmos.DrawSphere(waypoint.transform.position, 2f);
             //     }
             // }
+            GameObject obj = getClosestWaypoint();
+            if (obj != null)
+                Gizmos.DrawLine(transform.position, obj.transform.position);
+            else
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawCube(transform.position, Vector3.one * 2f);
+            }
 
             if (links != null)
             {
