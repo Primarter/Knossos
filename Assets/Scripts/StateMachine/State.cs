@@ -1,22 +1,25 @@
 using UnityEngine;
 
-public abstract class State
+namespace Knossos.FSM
 {
-    public GameObject obj;
-    int id;
+    public abstract class State
+    {
+        public GameObject obj;
+        int id;
 
-    // Called when State is registered
-    public abstract void Init();
+        // Called when State is registered
+        public abstract void Init();
 
-    // Called when State become the active
-    public abstract void Enter();
+        // Called when State become the active
+        public abstract void Enter();
 
-    // call each Update
-    public abstract void Update();
+        // call each Update
+        public abstract void Update();
 
-    // call each FixedUpdate
-    public abstract void FixedUpdate();
+        // call each FixedUpdate
+        public abstract void FixedUpdate();
 
-    // Called when State become the active
-    public abstract void Exit();
+        // Called when State become the active
+        public abstract void Exit();
+    }
 }

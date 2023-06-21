@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class LocomotionSystem : MonoBehaviour
+namespace Knossos.Enemy
 {
-    EnemyAgent agent;
-    public NavMeshAgent navMeshAgent;
-
-    void Awake()
+    public class LocomotionSystem : MonoBehaviour
     {
-        agent = GetComponent<EnemyAgent>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-    }
+        EnemyAgent agent;
+        public NavMeshAgent navMeshAgent;
 
-    void Start()
-    {
-        navMeshAgent.speed = agent.config.defaultSpeed;
-    }
+        void Awake()
+        {
+            agent = GetComponent<EnemyAgent>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
 
-    void Update()
-    {
-        if (!navMeshAgent.enabled) return;
-        if (!navMeshAgent.isStopped) return;
+        void Start()
+        {
+            navMeshAgent.speed = agent.config.defaultSpeed;
+        }
 
-        Vector3 dir = new Vector3(transform.forward.x, 0f, transform.forward.z);
-        navMeshAgent.Move(dir * navMeshAgent.speed * Time.deltaTime);
+        void Update()
+        {
+            if (!navMeshAgent.enabled) return;
+            if (!navMeshAgent.isStopped) return;
+
+            Vector3 dir = new Vector3(transform.forward.x, 0f, transform.forward.z);
+            navMeshAgent.Move(dir * navMeshAgent.speed * Time.deltaTime);
+        }
     }
 }

@@ -1,49 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Knossos;
 
-public class EnemyAgent : MonoBehaviour
+namespace Knossos.Enemy
 {
-    public StateMachine stateMachine;
-
-    [SerializeField] public EnemyConfig config;
-    [SerializeField] public EnemyState currentState;
-
-    // public bool isAttacking;
-    // public bool canAttack;
-
-    [HideInInspector]
-    public TargetingSystem targetingSystem;
-    [HideInInspector]
-    public LocomotionSystem locomotionSystem;
-
-    void Awake()
+    public class EnemyAgent : MonoBehaviour
     {
-        targetingSystem = GetComponent<TargetingSystem>();
-        locomotionSystem = GetComponent<LocomotionSystem>();
-    }
+        public FSM.StateMachine stateMachine;
 
-    void Start()
-    {
-        stateMachine = new StateMachine(this.gameObject, typeof(EnemyState));
+        [SerializeField] public EnemyConfig config;
+        [SerializeField] public State currentState;
 
-        stateMachine.RegisterState<EnemyIdleState>(EnemyState.Idle);
-        stateMachine.RegisterState<EnemyPatrolState>(EnemyState.Patrol);
-        stateMachine.RegisterState<EnemyChargeAttackState>(EnemyState.ChargeAttack);
-        stateMachine.RegisterState<EnemyAttackingState>(EnemyState.Attacking);
-        stateMachine.RegisterState<EnemyStagerredState>(EnemyState.Stagerred);
+        // public bool isAttacking;
+        // public bool canAttack;
 
-        stateMachine.ChangeState(config.initialState);
-    }
+        [HideInInspector]
+        public TargetingSystem targetingSystem;
+        [HideInInspector]
+        public LocomotionSystem locomotionSystem;
 
-    void FixedUpdate()
-    {
-        stateMachine.FixedUpdate();
-    }
+        void Awake()
+        {
+            targetingSystem = GetComponent<TargetingSystem>();
+            locomotionSystem = GetComponent<LocomotionSystem>();
+        }
 
-    void Update()
-    {
-        stateMachine.Update();
-        currentState = (EnemyState)stateMachine.currentState;
+        void Start()
+        {
+            stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
+
+            stateMachine.RegisterState<EnemyStateIdle>(State.Idle);
+            stateMachine.RegisterState<EnemyStatePatrol>(State.Patrol);
+            stateMachine.RegisterState<EnemyStateChargeAttack>(State.ChargeAttack);
+            stateMachine.RegisterState<EnemyStateAttacking>(State.Attacking);
+            stateMachine.RegisterState<EnemyStateStagerred>(State.Stagerred);
+
+            stateMachine.ChangeState(config.initialState);
+        }
+
+        void FixedUpdate()
+        {
+            stateMachine.FixedUpdate();
+        }
+
+        void Update()
+        {
+            stateMachine.Update();
+            currentState = (State)stateMachine.currentState;
+        }
     }
 }
