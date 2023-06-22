@@ -6,26 +6,60 @@ using System.Linq;
 
 namespace Knossos.Minotaur
 {
-    [Serializable]
-    public struct Link
+    public class Waypoint
     {
-        public GameObject waypointA;
-        public GameObject waypointB;
+        public Waypoint(GameObject _obj)
+        {
+            obj = _obj;
+            neighbours = null;
+        }
+
+        public GameObject obj;
+        public Waypoint[] neighbours;
     }
 
     public class PathSystem : MonoBehaviour
     {
-        [SerializeField] GameObject[] waypoints;
-        [SerializeField] Link[] links;
+        Waypoint[] waypoints;
         [SerializeField] LayerMask obstructionLayer;
 
-        public GameObject getClosestWaypoint()
+        void Start()
         {
-            GameObject[] orderedWaypoints = waypoints.OrderBy( x => Vector3.Distance(transform.position, x.transform.position) ).ToArray();
+            GameObject[] waypointsObjects = GameObject.FindGameObjectsWithTag("Waypoint");
+            waypoints = (from waypointObject in waypointsObjects select new Waypoint(waypointObject)).ToArray();
+
+            foreach (Waypoint waypoint in waypoints)
+            {
+                waypoint.neighbours = (getWaypointInSight(waypoint.obj.transform.position).Where(w => w != waypoint)).ToArray();
+            }
+        }
+
+        public Waypoint[] getWaypointInSight(Vector3 position)
+        {
+            List<Waypoint> waypointsInSight = new List<Waypoint>();
+
+            foreach (var w in waypoints)
+            {
+                Vector3 dir = w.obj.transform.position - position;
+                float distance = dir.magnitude;
+                dir.Normalize();
+
+                bool hit = Physics.Raycast(position, dir, distance, obstructionLayer);
+
+                if (hit == false) // if no wall is obstructing
+                    waypointsInSight.Add(w);
+            }
+
+            return waypointsInSight.ToArray();
+        }
+
+        public Waypoint getClosestWaypoint()
+        {
+            Waypoint[] orderedWaypoints = waypoints.OrderBy( x => Vector3.Distance(transform.position, x.obj.transform.position) ).ToArray();
 
             foreach (var w in orderedWaypoints)
             {
-                Vector3 dir = w.transform.position - transform.position;
+                Vector3 dir = w.obj.transform.position - transform.position;
                 float distance = dir.magnitude;
                 dir.Normalize();
 
@@ -38,21 +72,6 @@ namespace Knossos.Minotaur
             return null;
         }
 
-        public GameObject[] getLinkedWaypoints(GameObject waypoint)
-        {
-            List<GameObject> linkedWaypoints = new List<GameObject>();
-
-            foreach (Link link in links)
-            {
-                if (link.waypointA == waypoint)
-                    linkedWaypoints.Add(link.waypointB);
-                else if (link.waypointB == waypoint)
-                    linkedWaypoints.Add(link.waypointA);
-            }
-
-            return linkedWaypoints.ToArray();
-        }
-
         void OnDrawGizmos()
         {
             // if (waypoints != null)
@@ -63,21 +82,23 @@ namespace Knossos.Minotaur
             //         Gizmos.DrawSphere(waypoint.transform.position, 2f);
             //     }
             // }
-            GameObject obj = getClosestWaypoint();
-            if (obj != null)
-                Gizmos.DrawLine(transform.position, obj.transform.position);
+            if (waypoints == null) return;
+
+            Waypoint waypoint = getClosestWaypoint();
+            if (waypoint != null)
+                Gizmos.DrawLine(transform.position, waypoint.obj.transform.position);
             else
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawCube(transform.position, Vector3.one * 2f);
             }
 
-            if (links != null)
+            Gizmos.color = Color.cyan;
+            foreach (Waypoint w in waypoints)
             {
-                Gizmos.color = Color.cyan;
-                foreach (Link link in links)
+                foreach (Waypoint n in w.neighbours)
                 {
-                    Gizmos.DrawLine(link.waypointA.transform.position, link.waypointB.transform.position);
+                    Gizmos.DrawLine(w.obj.transform.position, n.obj.transform.position);
                 }
             }
         }

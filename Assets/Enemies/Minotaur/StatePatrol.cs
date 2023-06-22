@@ -10,7 +10,7 @@ namespace Knossos.Minotaur
     {
         MinotaurAgent agent;
 
-        GameObject targetWaypoint;
+        Waypoint targetWaypoint;
 
         public override void Init()
         {
@@ -38,20 +38,19 @@ namespace Knossos.Minotaur
 
             if (targetWaypoint == null)
             {
-                GameObject waypoint = agent.pathSystem.getClosestWaypoint();
+                Waypoint waypoint = agent.pathSystem.getClosestWaypoint();
                 targetWaypoint = waypoint;
 
-                agent.locomotionSystem.navMeshAgent.destination = targetWaypoint.transform.position;
+                agent.locomotionSystem.navMeshAgent.destination = targetWaypoint.obj.transform.position;
             }
             else
             {
-                Vector3 targetWaypoint2D = new Vector3(targetWaypoint.transform.position.x, 0f, targetWaypoint.transform.position.z);
+                Vector3 targetWaypoint2D = new Vector3(targetWaypoint.obj.transform.position.x, 0f, targetWaypoint.obj.transform.position.z);
                 Vector3 agentPosition2D = new Vector3(agent.transform.position.x, 0f, agent.transform.position.z);
 
                 if (Vector3.Distance(targetWaypoint2D, agentPosition2D) < 1f)
                 {
-                    GameObject newTarget = findNewTarget();
-                    setTarget(newTarget);
+                    setTarget(findNewTarget());
                 }
             }
         }
@@ -60,17 +59,15 @@ namespace Knossos.Minotaur
         {
         }
 
-        void setTarget(GameObject target)
+        void setTarget(Waypoint target)
         {
             targetWaypoint = target;
-            agent.locomotionSystem.navMeshAgent.destination = target.transform.position;
+            agent.locomotionSystem.navMeshAgent.destination = target.obj.transform.position;
         }
 
-        GameObject findNewTarget()
+        Waypoint findNewTarget()
         {
-            GameObject[] linkedWaypoints = agent.pathSystem.getLinkedWaypoints(targetWaypoint);
-            GameObject randomWaypoint = linkedWaypoints[Random.Range(0, linkedWaypoints.Length)];
-
+            Waypoint randomWaypoint = targetWaypoint.neighbours[Random.Range(0, targetWaypoint.neighbours.Length)];
             return randomWaypoint;
 
             // float minRange = 20f;

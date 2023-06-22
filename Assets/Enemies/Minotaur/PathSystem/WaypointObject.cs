@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Knossos.Minotaur
 {
-    public class Waypoint : MonoBehaviour
+    public class WaypointObject : MonoBehaviour
     {
         void OnDrawGizmos()
         {

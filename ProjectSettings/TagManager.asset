@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Bush
+  - Waypoint
   layers:
   - Default
   - TransparentFX
