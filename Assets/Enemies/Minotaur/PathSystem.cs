@@ -20,7 +20,7 @@ namespace Knossos.Minotaur
 
     public class PathSystem : MonoBehaviour
     {
-        Waypoint[] waypoints;
+        [HideInInspector] public Waypoint[] waypoints;
         [SerializeField] LayerMask obstructionLayer;
 
         void Start()
@@ -72,35 +72,5 @@ namespace Knossos.Minotaur
             return null;
         }
 
-        void OnDrawGizmos()
-        {
-            // if (waypoints != null)
-            // {
-            //     Gizmos.color = Color.magenta;
-            //     foreach (GameObject waypoint in waypoints)
-            //     {
-            //         Gizmos.DrawSphere(waypoint.transform.position, 2f);
-            //     }
-            // }
-            if (waypoints == null) return;
-
-            Waypoint waypoint = getClosestWaypoint();
-            if (waypoint != null)
-                Gizmos.DrawLine(transform.position, waypoint.obj.transform.position);
-            else
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawCube(transform.position, Vector3.one * 2f);
-            }
-
-            Gizmos.color = Color.cyan;
-            foreach (Waypoint w in waypoints)
-            {
-                foreach (Waypoint n in w.neighbours)
-                {
-                    Gizmos.DrawLine(w.obj.transform.position, n.obj.transform.position);
-                }
-            }
-        }
     }
 }
