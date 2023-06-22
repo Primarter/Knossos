@@ -25,7 +25,5 @@ public class PathSystemEditor : Editor
                 Handles.DrawLine(w.obj.transform.position, n.obj.transform.position);
             }
         }
-
-
     }
 }
