@@ -40,12 +40,24 @@ public class AnimationController : MonoBehaviour
 
     public void TriggerDodge()
     {
+        print("TriggerDodge");
         animator.SetTrigger("Dodge");
     }
 
     public void TriggerAttack()
     {
+        print("TriggerAttack");
         animator.SetTrigger("Attack");
+    }
+
+    public void ResetAttack()
+    {
+        animator.ResetTrigger("Attack");
+    }
+
+    public void ResetDodge()
+    {
+        animator.ResetTrigger("Dodge");
     }
 
     //TODO

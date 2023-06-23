@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
+using System;
 
 public enum BufferedInput
 {
@@ -9,6 +10,7 @@ public enum BufferedInput
     Attack
 }
 
+[RequireComponent(typeof(AnimationController))]
 public class InputManager : MonoBehaviour
 {
     public struct Inputs
@@ -21,15 +23,26 @@ public class InputManager : MonoBehaviour
 
     public static Inputs inputs;
 
+    public delegate void OnUnbufferedInput(BufferedInput input);
+    public static OnUnbufferedInput onUnbufferedInput;
+
+    public delegate void OnClearedInput(BufferedInput input);
+    public static OnClearedInput onClearedInput;
+
     [SerializeField]
     private InputConfig config;
 
     private static Stopwatch sw = new Stopwatch();
     private static Queue<(BufferedInput, long)> inputBuffer = new Queue<(BufferedInput, long)>();
+    private static Dictionary<BufferedInput, int> inputCounts = new Dictionary<BufferedInput, int>();
 
     private void Start()
     {
         sw.Start();
+        foreach(var i in Enum.GetValues(typeof(BufferedInput)))
+        {
+            inputCounts[(BufferedInput)(int)i] = 0;
+        }
     }
 
     private void Update()
@@ -37,7 +50,17 @@ public class InputManager : MonoBehaviour
         (BufferedInput, long) buffered;
         while (inputBuffer.TryPeek(out buffered) && buffered.Item2 < sw.ElapsedMilliseconds)
         {
-            inputBuffer.Dequeue();
+            var (input, _) = inputBuffer.Dequeue();
+            if (onUnbufferedInput != null)
+            {
+                onUnbufferedInput(input);
+            }
+            inputCounts[input] -= 1;
+            if (inputCounts[input] == 0)
+            {
+                onClearedInput(input);
+            }
+            print($"unbuffered {input}");
         }
 
         inputs.horizontal = Input.GetAxisRaw("Horizontal");
@@ -47,10 +70,12 @@ public class InputManager : MonoBehaviour
         if (inputs.dodge)
         {
             inputBuffer.Enqueue((BufferedInput.Dodge, sw.ElapsedMilliseconds + config.dodgeBufferDuration));
+            inputCounts[BufferedInput.Dodge] += 1;
         }
-        if (inputs.attack)
+        else if (inputs.attack)
         {
             inputBuffer.Enqueue((BufferedInput.Attack, sw.ElapsedMilliseconds + config.attackBufferDuration));
+            inputCounts[BufferedInput.Attack] += 1;
         }
     }
 
@@ -59,8 +84,14 @@ public class InputManager : MonoBehaviour
         (BufferedInput, long) buffered;
         if (inputBuffer.TryPeek(out buffered) && buffered.Item1 == input)
         {
-            if (consume)
-                inputBuffer.Dequeue();
+            if (consume) {
+                var (deq, _) = inputBuffer.Dequeue();
+                inputCounts[deq] -= 1;
+                if (inputCounts[deq] == 0)
+                {
+                    onClearedInput(input);
+                }
+            }
             return true;
         }
 
