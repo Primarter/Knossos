@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(AnimationController))]
+[RequireComponent(typeof(CharacterController))]//, typeof(AnimationController))]
 public class PlayerController : MonoBehaviour
 {
     public PlayerConfig config;
 
     private CharacterController characterController;
-    private AnimationController animationController;
+    private Knossos.Player.AnimationController animationController;
     private Camera mainCam;
 
     // Player stats
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        animationController = GetComponent<AnimationController>();
+        animationController = GetComponent<Knossos.Player.AnimationController>();
         mainCam = Camera.main;
     }
 
@@ -74,15 +74,14 @@ public class PlayerController : MonoBehaviour
 
         UpdateDash();
         UpdateAttack();
-
     }
 
     private void OnBufferClear(BufferedInput input)
     {
-        if (input == BufferedInput.Dodge)
-            animationController.ResetDodge();
-        else if (input == BufferedInput.Attack)
-            animationController.ResetAttack();
+        // if (input == BufferedInput.Dodge)
+            // animationController.ResetDodge();
+        // else if (input == BufferedInput.Attack)
+            // animationController.ResetAttack();
         print("OnBufferClear");
     }
 
@@ -92,8 +91,9 @@ public class PlayerController : MonoBehaviour
     {
         if (canDash && stamina >= config.dashCost && InputManager.CheckBuffer(BufferedInput.Dodge, false))
         {
-            animationController.TriggerDodge();
-            animationController.ResetAttack();
+            animationController.TransitionTo(Knossos.Player.State.Dodge, 0.035f);
+            // animationController.TriggerDodge();
+            // animationController.ResetAttack();
         }
     }
 
@@ -136,8 +136,8 @@ public class PlayerController : MonoBehaviour
             attacking = true;
             canDash = false;
             EnableSlowMotion();
-            animationController.ResetDodge();
-            animationController.TriggerAttack();
+            // animationController.ResetDodge();
+            // animationController.TriggerAttack();
         }
     }
 

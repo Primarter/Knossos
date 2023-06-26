@@ -10,7 +10,7 @@ public enum BufferedInput
     Attack
 }
 
-[RequireComponent(typeof(AnimationController))]
+// [RequireComponent(typeof(AnimationController))]
 public class InputManager : MonoBehaviour
 {
     public struct Inputs
