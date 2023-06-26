@@ -60,7 +60,6 @@ public class InputManager : MonoBehaviour
             {
                 onClearedInput(input);
             }
-            print($"unbuffered {input}");
         }
 
         inputs.horizontal = Input.GetAxisRaw("Horizontal");
