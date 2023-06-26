@@ -287,8 +287,58 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
+      curves:
+      - name: TrailSize
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0.0019226074
+            value: 0
+            inSlope: 0.024575556
+            outSlope: 0.024575556
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.14703473
+          - serializedVersion: 3
+            time: 0.65461844
+            value: 0.2
+            inSlope: 1.1871392
+            outSlope: 1.1871392
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.108969435
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.0728562
+            outSlope: 0.0728562
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.1942308
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
+      events:
+      - time: 0
+        functionName: EnableTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fe581d56e711f754bbff0c9c31d0d3bf,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: DisableTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fe581d56e711f754bbff0c9c31d0d3bf,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -345,8 +395,67 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
+      curves:
+      - name: TrailSize
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0.0019226074
+            value: 0
+            inSlope: 3.2022626
+            outSlope: 3.2022626
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.03468254
+          - serializedVersion: 3
+            time: 0.03731952
+            value: 0.7009867
+            inSlope: 1.1582268
+            outSlope: 3.6792536
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.15962426
+          - serializedVersion: 3
+            time: 0.18904422
+            value: 0.9232341
+            inSlope: 0.27612287
+            outSlope: 0.27612287
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.7009532
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.0728562
+            outSlope: 0.0728562
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.1942308
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
+      events:
+      - time: 0
+        functionName: EnableTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fe581d56e711f754bbff0c9c31d0d3bf,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: DisableTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fe581d56e711f754bbff0c9c31d0d3bf,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -403,8 +512,67 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
+      curves:
+      - name: TrailSize
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0.0019226074
+            value: 0
+            inSlope: 3.2022626
+            outSlope: 3.2022626
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.03468254
+          - serializedVersion: 3
+            time: 0.03731952
+            value: 0.7009867
+            inSlope: 1.1582268
+            outSlope: 3.6792536
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.15962426
+          - serializedVersion: 3
+            time: 0.18904422
+            value: 0.9232341
+            inSlope: 0.27612287
+            outSlope: 0.27612287
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.7009532
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.0728562
+            outSlope: 0.0728562
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.1942308
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
+      events:
+      - time: 0
+        functionName: EnableTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fe581d56e711f754bbff0c9c31d0d3bf,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: DisableTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: fe581d56e711f754bbff0c9c31d0d3bf,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
