@@ -17,7 +17,10 @@ namespace Knossos.Minotaur
 
         public override void Enter()
         {
+            agent.soundSensorSystem.heardSuspiciousSound = false;
+
             agent.locomotionSystem.navMeshAgent.isStopped = false;
+            agent.locomotionSystem.navMeshAgent.destination = agent.soundSensorSystem.suspiciousSoundPosition;
         }
 
         public override void Exit()
@@ -26,6 +29,15 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
+            if (agent.visionSystem.hasTarget)
+            {
+                agent.stateMachine.ChangeState(State.Follow);
+            }
+
+            if (agent.locomotionSystem.navMeshAgent.remainingDistance < 1f)
+            {
+                agent.stateMachine.ChangeState(State.Patrol);
+            }
         }
 
         public override void Update()

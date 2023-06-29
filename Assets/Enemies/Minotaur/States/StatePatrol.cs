@@ -46,6 +46,11 @@ namespace Knossos.Minotaur
                 agent.stateMachine.ChangeState(State.Follow);
             }
 
+            if (agent.soundSensorSystem.heardSuspiciousSound)
+            {
+                agent.stateMachine.ChangeState(State.Alert);
+            }
+
             if (targetWaypoint == null)
             {
                 Waypoint waypoint = agent.pathSystem.getClosestWaypoint();
@@ -58,6 +63,8 @@ namespace Knossos.Minotaur
             {
                 Vector3 targetWaypoint2D = new Vector3(targetWaypoint.obj.transform.position.x, 0f, targetWaypoint.obj.transform.position.z);
                 Vector3 agentPosition2D = new Vector3(agent.transform.position.x, 0f, agent.transform.position.z);
+
+                // TODO use navmeshAgent.remaining distance instead of doing math myself
 
                 if (Vector3.Distance(targetWaypoint2D, agentPosition2D) < 1f)
                 {

@@ -43,15 +43,17 @@ namespace Knossos.Minotaur
         public FSM.StateMachine stateMachine;
         [SerializeField] public State currentState;
 
+        [HideInInspector] public PathSystem pathSystem;
         [HideInInspector] public LocomotionSystem locomotionSystem;
         [HideInInspector] public VisionSystem visionSystem;
-        [HideInInspector] public PathSystem pathSystem;
+        [HideInInspector] public SoundSensorSystem soundSensorSystem;
 
         void Awake()
         {
+            pathSystem = GetComponent<PathSystem>();
             locomotionSystem = GetComponent<LocomotionSystem>();
             visionSystem = GetComponent<VisionSystem>();
-            pathSystem = GetComponent<PathSystem>();
+            soundSensorSystem = GetComponent<SoundSensorSystem>();
         }
 
         void Start()

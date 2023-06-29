@@ -10,15 +10,15 @@ public class PathSystemEditor : Editor
 {
     public void OnSceneGUI()
     {
-        var ps = (PathSystem)target;
+        var s = (PathSystem)target;
 
-        if (ps.waypoints == null) return;
+        if (s.waypoints == null) return;
 
-        Waypoint waypoint = ps.getClosestWaypoint();
-        Handles.DrawLine(ps.transform.position, waypoint.obj.transform.position);
+        Waypoint waypoint = s.getClosestWaypoint();
+        Handles.DrawLine(s.transform.position, waypoint.obj.transform.position);
 
         Handles.color = Color.blue;
-        foreach (Waypoint w in ps.waypoints)
+        foreach (Waypoint w in s.waypoints)
         {
             foreach (Waypoint n in w.neighbours)
             {

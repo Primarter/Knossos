@@ -41,6 +41,11 @@ namespace Knossos.Minotaur
                 agent.stateMachine.ChangeState(State.Follow);
             }
 
+            if (agent.soundSensorSystem.heardSuspiciousSound)
+            {
+                agent.stateMachine.ChangeState(State.Alert);
+            }
+
             if (agent.locomotionSystem.navMeshAgent.remainingDistance < 1f)
             {
                 agent.stateMachine.ChangeState(State.Sleep);

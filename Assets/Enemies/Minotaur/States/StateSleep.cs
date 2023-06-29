@@ -26,6 +26,11 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
+            if (agent.soundSensorSystem.heardSuspiciousSound)
+            {
+                agent.stateMachine.ChangeState(State.Alert);
+            }
+
             if (agent.visionSystem.CanSeePlayer())
             {
                 agent.stateMachine.ChangeState(State.Follow);

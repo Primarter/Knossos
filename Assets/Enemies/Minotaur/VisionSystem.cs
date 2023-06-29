@@ -16,6 +16,9 @@ namespace Knossos.Minotaur
         [SerializeField] public float minDetectionRange = 5f;
         [SerializeField] LayerMask obstructionLayer;
 
+        Vector3 suspiciousSoundPosition;
+        bool heardSuspiciousSound;
+
         void Awake()
         {
             player = GameObject.FindWithTag("Player");
@@ -24,6 +27,7 @@ namespace Knossos.Minotaur
         void Start()
         {
             hasTarget = false;
+            heardSuspiciousSound = false;
         }
 
         void FixedUpdate()

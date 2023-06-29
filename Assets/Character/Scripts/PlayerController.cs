@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator TriggerDash()
     {
+        LoudSoundManager.playLoudSound(transform.position);
+
         dashing = true;
         canDash = false;
 
