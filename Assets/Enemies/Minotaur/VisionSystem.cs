@@ -13,6 +13,7 @@ namespace Knossos.Minotaur
 
         [SerializeField] public float FOV = 150f; // field of view degrees
         [SerializeField] public float viewRange = 20f;
+        [SerializeField] public float minDetectionRange = 5f;
         [SerializeField] LayerMask obstructionLayer;
 
         void Awake()
@@ -64,11 +65,15 @@ namespace Knossos.Minotaur
             bool isInViewRange = Vector3.Distance(transform.position, p) < viewRange;
             bool isInFOV = angle < (FOV / 2f);
             bool isInDirectVision = !Physics.Raycast(transform.position, towardPosition, towardPosition.magnitude, obstructionLayer);
+            bool isInMinDetectionRange = Vector3.Distance(transform.position, p) < minDetectionRange;
 
             return (
-                isInViewRange &&
-                isInFOV &&
-                isInDirectVision
+                isInMinDetectionRange ||
+                (
+                    isInViewRange &&
+                    isInFOV &&
+                    isInDirectVision
+                )
             );
         }
     }
