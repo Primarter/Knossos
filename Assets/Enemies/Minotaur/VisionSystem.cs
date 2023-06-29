@@ -13,6 +13,7 @@ namespace Knossos.Minotaur
 
         [SerializeField] public float FOV = 150f; // field of view degrees
         [SerializeField] public float viewRange = 20f;
+        [SerializeField] LayerMask obstructionLayer;
 
         void Awake()
         {
@@ -26,8 +27,9 @@ namespace Knossos.Minotaur
 
         void FixedUpdate()
         {
-            if (!player.GetComponent<Hiding>().isHidding &&
-                CanSeePosition(player.transform.position))
+            if (
+                !player.GetComponent<Hiding>().isHidding &&
+                CanSeePlayer())
             {
                 hasTarget = true;
                 target = player;
@@ -39,6 +41,15 @@ namespace Knossos.Minotaur
             }
         }
 
+        void Update()
+        {
+        }
+
+        public bool CanSeePlayer()
+        {
+            return CanSeePosition(player.transform.position);
+        }
+
         public bool CanSeePosition(Vector3 p)
         {
             Vector3 towardPosition = p - transform.position;
@@ -48,18 +59,17 @@ namespace Knossos.Minotaur
             Vector2 forward2D = new Vector2(transform.forward.x, transform.forward.z).normalized;
 
             float angle = Vector2.Angle(towardPosition2D, forward2D);
+            // print((angle, FOV/2f));
 
-            print((angle, FOV/2f));
+            bool isInViewRange = Vector3.Distance(transform.position, p) < viewRange;
+            bool isInFOV = angle < (FOV / 2f);
+            bool isInDirectVision = !Physics.Raycast(transform.position, towardPosition, towardPosition.magnitude, obstructionLayer);
 
             return (
-                Vector3.Distance(transform.position, p) < viewRange &&
-                angle < (FOV / 2f)
+                isInViewRange &&
+                isInFOV &&
+                isInDirectVision
             );
-        }
-
-        void Update()
-        {
-
         }
     }
 }

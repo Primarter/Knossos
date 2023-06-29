@@ -11,6 +11,8 @@ namespace Knossos.Minotaur
         MinotaurAgent agent;
 
         Waypoint targetWaypoint;
+        public float patrolTime = 60f;
+        [SerializeField] float patrolTimeRemaining;
 
         public override void Init()
         {
@@ -23,6 +25,7 @@ namespace Knossos.Minotaur
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
             targetWaypoint = null;
+            patrolTimeRemaining = patrolTime;
         }
 
         public override void Exit()
@@ -31,6 +34,13 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
+            patrolTimeRemaining -= Time.fixedDeltaTime;
+            if (patrolTimeRemaining <= 0f)
+            {
+                agent.stateMachine.ChangeState(State.GoHome);
+                // go to lair
+            }
+
             if (agent.visionSystem.hasTarget)
             {
                 agent.stateMachine.ChangeState(State.Follow);
@@ -39,8 +49,9 @@ namespace Knossos.Minotaur
             if (targetWaypoint == null)
             {
                 Waypoint waypoint = agent.pathSystem.getClosestWaypoint();
+                if (waypoint == null)
+                    return;
                 targetWaypoint = waypoint;
-
                 agent.locomotionSystem.navMeshAgent.destination = targetWaypoint.obj.transform.position;
             }
             else
@@ -73,10 +84,8 @@ namespace Knossos.Minotaur
             // float minRange = 20f;
             // float maxRange = 70f;
             // Vector3 point = Random.onUnitSphere * Random.Range(minRange, maxRange);
-
             // NavMeshHit hit;
             // NavMesh.SamplePosition(agent.transform.position + point, out hit, 30f, 1);
-
             // return hit.position;
         }
     }

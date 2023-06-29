@@ -1,25 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Knossos.FSM;
 
 namespace Knossos.Minotaur
 {
-    public class StateFollow : FSM.State
+    public class StateSleep : FSM.State
     {
         MinotaurAgent agent;
-        GameObject player;
 
         public override void Init()
         {
             agent = obj.GetComponent<MinotaurAgent>();
-            player = GameObject.FindWithTag("Player");
         }
 
         public override void Enter()
         {
-            agent.locomotionSystem.navMeshAgent.speed = 5f;
-            // agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed;
+            agent.locomotionSystem.navMeshAgent.isStopped = true;
         }
 
         public override void Exit()
@@ -28,18 +26,14 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
-            if (!agent.visionSystem.hasTarget)
+            if (agent.visionSystem.CanSeePlayer())
             {
-                agent.stateMachine.ChangeState(State.Patrol);
-            }
-            else
-            {
-                agent.locomotionSystem.navMeshAgent.destination = player.transform.position;
+                agent.stateMachine.ChangeState(State.Follow);
             }
         }
 
         public override void Update()
         {
         }
-}
+    }
 }

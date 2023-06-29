@@ -2,8 +2,10 @@ namespace Knossos.Minotaur
 {
     public enum State
     {
-        Idle,
+        Sleep,
+        Alert,
         Patrol,
-        Follow
+        Follow,
+        GoHome
     }
 }

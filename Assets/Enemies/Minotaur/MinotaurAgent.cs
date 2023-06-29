@@ -28,7 +28,12 @@ Patrol:
         go to intersection node
         if [atIntersection]
             find new intersection node
+    -> GoHome
+
+GoHome:
     go to nearest lair
+    if [inRangeOfPlayer]
+        attack player
 */
 
 namespace Knossos.Minotaur
@@ -36,15 +41,11 @@ namespace Knossos.Minotaur
     public class MinotaurAgent : MonoBehaviour
     {
         public FSM.StateMachine stateMachine;
-
         [SerializeField] public State currentState;
 
-        [HideInInspector]
-        public LocomotionSystem locomotionSystem;
-        [HideInInspector]
-        public VisionSystem visionSystem;
-        [HideInInspector]
-        public PathSystem pathSystem;
+        [HideInInspector] public LocomotionSystem locomotionSystem;
+        [HideInInspector] public VisionSystem visionSystem;
+        [HideInInspector] public PathSystem pathSystem;
 
         void Awake()
         {
@@ -56,12 +57,12 @@ namespace Knossos.Minotaur
         void Start()
         {
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
-
-            // stateMachine.RegisterState<StateIdle>(State.Idle);
+            stateMachine.RegisterState<StateSleep>(State.Sleep);
+            stateMachine.RegisterState<StateAlert>(State.Alert);
             stateMachine.RegisterState<StatePatrol>(State.Patrol);
             stateMachine.RegisterState<StateFollow>(State.Follow);
-
-            stateMachine.ChangeState(State.Patrol);
+            stateMachine.RegisterState<StateGoHome>(State.GoHome);
+            stateMachine.ChangeState(State.Sleep);
         }
 
         void FixedUpdate()
