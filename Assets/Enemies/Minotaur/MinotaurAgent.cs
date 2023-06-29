@@ -7,12 +7,28 @@ using Knossos;
 /*
 Minotaur AI
 
-sleeping:
-    not moving
-follow player:
+Sleeping:
+    do nothing
+    if [trigger]
+        -> Alert
+        go into follow player
+
+Alert:
+    Pathfind to Sound
+    if [isAtSoundSource]
+        -> Patrol
+
+Follow player:
     follow the player
-patrol:
-    go until intersection
+    if [inRangeOfPlayer]
+        attack player
+
+Patrol:
+    while [amountOfTime]
+        go to intersection node
+        if [atIntersection]
+            find new intersection node
+    go to nearest lair
 */
 
 namespace Knossos.Minotaur
