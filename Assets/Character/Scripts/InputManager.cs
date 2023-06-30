@@ -32,9 +32,9 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private InputConfig config;
 
-    private static Stopwatch sw = new Stopwatch();
-    private static Queue<(BufferedInput, long)> inputBuffer = new Queue<(BufferedInput, long)>();
-    private static Dictionary<BufferedInput, int> inputCounts = new Dictionary<BufferedInput, int>();
+    private static Stopwatch sw = new();
+    private static Queue<(BufferedInput, long)> inputBuffer = new();
+    private static Dictionary<BufferedInput, int> inputCounts = new();
 
     private void Start()
     {

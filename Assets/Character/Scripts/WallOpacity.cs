@@ -9,7 +9,7 @@ public class WallOpacity : MonoBehaviour
     [SerializeField]
     private float minOpacity = .17f;
 
-    Stopwatch sw = new Stopwatch();
+    Stopwatch sw = new();
     private MeshRenderer renderer;
 
     private float _opacity = 1f;

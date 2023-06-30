@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 public class AnimationController : MonoBehaviour
@@ -8,10 +9,18 @@ public class AnimationController : MonoBehaviour
     [SerializeField]
     private PlayerConfig config;
 
+    public delegate void OnHit(int hit);
+    public UnityEvent<int> onHitActive;
+    public UnityEvent<int> onHitInactive;
+    public UnityEvent<int> onHitConnect;
+    public UnityEvent<int> onHitStopEnd;
+
     Animator animator;
     Vector3 smoothInput = Vector3.zero;
     Vector3 velocity = Vector3.zero;
     Camera mainCam;
+
+    Coroutine hitStopCoroutine = null;
 
     private void Awake()
     {
@@ -38,15 +47,25 @@ public class AnimationController : MonoBehaviour
         #endif
     }
 
+    // Animator control functions
+
+    public void StopAnimation(int frames = -1)
+    {
+        animator.speed = 0;
+    }
+
+    public void ResumeAnimation()
+    {
+        animator.speed = 1;
+    }
+
     public void TriggerDodge()
     {
-        print("TriggerDodge");
         animator.SetTrigger("Dodge");
     }
 
     public void TriggerAttack()
     {
-        print("TriggerAttack");
         animator.SetTrigger("Attack");
     }
 
@@ -58,6 +77,57 @@ public class AnimationController : MonoBehaviour
     public void ResetDodge()
     {
         animator.ResetTrigger("Dodge");
+    }
+
+    // Event control functions
+
+    public void OnHitActiveEvent(int hit)
+    {
+        // print("HitActive");
+        onHitActive.Invoke(hit);
+    }
+
+    public void OnHitConnectEvent(int hit)
+    {
+        // print("HitConnect");
+        onHitConnect.Invoke(hit);
+    }
+
+    public void OnHitInactiveEvent(int hit)
+    {
+        // print("HitInactive");
+        onHitInactive.Invoke(hit);
+    }
+
+    // Hitstop control
+
+    public void TriggerHitStop(int hitIdx)
+    {
+        if (hitIdx >= 0 && hitIdx < config.hitStops.Length)
+        {
+            StopAnimation(config.hitStops[hitIdx]);
+
+            if (config.hitStops[hitIdx] < 0)
+                return;
+            if (hitStopCoroutine != null)
+                StopCoroutine(hitStopCoroutine);
+            hitStopCoroutine = StartCoroutine(EndHitStopAfter(config.hitStops[hitIdx], hitIdx));
+        }
+        else
+            Debug.LogError("Invalid hitIdx in TriggerHitStop");
+    }
+
+    IEnumerator EndHitStopAfter(int frames, int hitIdx)
+    {
+        int startFrame = Time.frameCount;
+
+        while (Time.frameCount < startFrame + frames)
+            yield return null;
+
+        ResumeAnimation();
+        onHitStopEnd.Invoke(hitIdx);
+        // print("HitstopEnd");
+        hitStopCoroutine = null;
     }
 
     //TODO

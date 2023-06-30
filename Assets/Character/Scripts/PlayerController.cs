@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool dashing = false;
 
     // Dash control
-    private Stopwatch dashTimer = new Stopwatch();
+    private Stopwatch dashTimer = new();
     [System.NonSerialized]
     private bool canDash = true;
 
@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
             animationController.ResetDodge();
         else if (input == BufferedInput.Attack)
             animationController.ResetAttack();
-        print("OnBufferClear");
     }
 
     // Dash Control
@@ -131,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAttack()
     {
-        if (!dashing && InputManager.CheckBuffer(BufferedInput.Attack, false))
+        if (InputManager.CheckBuffer(BufferedInput.Attack, false))
         {
             attacking = true;
             canDash = false;
@@ -158,5 +157,13 @@ public class PlayerController : MonoBehaviour
         attacking = false;
         canDash = true;
         DisableSlowMotion();
+    }
+
+    private void OnEnable() {
+        print($"Enabled {Time.frameCount}");
+    }
+
+    private void OnDisable() {
+        print($"Disabled {Time.frameCount}");
     }
 }
