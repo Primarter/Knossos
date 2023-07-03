@@ -22,6 +22,7 @@ public class Hitbox : MonoBehaviour
 
     private void Update()
     {
+        enemies.RemoveAll(en => en == null || !en.isActiveAndEnabled);
         if (!hitting)
             return;
         foreach (EnemyLife enemy in enemies)

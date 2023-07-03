@@ -158,12 +158,4 @@ public class PlayerController : MonoBehaviour
         canDash = true;
         DisableSlowMotion();
     }
-
-    private void OnEnable() {
-        print($"Enabled {Time.frameCount}");
-    }
-
-    private void OnDisable() {
-        print($"Disabled {Time.frameCount}");
-    }
 }

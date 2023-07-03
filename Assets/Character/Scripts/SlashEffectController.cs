@@ -21,7 +21,7 @@ public class SlashEffectController : MonoBehaviour
     {
         if (effectIdx >= 0 && effectIdx < visualEffects.Length)
         {
-            print(effectIdx);
+            // print(effectIdx);
             visualEffects[effectIdx].playRate = 0f;
         } else
             Debug.LogError("Invalid effectIdx in PlayEffect");
@@ -31,7 +31,7 @@ public class SlashEffectController : MonoBehaviour
     {
         if (effectIdx >= 0 && effectIdx < visualEffects.Length)
         {
-            print(effectIdx);
+            // print(effectIdx);
             visualEffects[effectIdx].playRate = 1f;
         } else
             Debug.LogError("Invalid effectIdx in PlayEffect");

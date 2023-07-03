@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyLife : MonoBehaviour
 {
-    float health = 3;
+    public float health = 3;
 
     public void TakeDamage(int damage)
     {
