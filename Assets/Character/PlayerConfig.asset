@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   speed: 5
+  attackMoveSpeedMultiplier: 0.05
+  attackRotationSpeedMultiplier: 0.2
   maxStamina: 3
+  rotationSpeed: 10
   DashSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -79,4 +82,5 @@ MonoBehaviour:
   dashCooldown: 0.2
   dashCost: 1
   staminaRegenPerSec: 1
+  hitStops: 05000000050000000a000000
   DodgeAnimationSpeedMultiplier: 1.7499999

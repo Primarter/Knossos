@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class LockOnController : MonoBehaviour
 {
-    List<Enemy> enemies = new List<Enemy>();
+    List<Enemy> enemies = new();
 
     private Enemy _closest;
     public Enemy lockedEnemy

@@ -391,7 +391,7 @@ Transform:
   m_Children:
   - {fileID: 1745461362}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1322907707
 PrefabInstance:
@@ -563,7 +563,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1634240038
 PrefabInstance:
@@ -768,7 +768,7 @@ PrefabInstance:
     - target: {fileID: 2353560702782764262, guid: 6b9a7e2ab05535643a8ca933cd7a5081,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2353560702782764262, guid: 6b9a7e2ab05535643a8ca933cd7a5081,
         type: 3}
@@ -845,6 +845,7 @@ GameObject:
   - component: {fileID: 6076266875120422206}
   - component: {fileID: 2744436153794006870}
   - component: {fileID: 7040075673101038832}
+  - component: {fileID: 7040075673101038833}
   m_Layer: 0
   m_Name: TestTarget
   m_TagString: Enemy
@@ -1110,3 +1111,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7040075673101038833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6076266875120422177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0431025781044b4f99c0f214957448b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
