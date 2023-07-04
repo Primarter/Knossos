@@ -8,7 +8,10 @@ public class Hitbox : MonoBehaviour
     [SerializeField]
     AnimationController animationController;
     public int hitIdx = 0;
+    [SerializeField]
+    GameObject damageParticle;
 
+    Transform player;
     BoxCollider collider;
     List<EnemyLife> enemies = new();
     List<EnemyLife> hitEnemies = new();
@@ -17,6 +20,7 @@ public class Hitbox : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player").transform;
         collider = GetComponent<BoxCollider>();
     }
 
@@ -29,10 +33,7 @@ public class Hitbox : MonoBehaviour
         {
             if (!hitEnemies.Contains(enemy))
             {
-                enemy.TakeDamage(damage);
-                hitEnemies.Add(enemy);
-                print($"Hit {enemy.name}");
-                animationController.OnHitConnectEvent(hitIdx);
+                Hit(enemy);
             }
         }
     }
@@ -57,16 +58,22 @@ public class Hitbox : MonoBehaviour
         }
     }
 
+    private void Hit(EnemyLife enemy)
+    {
+        enemy.TakeDamage(damage);
+        hitEnemies.Add(enemy);
+        print($"Hit {enemy.name}");
+        animationController.OnHitConnectEvent(hitIdx);
+        Destroy(GameObject.Instantiate(damageParticle, enemy.transform.position, player.rotation), .5f);
+    }
+
     public void EnableHitbox(int damage)
     {
         hitting = true;
         this.damage = damage;
         foreach (EnemyLife enemy in enemies)
         {
-            enemy.TakeDamage(damage);
-            hitEnemies.Add(enemy);
-            print($"Hit {enemy.name}");
-            animationController.OnHitConnectEvent(hitIdx);
+            Hit(enemy);
         }
     }
 
