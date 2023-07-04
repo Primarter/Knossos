@@ -10,7 +10,7 @@ namespace Knossos.Minotaur
 public class AttackSystem : MonoBehaviour
 {
     MinotaurAgent agent;
-    [SerializeField] ColliderMemory attackColliderMemory;
+    [SerializeField] ColliderManager attackColliderManager;
 
     int damage = 25;
 
@@ -19,12 +19,20 @@ public class AttackSystem : MonoBehaviour
         agent = GetComponent<MinotaurAgent>();
     }
 
-    public void Attack()
+    void Start()
     {
+        attackColliderManager.OnTriggerIn += Attack;
+    }
+
+    public void Attack(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            // TODO: error here -> redo the ColliderManager
+            // other.gameObject.GetComponent<Health>().TakeDamage(damage);
+        }
 
         // GameObject[] players = gameobjectInCollider.Where(i => i.tag == "Player").ToArray();
-        // print(players.Length);
-
         // foreach (GameObject player in players)
         // {
         //     player.GetComponent<Health>().TakeDamage(damage);

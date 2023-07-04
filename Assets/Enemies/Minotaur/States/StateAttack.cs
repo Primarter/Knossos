@@ -20,7 +20,7 @@ namespace Knossos.Minotaur
         {
             agent.locomotionSystem.navMeshAgent.isStopped = true;
             timer = 1.5f;
-            agent.attackSystem.Attack();
+            // agent.attackSystem.Attack();
         }
 
         public override void Exit()
@@ -44,6 +44,7 @@ namespace Knossos.Minotaur
 
         public override void Update()
         {
+            agent.transform.Rotate(new Vector3(0f, 1f, 0f), 360f * Time.deltaTime);
         }
     }
 }

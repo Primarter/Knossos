@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ColliderMemory : MonoBehaviour
+public class ColliderManager : MonoBehaviour
 {
     [SerializeField] string[] tags;
 
@@ -13,14 +13,15 @@ public class ColliderMemory : MonoBehaviour
     public TriggerEnter OnTriggerIn;
     public TriggerExit OnTriggerOut;
 
-    public List<GameObject> collidingGameObjects = new();
+    [HideInInspector] public List<GameObject> collidingGameObjects = new();
 
     void OnTriggerEnter(Collider other)
     {
         if (tags.Contains(other.tag))
         {
             collidingGameObjects.Add(other.gameObject);
-            OnTriggerIn(other);
+            if (OnTriggerIn != null)
+                OnTriggerIn(other);
         }
     }
 
@@ -29,7 +30,8 @@ public class ColliderMemory : MonoBehaviour
         if (tags.Contains(other.tag))
         {
             collidingGameObjects.Remove(other.gameObject);
-            OnTriggerOut(other);
+            if (OnTriggerOut != null)
+                OnTriggerOut(other);
         }
     }
 }

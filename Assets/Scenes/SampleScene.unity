@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98afc1de5e214cb4db3d6c298d5a8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minOpacity: 0.17
 --- !u!64 &16590200
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5992,7 +5991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98afc1de5e214cb4db3d6c298d5a8ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minOpacity: 0.17
 --- !u!1 &511963873
 GameObject:
   m_ObjectHideFlags: 0
@@ -9958,7 +9956,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33064
+  m_Name: pb_Mesh28662
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13854,7 +13852,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5703805931304275809}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1101788069
+--- !u!114 &1101788075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13863,10 +13861,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1101788055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71d672362d458943b7d589967ef9d97, type: 3}
+  m_Script: {fileID: 11500000, guid: f4b2aee66a6889d4e992dcc2f06f9472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackColliderMemory: {fileID: 0}
+  attackColliderManager: {fileID: 2085671822}
 --- !u!1 &1102803659
 GameObject:
   m_ObjectHideFlags: 0
@@ -24936,7 +24934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085671819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 1.56}
+  m_LocalPosition: {x: 1.36, y: 0, z: -0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24954,8 +24952,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.988474, y: 3.3562407, z: 2.3089862}
-  m_Center: {x: -0.00000028096545, y: -0.14245582, z: 0.65449315}
+  m_Size: {x: 3.2978415, y: 2.7602549, z: 1.5761018}
+  m_Center: {x: 0.15468287, y: -0.44044876, z: 0.28805068}
 --- !u!114 &2085671822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24970,6 +24968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags:
   - Player
+  collidingGameObjects: []
 --- !u!43 &2113927113
 Mesh:
   m_ObjectHideFlags: 0
