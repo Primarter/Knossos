@@ -7,9 +7,9 @@ namespace Knossos.Character
 {
 
 [RequireComponent(typeof(CharacterController), typeof(AnimationController))]
-public class PlayerController : MonoBehaviour
+public class Controller : MonoBehaviour
 {
-    public PlayerConfig config;
+    public Config config;
 
     private CharacterController characterController;
     private AnimationController animationController;

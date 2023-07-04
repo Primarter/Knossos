@@ -567,7 +567,6 @@ GameObject:
   - component: {fileID: 1745461365}
   - component: {fileID: 1745461364}
   - component: {fileID: 1745461363}
-  - component: {fileID: 1745461366}
   m_Layer: 6
   m_Name: d
   m_TagString: Untagged
@@ -653,19 +652,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745461361}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1745461366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745461361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98afc1de5e214cb4db3d6c298d5a8ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minOpacity: 0.01
 --- !u!1001 &3000225112149119529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -748,5 +734,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3000225111823255524, guid: 6b9a7e2ab05535643a8ca933cd7a5081, type: 3}
+    - {fileID: 209862253, guid: 6b9a7e2ab05535643a8ca933cd7a5081, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6b9a7e2ab05535643a8ca933cd7a5081, type: 3}

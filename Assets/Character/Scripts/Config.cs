@@ -6,7 +6,7 @@ namespace Knossos.Character
 {
 
 [CreateAssetMenu()]
-public class PlayerConfig : ScriptableObject
+public class Config : ScriptableObject
 {
     [Header("Player stats")]
     public float speed = 10f;

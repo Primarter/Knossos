@@ -10,7 +10,7 @@ namespace Knossos.Character
 public class AnimationController : MonoBehaviour
 {
     [SerializeField]
-    private PlayerConfig config;
+    private Config config;
 
     public delegate void OnHit(int hit);
     public UnityEvent<int> onHitActive;

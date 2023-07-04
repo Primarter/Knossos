@@ -16,14 +16,14 @@ public class AttackBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<PlayerController>().EnableSlowMotion();
+        animator.GetComponent<Controller>().EnableSlowMotion();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Debug.Log("OnStateExit: " + Time.frameCount);
-        animator.GetComponent<PlayerController>().StopAttacking();
+        animator.GetComponent<Controller>().StopAttacking();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
