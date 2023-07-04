@@ -1,4 +1,4 @@
-namespace Knossos.Enemy
+namespace Knossos.Enemy1
 {
     public enum State
     {

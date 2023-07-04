@@ -15,5 +15,5 @@ public class EnemyConfig : ScriptableObject
     public float nextAttackCooldown = 2f;
 
     [Header("StateMachine")]
-    public Knossos.Enemy.State initialState;
+    public Knossos.Enemy1.State initialState;
 }

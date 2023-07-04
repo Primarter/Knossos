@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 [RequireComponent(typeof(AnimationController))]
 public class HitboxManager : MonoBehaviour
 {
@@ -17,4 +20,6 @@ public class HitboxManager : MonoBehaviour
     {
         comboHitboxes[hitboxIdx].DisableHitbox();
     }
+}
+
 }

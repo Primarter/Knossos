@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace Knossos.Character
+{
+
 [RequireComponent(typeof(Animator))]
 public class AnimationController : MonoBehaviour
 {
     [SerializeField]
-    private PlayerConfig config;
+    private Config config;
 
     public delegate void OnHit(int hit);
     public UnityEvent<int> onHitActive;
@@ -133,4 +136,6 @@ public class AnimationController : MonoBehaviour
     //TODO
     // bend back hand when running
     // close hand on idle
+}
+
 }
