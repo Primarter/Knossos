@@ -342,7 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 3000225110171045486}
   hitIdx: 0
-  damageParticle: {fileID: 0}
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!1773428102 &1245203894
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -564,7 +565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 3000225110171045486}
   hitIdx: 0
-  damageParticle: {fileID: 0}
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!1773428102 &1375671792
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -652,7 +654,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 3000225110171045486}
   hitIdx: 0
-  damageParticle: {fileID: 0}
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!1773428102 &1576730111
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -1024,8 +1027,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000225111823255534}
-  m_LocalRotation: {x: 0.30337554, y: 0.43390182, z: -0.1579273, w: 0.8335176}
-  m_LocalPosition: {x: 54.838634, y: 15.2873745, z: 40.700775}
+  m_LocalRotation: {x: 0.22360635, y: 0.22360635, z: -0.052786175, w: 0.9472139}
+  m_LocalPosition: {x: -5.9999914, y: 7.728191, z: -12.000011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
