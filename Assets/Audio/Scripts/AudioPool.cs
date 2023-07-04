@@ -15,14 +15,14 @@ public class AudioPool
 
     public void Initialize()
     {
-        audioSourcePool = new Stack<GameObject>(maxPoolSize);
-        audioSourcePlaying = new List<GameObject>();
+        audioSourcePool = new(maxPoolSize);
+        audioSourcePlaying = new();
 
         poolParent = new GameObject("AudioSourcePool");
 
         for (int i = 0 ; i < maxPoolSize ; ++i)
         {
-            GameObject obj = new GameObject();
+            GameObject obj = new();
             obj.name = "AudioSourcePoolObject";
             obj.transform.SetParent(poolParent.transform, false);
             obj.transform.localPosition = Vector3.zero;

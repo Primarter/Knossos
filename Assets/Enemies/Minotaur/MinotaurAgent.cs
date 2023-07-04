@@ -47,6 +47,7 @@ namespace Knossos.Minotaur
         [HideInInspector] public LocomotionSystem locomotionSystem;
         [HideInInspector] public VisionSystem visionSystem;
         [HideInInspector] public SoundSensorSystem soundSensorSystem;
+        [HideInInspector] public AttackSystem attackSystem;
 
         void Awake()
         {
@@ -54,6 +55,7 @@ namespace Knossos.Minotaur
             locomotionSystem = GetComponent<LocomotionSystem>();
             visionSystem = GetComponent<VisionSystem>();
             soundSensorSystem = GetComponent<SoundSensorSystem>();
+            attackSystem = GetComponent<AttackSystem>();
         }
 
         void Start()
@@ -64,6 +66,7 @@ namespace Knossos.Minotaur
             stateMachine.RegisterState<StatePatrol>(State.Patrol);
             stateMachine.RegisterState<StateFollow>(State.Follow);
             stateMachine.RegisterState<StateGoHome>(State.GoHome);
+            stateMachine.RegisterState<StateAttack>(State.Attack);
             stateMachine.ChangeState(State.Sleep);
         }
 

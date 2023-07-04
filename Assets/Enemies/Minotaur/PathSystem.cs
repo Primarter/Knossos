@@ -36,7 +36,7 @@ namespace Knossos.Minotaur
 
         public Waypoint[] getWaypointInSight(Vector3 position)
         {
-            List<Waypoint> waypointsInSight = new List<Waypoint>();
+            List<Waypoint> waypointsInSight = new();
 
             foreach (var w in waypoints)
             {

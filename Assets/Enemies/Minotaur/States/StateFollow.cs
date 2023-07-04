@@ -36,6 +36,12 @@ namespace Knossos.Minotaur
             {
                 agent.locomotionSystem.navMeshAgent.destination = player.transform.position;
             }
+
+            if (agent.locomotionSystem.navMeshAgent.remainingDistance < 2.5f)
+            {
+                agent.stateMachine.ChangeState(State.Attack);
+            }
+
         }
 
         public override void Update()

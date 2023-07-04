@@ -38,7 +38,6 @@ namespace Knossos.Minotaur
             if (patrolTimeRemaining <= 0f)
             {
                 agent.stateMachine.ChangeState(State.GoHome);
-                // go to lair
             }
 
             if (agent.visionSystem.hasTarget)
