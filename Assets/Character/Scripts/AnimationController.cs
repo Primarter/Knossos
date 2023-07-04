@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace Knossos.Character
+{
+
 [RequireComponent(typeof(Animator))]
 public class AnimationController : MonoBehaviour
 {
@@ -133,4 +136,6 @@ public class AnimationController : MonoBehaviour
     //TODO
     // bend back hand when running
     // close hand on idle
+}
+
 }

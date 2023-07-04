@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 [CreateAssetMenu()]
 public class PlayerConfig : ScriptableObject
 {
@@ -33,4 +36,6 @@ public class PlayerConfig : ScriptableObject
     {
         DodgeAnimationSpeedMultiplier = 1.05f / dashDuration;
     }
+}
+
 }

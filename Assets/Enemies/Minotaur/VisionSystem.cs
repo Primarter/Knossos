@@ -25,7 +25,7 @@ namespace Knossos.Minotaur
         {
             float detectionRange = 15f;
 
-            if (!player.GetComponent<Hiding>().isHidding &&
+            if (!player.GetComponent<Character.Hiding>().isHidding &&
                 Vector3.Distance(transform.position, player.transform.position) < detectionRange)
             {
                 hasTarget = true;

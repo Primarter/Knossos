@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 [RequireComponent(typeof(CharacterController), typeof(AnimationController))]
 public class PlayerController : MonoBehaviour
 {
@@ -158,4 +161,6 @@ public class PlayerController : MonoBehaviour
         canDash = true;
         DisableSlowMotion();
     }
+}
+
 }

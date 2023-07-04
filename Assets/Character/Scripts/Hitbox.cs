@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 [RequireComponent(typeof(BoxCollider))]
 public class Hitbox : MonoBehaviour
 {
@@ -82,4 +85,6 @@ public class Hitbox : MonoBehaviour
         hitting = false;
         hitEnemies.Clear();
     }
+}
+
 }

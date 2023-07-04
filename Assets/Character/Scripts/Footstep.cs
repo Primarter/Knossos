@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 public class Footstep : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer;
@@ -43,4 +46,6 @@ public class Footstep : MonoBehaviour
         lastLeftHit = leftHit;
         lastRightHit = rightHit;
     }
+}
+
 }

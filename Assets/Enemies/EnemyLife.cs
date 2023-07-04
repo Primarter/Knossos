@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyLife : MonoBehaviour
 {
-    public float health = 3;
     public Material damageMaterial;
 
+    private EnemyStats stats;
     private Renderer renderer;
     private Material regularMaterial;
+
+    float health;
 
     private void Awake() {
         renderer = GetComponent<Renderer>();
         regularMaterial = renderer.sharedMaterial;
+        stats = GetComponent<Enemy>().stats;
+    }
+
+    private void Start() {
+        health = stats.life;
     }
 
     public void TakeDamage(int damage)
