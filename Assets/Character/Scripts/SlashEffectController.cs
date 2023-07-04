@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
+namespace Knossos.Character
+{
+
 [RequireComponent(typeof(AnimationController))]
 public class SlashEffectController : MonoBehaviour
 {
@@ -36,5 +39,7 @@ public class SlashEffectController : MonoBehaviour
         } else
             Debug.LogError("Invalid effectIdx in PlayEffect");
     }
+
+}
 
 }

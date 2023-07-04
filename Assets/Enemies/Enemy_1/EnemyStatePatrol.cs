@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Knossos.Enemy
+namespace Knossos.Enemy1
 {
     public class EnemyStatePatrol : FSM.State
     {

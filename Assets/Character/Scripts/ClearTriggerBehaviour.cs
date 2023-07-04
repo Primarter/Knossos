@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 public class ClearTriggerBehaviour : StateMachineBehaviour
 {
     public string trigger;
@@ -34,4 +37,6 @@ public class ClearTriggerBehaviour : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+}
+
 }

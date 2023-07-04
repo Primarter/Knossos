@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 public class Hiding : MonoBehaviour
 {
     [SerializeField] string bushTag;
@@ -28,4 +31,6 @@ public class Hiding : MonoBehaviour
             isHidding = false;
         }
     }
+}
+
 }

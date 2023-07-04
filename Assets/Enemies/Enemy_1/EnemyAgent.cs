@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Knossos;
 
-namespace Knossos.Enemy
+namespace Knossos.Enemy1
 {
     public class EnemyAgent : MonoBehaviour
     {

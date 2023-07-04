@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Diagnostics;
 using System;
 
+namespace Knossos.Character
+{
+
 public enum BufferedInput
 {
     Dodge,
@@ -96,4 +99,6 @@ public class InputManager : MonoBehaviour
 
         return false;
     }
+}
+
 }

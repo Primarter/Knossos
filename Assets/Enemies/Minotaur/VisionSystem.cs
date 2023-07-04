@@ -33,7 +33,7 @@ namespace Knossos.Minotaur
         void FixedUpdate()
         {
             if (
-                !player.GetComponent<Hiding>().isHidding &&
+                !player.GetComponent<Character.Hiding>().isHidding &&
                 CanSeePlayer())
             {
                 hasTarget = true;
