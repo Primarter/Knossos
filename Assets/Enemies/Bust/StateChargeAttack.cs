@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
-    public class EnemyStateChargeAttack : FSM.State
+    public class StateChargeAttack : FSM.State
     {
-        EnemyAgent agent;
+        BustAgent agent;
 
         public override void Init()
         {
-            agent = obj.GetComponent<EnemyAgent>();
+            agent = obj.GetComponent<BustAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.speed = 0f;
             agent.locomotionSystem.navMeshAgent.isStopped = true;
@@ -26,7 +26,7 @@ namespace Knossos.Enemy1
             agent.StartCoroutine(attackTimer());
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 

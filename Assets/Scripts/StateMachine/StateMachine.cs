@@ -47,9 +47,10 @@ namespace Knossos.FSM
 
         public void ChangeState(System.Enum newState)
         {
-            GetState(currentState)?.Exit();
-            currentState = (int)(object)newState;
-            GetState(currentState)?.Enter();
+            int nextState = (int)(object)newState;
+            GetState(currentState)?.Exit(nextState);
+            GetState(nextState)?.Enter(currentState);
+            currentState = nextState;
         }
     }
 }

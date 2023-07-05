@@ -16,13 +16,13 @@ namespace Knossos.Minotaur
             player = GameObject.FindWithTag("Player");
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.speed = 5f;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 

@@ -1,4 +1,4 @@
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
     public enum State
     {
@@ -6,6 +6,6 @@ namespace Knossos.Enemy1
         Patrol,
         ChargeAttack,
         Attacking,
-        Stagerred,
+        Cooldown,
     }
 }

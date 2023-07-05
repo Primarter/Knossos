@@ -11,7 +11,7 @@ namespace Knossos.FSM
         public abstract void Init();
 
         // Called when State become the active
-        public abstract void Enter();
+        public abstract void Enter(int previousState);
 
         // call each Update
         public abstract void Update();
@@ -20,6 +20,6 @@ namespace Knossos.FSM
         public abstract void FixedUpdate();
 
         // Called when State become the active
-        public abstract void Exit();
+        public abstract void Exit(int nextState);
     }
 }

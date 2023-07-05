@@ -19,7 +19,7 @@ namespace Knossos.Minotaur
             agent = obj.GetComponent<MinotaurAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.speed = 3f;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
@@ -28,7 +28,7 @@ namespace Knossos.Minotaur
             patrolTimeRemaining = patrolTime;
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 

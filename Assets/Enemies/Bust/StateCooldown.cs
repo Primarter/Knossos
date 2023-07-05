@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
-    public class EnemyStateStagerred : FSM.State
+    public class StateCooldown : FSM.State
     {
-        EnemyAgent agent;
+        BustAgent agent;
         Quaternion originalRotation;
 
         public override void Init()
         {
-            agent = obj.GetComponent<EnemyAgent>();
+            agent = obj.GetComponent<BustAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.enabled = false;
             // agent.locomotionSystem.navMeshAgent.speed = 0f;
@@ -26,7 +26,7 @@ namespace Knossos.Enemy1
             agent.StartCoroutine(StaggeredTimer());
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
             agent.transform.rotation = originalRotation;
             agent.locomotionSystem.navMeshAgent.enabled = true;
