@@ -16,7 +16,7 @@ namespace Knossos.Minotaur
             agent = obj.GetComponent<MinotaurAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
@@ -30,7 +30,7 @@ namespace Knossos.Minotaur
             // TODO: pathfind nodes to nearest lair using waypoints to create path
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 

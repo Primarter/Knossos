@@ -342,6 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 3000225110171045486}
   hitIdx: 0
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!1773428102 &1245203894
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -563,6 +565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 3000225110171045486}
   hitIdx: 0
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!1773428102 &1375671792
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -650,6 +654,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 3000225110171045486}
   hitIdx: 0
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!1773428102 &1576730111
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -1007,7 +1013,6 @@ GameObject:
   - component: {fileID: 3000225111823255521}
   - component: {fileID: 3000225111823255522}
   - component: {fileID: 3000225111823255525}
-  - component: {fileID: 3000225111823255524}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1148,21 +1153,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3000225111823255524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000225111823255534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5abbe144747b9418438a848f8f7864, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1001 &3000225110171045480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2567,9 +2557,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 129fabeaecd889b469877fd9d473eb02, type: 2}
+--- !u!114 &8707686826105622532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694165254857749305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300140955f82e9040875de98d6754caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  leftFoot: {fileID: 8686913115036256459}
+  rightFoot: {fileID: 6353367194448408118}
+  footstepSounds: []
 --- !u!4 &3325989323589724547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc0a4c54f6e07264ea72c907ca283e34,
+    type: 3}
+  m_PrefabInstance: {fileID: 3000225110171045480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6353367194448408118 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8181141781262655582, guid: fc0a4c54f6e07264ea72c907ca283e34,
     type: 3}
   m_PrefabInstance: {fileID: 3000225110171045480}
   m_PrefabAsset: {fileID: 0}
@@ -2608,6 +2622,12 @@ ParentConstraint:
 --- !u!4 &7808760074790811354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5043109358080850098, guid: fc0a4c54f6e07264ea72c907ca283e34,
+    type: 3}
+  m_PrefabInstance: {fileID: 3000225110171045480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8686913115036256459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5849311306583688867, guid: fc0a4c54f6e07264ea72c907ca283e34,
     type: 3}
   m_PrefabInstance: {fileID: 3000225110171045480}
   m_PrefabAsset: {fileID: 0}

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class EnemyConfig : ScriptableObject
+public class BustConfig : ScriptableObject
 {
     [Header("Stats")]
     public float attackSpeed = 25f;
@@ -15,5 +15,5 @@ public class EnemyConfig : ScriptableObject
     public float nextAttackCooldown = 2f;
 
     [Header("StateMachine")]
-    public Knossos.Enemy1.State initialState;
+    public Knossos.Bust.State initialState;
 }

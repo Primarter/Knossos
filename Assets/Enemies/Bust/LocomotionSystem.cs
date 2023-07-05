@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
     public class LocomotionSystem : MonoBehaviour
     {
-        EnemyAgent agent;
+        BustAgent agent;
         public NavMeshAgent navMeshAgent;
 
         void Awake()
         {
-            agent = GetComponent<EnemyAgent>();
+            agent = GetComponent<BustAgent>();
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
 

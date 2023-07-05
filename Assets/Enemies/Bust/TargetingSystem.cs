@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
     public class TargetingSystem : MonoBehaviour
     {
-        EnemyAgent agent;
+        BustAgent agent;
         public Transform target;
 
         public bool hasTarget;
 
         void Awake()
         {
-            agent = GetComponent<EnemyAgent>();
+            agent = GetComponent<BustAgent>();
         }
 
         void Start()

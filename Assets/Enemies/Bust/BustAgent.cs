@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Knossos;
 
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
-    public class EnemyAgent : MonoBehaviour
+    public class BustAgent : MonoBehaviour
     {
         public FSM.StateMachine stateMachine;
 
-        [SerializeField] public EnemyConfig config;
+        [SerializeField] public BustConfig config;
         [SerializeField] public State currentState;
 
         // public bool isAttacking;
@@ -30,11 +30,11 @@ namespace Knossos.Enemy1
         {
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
-            stateMachine.RegisterState<EnemyStateIdle>(State.Idle);
-            stateMachine.RegisterState<EnemyStatePatrol>(State.Patrol);
-            stateMachine.RegisterState<EnemyStateChargeAttack>(State.ChargeAttack);
-            stateMachine.RegisterState<EnemyStateAttacking>(State.Attacking);
-            stateMachine.RegisterState<EnemyStateStagerred>(State.Stagerred);
+            stateMachine.RegisterState<StateIdle>(State.Idle);
+            stateMachine.RegisterState<StatePatrol>(State.Patrol);
+            stateMachine.RegisterState<StateChargeAttack>(State.ChargeAttack);
+            stateMachine.RegisterState<StateAttacking>(State.Attacking);
+            stateMachine.RegisterState<StateCooldown>(State.Cooldown);
 
             stateMachine.ChangeState(config.initialState);
         }

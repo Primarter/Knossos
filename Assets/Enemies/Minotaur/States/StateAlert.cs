@@ -15,7 +15,7 @@ namespace Knossos.Minotaur
             agent = obj.GetComponent<MinotaurAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.soundSensorSystem.heardSuspiciousSound = false;
 
@@ -23,7 +23,7 @@ namespace Knossos.Minotaur
             agent.locomotionSystem.navMeshAgent.destination = agent.soundSensorSystem.suspiciousSoundPosition;
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 

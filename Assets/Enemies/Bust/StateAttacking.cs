@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knossos.Enemy1
+namespace Knossos.Bust
 {
-    public class EnemyStateAttacking : FSM.State
+    public class StateAttacking : FSM.State
     {
-        EnemyAgent agent;
+        BustAgent agent;
 
         public override void Init()
         {
-            agent = obj.GetComponent<EnemyAgent>();
+            agent = obj.GetComponent<BustAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.speed = agent.config.attackSpeed;
             agent.StartCoroutine(AttackTimer());
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 
@@ -35,7 +35,7 @@ namespace Knossos.Enemy1
         IEnumerator AttackTimer()
         {
             yield return new WaitForSeconds(agent.config.attackDuration);
-            agent.stateMachine.ChangeState(State.Stagerred);
+            agent.stateMachine.ChangeState(State.Cooldown);
         }
     }
 }

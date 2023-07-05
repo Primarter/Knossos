@@ -15,12 +15,12 @@ namespace Knossos.Minotaur
             agent = obj.GetComponent<MinotaurAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.isStopped = true;
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 
