@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Knossos.Bust
 {
-    public class StateCooldown : FSM.State
+    public class StateStagered : FSM.State
     {
         BustAgent agent;
         Quaternion originalRotation;
-        Coroutine cooldown;
+        int previousState;
+        Coroutine staggered;
 
         public override void Init()
         {
@@ -17,22 +18,20 @@ namespace Knossos.Bust
 
         public override void Enter(int previousState)
         {
+            this.previousState = previousState;
             agent.locomotionSystem.navMeshAgent.enabled = false;
-            // agent.locomotionSystem.navMeshAgent.speed = 0f;
-            // agent.locomotionSystem.navMeshAgent.isStopped = true;
 
             originalRotation = agent.transform.rotation;
-            agent.transform.rotation *= Quaternion.AngleAxis(90f, new Vector3(1f, 0f, 0f));
+            agent.transform.rotation *= Quaternion.AngleAxis(90f, new Vector3(-1f, 0f, 0f));
 
-            cooldown = agent.StartCoroutine(CooldownTimer());
+            staggered = agent.StartCoroutine(StaggeredTimer());
         }
 
         public override void Exit(int nextState)
         {
             agent.transform.rotation = originalRotation;
             agent.locomotionSystem.navMeshAgent.enabled = true;
-            // agent.locomotionSystem.navMeshAgent.isStopped = false;
-            agent.StopCoroutine(cooldown);
+            agent.StopCoroutine(staggered);
         }
 
         public override void FixedUpdate()
@@ -41,14 +40,12 @@ namespace Knossos.Bust
 
         public override void Update()
         {
-            // agent.transform.Rotate(new Vector3(0f, 360f, 0f) * Time.deltaTime);
         }
 
-        IEnumerator CooldownTimer()
+        IEnumerator StaggeredTimer()
         {
-            yield return new WaitForSeconds(agent.config.attackEndlag);
-            // agent.stateMachine.ChangeState(EnemyState.Idle);
-            agent.stateMachine.ChangeState(BustState.Patrol);
+            yield return new WaitForSeconds(agent.config.staggerDuration);
+            agent.stateMachine.ChangeState(BustState.Idle);
         }
     }
 }

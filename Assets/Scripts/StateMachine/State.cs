@@ -5,7 +5,7 @@ namespace Knossos.FSM
     public abstract class State
     {
         public GameObject obj;
-        int id;
+        protected int id;
 
         // Called when State is registered
         public abstract void Init();

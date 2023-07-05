@@ -26,7 +26,7 @@ namespace Knossos.Bust
         {
             if (agent.targetingSystem.hasTarget)
             {
-                agent.stateMachine.ChangeState(State.ChargeAttack);
+                agent.stateMachine.ChangeState(BustState.ChargeAttack);
             }
         }
 

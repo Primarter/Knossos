@@ -116,6 +116,8 @@ GameObject:
   - component: {fileID: 5162653091762640739}
   - component: {fileID: 565865669}
   - component: {fileID: 1123630004498305581}
+  - component: {fileID: -2220769057641499956}
+  - component: {fileID: 6142005899244872460}
   m_Layer: 0
   m_Name: Bust
   m_TagString: Enemy
@@ -238,7 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 348e48f3093596343896bc3034e21bf5, type: 2}
-  currentState: 0
   targetingSystem: {fileID: 0}
   locomotionSystem: {fileID: 0}
 --- !u!114 &3882211738945492236
@@ -309,5 +310,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0431025781044b4f99c0f214957448b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+--- !u!114 &-2220769057641499956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882211738945492244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a424adb492aee84dad61a1acc973b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damageMaterial: {fileID: 2100000, guid: 7ee0d3ef0a1268b47af2a2488e7b8565, type: 2}
+--- !u!114 &6142005899244872460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882211738945492244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49862d4f2b68ad74b8e2006ed06dac0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
