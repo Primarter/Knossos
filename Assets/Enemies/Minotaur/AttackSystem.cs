@@ -21,22 +21,17 @@ public class AttackSystem : MonoBehaviour
 
     void Start()
     {
-        attackColliderManager.OnTriggerIn += Attack;
     }
 
-    public void Attack(Collider other)
+    public void Attack()
     {
-        if (other.gameObject.tag == "Player")
+        foreach (var gameObject in attackColliderManager.getColliding())
         {
-            // TODO: error here -> redo the ColliderManager
-            // other.gameObject.GetComponent<Health>().TakeDamage(damage);
+            if (gameObject.tag == "Player")
+            {
+                bool hit = gameObject.GetComponent<Health>().TakeDamage(damage);
+            }
         }
-
-        // GameObject[] players = gameobjectInCollider.Where(i => i.tag == "Player").ToArray();
-        // foreach (GameObject player in players)
-        // {
-        //     player.GetComponent<Health>().TakeDamage(damage);
-        // }
     }
 }
 

@@ -20,7 +20,6 @@ namespace Knossos.Minotaur
         {
             agent.locomotionSystem.navMeshAgent.isStopped = true;
             timer = 1.5f;
-            // agent.attackSystem.Attack();
         }
 
         public override void Exit(int nextState)
@@ -29,6 +28,8 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
+            agent.attackSystem.Attack();
+
             timer -= Time.fixedDeltaTime;
             if (timer > 0) return;
 
