@@ -16,14 +16,14 @@ namespace Knossos.Minotaur
             agent = obj.GetComponent<MinotaurAgent>();
         }
 
-        public override void Enter()
+        public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.isStopped = true;
             timer = 1.5f;
             // agent.attackSystem.Attack();
         }
 
-        public override void Exit()
+        public override void Exit(int nextState)
         {
         }
 
