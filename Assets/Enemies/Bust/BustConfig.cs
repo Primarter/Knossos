@@ -9,11 +9,12 @@ public class BustConfig : ScriptableObject
 
     [Header("Timings")]
     public float triggerAttackDistance = 5f;
-    public float startAttackCooldown = 0.3f;
+    public float attackStartup = 0.3f;
     public float attackDuration = 0.5f;
-    public float endAttackCooldown = 1f;
-    public float nextAttackCooldown = 2f;
+    public float attackEndlag = 1f;
+    public float attackCooldown = 2f;
+    public float staggerDuration = 1f;
 
     [Header("StateMachine")]
-    public Knossos.Bust.State initialState;
+    public Knossos.Bust.BustState initialState;
 }

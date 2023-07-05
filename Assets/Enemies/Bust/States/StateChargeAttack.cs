@@ -8,6 +8,8 @@ namespace Knossos.Bust
     {
         BustAgent agent;
 
+        Coroutine attackTimerCoroutine;
+
         public override void Init()
         {
             agent = obj.GetComponent<BustAgent>();
@@ -23,11 +25,12 @@ namespace Knossos.Bust
 
             agent.transform.forward = dir.normalized;
 
-            agent.StartCoroutine(attackTimer());
+            attackTimerCoroutine = agent.StartCoroutine(attackTimer());
         }
 
         public override void Exit(int nextState)
         {
+            agent.StopCoroutine(attackTimerCoroutine);
         }
 
         public override void FixedUpdate()
@@ -40,8 +43,8 @@ namespace Knossos.Bust
 
         IEnumerator attackTimer()
         {
-            yield return new WaitForSeconds(agent.config.startAttackCooldown);
-            agent.stateMachine.ChangeState(State.Attacking);
+            yield return new WaitForSeconds(agent.config.attackStartup);
+            agent.stateMachine.ChangeState(BustState.Attacking);
         }
 
     }

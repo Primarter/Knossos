@@ -10,7 +10,7 @@ namespace Knossos.Bust
         public FSM.StateMachine stateMachine;
 
         [SerializeField] public BustConfig config;
-        [SerializeField] public State currentState;
+        [SerializeField] public BustState currentState {get => (BustState)stateMachine.currentState;}
 
         // public bool isAttacking;
         // public bool canAttack;
@@ -28,13 +28,14 @@ namespace Knossos.Bust
 
         void Start()
         {
-            stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
+            stateMachine = new FSM.StateMachine(this.gameObject, typeof(BustState));
 
-            stateMachine.RegisterState<StateIdle>(State.Idle);
-            stateMachine.RegisterState<StatePatrol>(State.Patrol);
-            stateMachine.RegisterState<StateChargeAttack>(State.ChargeAttack);
-            stateMachine.RegisterState<StateAttacking>(State.Attacking);
-            stateMachine.RegisterState<StateCooldown>(State.Cooldown);
+            stateMachine.RegisterState<StateIdle>(BustState.Idle);
+            stateMachine.RegisterState<StatePatrol>(BustState.Patrol);
+            stateMachine.RegisterState<StateChargeAttack>(BustState.ChargeAttack);
+            stateMachine.RegisterState<StateAttacking>(BustState.Attacking);
+            stateMachine.RegisterState<StateCooldown>(BustState.Cooldown);
+            stateMachine.RegisterState<StateStagered>(BustState.Staggered);
 
             stateMachine.ChangeState(config.initialState);
         }
@@ -47,7 +48,6 @@ namespace Knossos.Bust
         void Update()
         {
             stateMachine.Update();
-            currentState = (State)stateMachine.currentState;
         }
     }
 }

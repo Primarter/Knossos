@@ -9,7 +9,7 @@ namespace Knossos.Bust
     {
         BustAgent agent;
 
-        IEnumerator patrolCoroutine;
+        Coroutine patrolCoroutine;
 
         public override void Init()
         {
@@ -21,8 +21,7 @@ namespace Knossos.Bust
             agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
-            patrolCoroutine = Patrol();
-            agent.StartCoroutine(patrolCoroutine);
+            patrolCoroutine = agent.StartCoroutine(Patrol());
         }
 
         public override void Exit(int nextState)
@@ -34,7 +33,7 @@ namespace Knossos.Bust
         {
             if (agent.targetingSystem.hasTarget)
             {
-                agent.stateMachine.ChangeState(State.ChargeAttack);
+                agent.stateMachine.ChangeState(BustState.ChargeAttack);
             }
         }
 

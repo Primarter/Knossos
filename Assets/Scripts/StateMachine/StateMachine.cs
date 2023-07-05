@@ -52,5 +52,12 @@ namespace Knossos.FSM
             GetState(nextState)?.Enter(currentState);
             currentState = nextState;
         }
+
+        public void ChangeState(int newState)
+        {
+            GetState(currentState)?.Exit(newState);
+            GetState(newState)?.Enter(currentState);
+            currentState = newState;
+        }
     }
 }

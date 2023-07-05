@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Knossos.Bust
 {
+    [RequireComponent(typeof(BustAgent))]
     public class TargetingSystem : MonoBehaviour
     {
         BustAgent agent;

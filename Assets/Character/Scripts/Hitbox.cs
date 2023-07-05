@@ -16,8 +16,8 @@ public class Hitbox : MonoBehaviour
 
     Transform player;
     BoxCollider collider;
-    List<EnemyLife> enemies = new();
-    List<EnemyLife> hitEnemies = new();
+    List<Enemies.OnHitEventSystem> enemies = new();
+    List<Enemies.OnHitEventSystem> hitEnemies = new();
     bool hitting = false;
     int damage;
 
@@ -32,7 +32,7 @@ public class Hitbox : MonoBehaviour
         enemies.RemoveAll(en => en == null || !en.isActiveAndEnabled);
         if (!hitting)
             return;
-        foreach (EnemyLife enemy in enemies)
+        foreach (Enemies.OnHitEventSystem enemy in enemies)
         {
             if (!hitEnemies.Contains(enemy))
             {
@@ -45,7 +45,7 @@ public class Hitbox : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            var en = other.GetComponent<EnemyLife>();
+            var en = other.GetComponent<Enemies.OnHitEventSystem>();
             if (en != null)
                 enemies.Add(en);
         }
@@ -55,13 +55,13 @@ public class Hitbox : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            var en = other.GetComponent<EnemyLife>();
+            var en = other.GetComponent<Enemies.OnHitEventSystem>();
             if (en != null)
                 enemies.Remove(en);
         }
     }
 
-    private void Hit(EnemyLife enemy)
+    private void Hit(Enemies.OnHitEventSystem enemy)
     {
         enemy.TakeDamage(damage);
         hitEnemies.Add(enemy);
@@ -74,7 +74,7 @@ public class Hitbox : MonoBehaviour
     {
         hitting = true;
         this.damage = damage;
-        foreach (EnemyLife enemy in enemies)
+        foreach (Enemies.OnHitEventSystem enemy in enemies)
         {
             Hit(enemy);
         }

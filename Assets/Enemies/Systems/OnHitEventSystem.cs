@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
-public class EnemyLife : MonoBehaviour
+namespace Knossos.Enemies
+{
+
+public class OnHitEventSystem : MonoBehaviour
 {
     public Material damageMaterial;
+
+    public delegate void OnHit(int damage);
+    public OnHit onHitCallbacks;
 
     private EnemyStats stats;
     private Renderer renderer;
     private Material regularMaterial;
-
-    float health;
 
     private void Awake() {
         renderer = GetComponent<Renderer>();
@@ -20,16 +23,13 @@ public class EnemyLife : MonoBehaviour
     }
 
     private void Start() {
-        health = stats.life;
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
         StartCoroutine(MaterialChangeCoroutine());
-        if (health <= 0)
-        {
-            gameObject.SetActive(false);
+        if (onHitCallbacks != null) {
+            onHitCallbacks(damage);
         }
     }
 
@@ -44,4 +44,6 @@ public class EnemyLife : MonoBehaviour
         }
         renderer.material = regularMaterial;
     }
+}
+
 }

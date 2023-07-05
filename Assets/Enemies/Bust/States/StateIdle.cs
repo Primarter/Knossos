@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Knossos.Bust
 {
-    public class StateAttacking : FSM.State
+    public class StateIdle : FSM.State
     {
         BustAgent agent;
 
@@ -15,8 +15,7 @@ namespace Knossos.Bust
 
         public override void Enter(int previousState)
         {
-            agent.locomotionSystem.navMeshAgent.speed = agent.config.attackSpeed;
-            agent.StartCoroutine(AttackTimer());
+            agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed;
         }
 
         public override void Exit(int nextState)
@@ -25,17 +24,14 @@ namespace Knossos.Bust
 
         public override void FixedUpdate()
         {
+            if (agent.targetingSystem.hasTarget)
+            {
+                agent.stateMachine.ChangeState(BustState.ChargeAttack);
+            }
         }
 
         public override void Update()
         {
-            // agent.transform.Rotate(new Vector3(0f, 90f, 0f) * Time.deltaTime);
         }
-
-        IEnumerator AttackTimer()
-        {
-            yield return new WaitForSeconds(agent.config.attackDuration);
-            agent.stateMachine.ChangeState(State.Cooldown);
-        }
-    }
+}
 }
