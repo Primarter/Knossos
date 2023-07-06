@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] Transform spawn;
+
     int _health = 100;
     int health
     {
@@ -21,13 +23,20 @@ public class Health : MonoBehaviour
         health -= value;
         if (health <= 0)
         {
-            print("Player is dead!");
+            Die();
             return false;
         }
 
         StartCoroutine(Invicibility(invicibilityTime));
 
         return true;
+    }
+
+    void Die()
+    {
+        print("Player is dead!");
+        transform.position = spawn.position;
+        health = 100;
     }
 
     IEnumerator Invicibility(float time)
