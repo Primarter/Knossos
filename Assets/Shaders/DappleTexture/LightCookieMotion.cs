@@ -13,6 +13,7 @@ public class LightCookieMotion : MonoBehaviour
     [SerializeField] Vector2 movementTimeOffset1UV = new Vector2();
     [SerializeField] Vector2 tex1TilingUV = new Vector2(1f, 1f);
     [SerializeField] Vector2 tex1OffsetUV = new Vector2(0f, 0f);
+    [SerializeField] float speed1 = 1f;
 
     [Header("Texture 2")]
     [SerializeField] Vector2 cycleDuration2UV = new Vector2(20f, 20f);
@@ -21,23 +22,24 @@ public class LightCookieMotion : MonoBehaviour
     [SerializeField] Vector2 movementTimeOffset2UV = new Vector2();
     [SerializeField] Vector2 tex2TilingUV = new Vector2(1f, 1f);
     [SerializeField] Vector2 tex2OffsetUV = new Vector2(0f, 0f);
+    [SerializeField] float speed2 = 1f;
 
     float time1U, time1V;
     float time2U, time2V;
 
     void Update()
     {
-        time1U = Time.time % cycleDuration1UV.x;
+        time1U = (Time.time * speed1) % cycleDuration1UV.x;
         time1U /= cycleDuration1UV.x;
 
-        time1U = Time.time % cycleDuration1UV.y;
-        time1U /= cycleDuration1UV.y;
+        time1V = (Time.time * speed1) % cycleDuration1UV.y;
+        time1V /= cycleDuration1UV.y;
 
-        time2U = Time.time % cycleDuration2UV.x;
+        time2U = (Time.time * speed2) % cycleDuration2UV.x;
         time2U /= cycleDuration2UV.x;
 
-        time2U = Time.time % cycleDuration2UV.y;
-        time2U /= cycleDuration2UV.y;
+        time2V = (Time.time * speed2) % cycleDuration2UV.y;
+        time2V /= cycleDuration2UV.y;
 
         UpdateMaterial();
     }

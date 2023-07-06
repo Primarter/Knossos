@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 51ab5eb4d129db94daf7b185a2ec9f33,
+  m_LightingDataAsset: {fileID: 112000000, guid: 3f25f73b416e1fb4d9609dae27b64802,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 24f14582a4977a54d810170a6d077540,
     type: 2}
@@ -9372,6 +9372,7 @@ MonoBehaviour:
   movementTimeOffset1UV: {x: 0, y: 0}
   tex1TilingUV: {x: 1, y: 1}
   tex1OffsetUV: {x: 0, y: 0}
+  speed1: 1
   cycleDuration2UV: {x: 20, y: 20}
   movementPath2U:
     serializedVersion: 2
@@ -9473,8 +9474,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.10685615
     - serializedVersion: 3
-      time: 0.17012672
-      value: 0.50950253
+      time: 0.26073143
+      value: 0.3287454
       inSlope: 0.16877542
       outSlope: 0.16877542
       tangentMode: 0
@@ -9482,8 +9483,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2577137
-      value: 0.4029027
+      time: 0.34221673
+      value: 0.22214559
       inSlope: -0.13878599
       outSlope: -0.13878599
       tangentMode: 0
@@ -9491,8 +9492,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.47895584
     - serializedVersion: 3
-      time: 0.38605058
-      value: 0.41996238
+      time: 0.52564275
+      value: 0.37277126
       inSlope: 0.7918493
       outSlope: 0.7918493
       tangentMode: 0
@@ -9500,8 +9501,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.13287124
     - serializedVersion: 3
-      time: 0.5484552
-      value: 0.5058781
+      time: 0.66509175
+      value: 0.11181408
       inSlope: -0.86423117
       outSlope: -0.86423117
       tangentMode: 0
@@ -9509,26 +9510,26 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.6332871
-      value: 0.23369154
-      inSlope: -0.53763205
-      outSlope: -0.53763205
+      time: 0.74629885
+      value: 0.19787565
+      inSlope: 0.41881806
+      outSlope: 0.41881806
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.35993242
+      outWeight: 0.5471162
     - serializedVersion: 3
-      time: 0.7978172
-      value: 0.28605247
-      inSlope: -0.7157239
-      outSlope: -0.7157239
+      time: 0.83714193
+      value: 0.15764216
+      inSlope: 0.17991772
+      outSlope: 0.17991772
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.50233954
+      outWeight: 0.63016653
     - serializedVersion: 3
-      time: 0.86863977
-      value: 0.18379155
+      time: 0.89841366
+      value: 0.042724736
       inSlope: -0.24382481
       outSlope: -0.24382481
       tangentMode: 0
@@ -9536,8 +9537,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 0.99633324
-      value: 0.14229451
+      time: 1
+      value: 0.0000019073486
       inSlope: 0.14898644
       outSlope: 0.14898644
       tangentMode: 0
@@ -9551,6 +9552,7 @@ MonoBehaviour:
   movementTimeOffset2UV: {x: 2.43, y: 0}
   tex2TilingUV: {x: 2, y: 2}
   tex2OffsetUV: {x: 0.54, y: 0}
+  speed2: 1
 --- !u!43 &734487671
 Mesh:
   m_ObjectHideFlags: 0
