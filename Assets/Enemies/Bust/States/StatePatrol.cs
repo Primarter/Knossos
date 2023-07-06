@@ -33,7 +33,7 @@ namespace Knossos.Bust
         {
             if (agent.targetingSystem.hasTarget)
             {
-                agent.stateMachine.ChangeState(BustState.ChargeAttack);
+                agent.stateMachine.ChangeState(State.Pursue);
             }
         }
 

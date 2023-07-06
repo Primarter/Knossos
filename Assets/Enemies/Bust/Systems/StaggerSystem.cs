@@ -18,9 +18,9 @@ public class StaggerSystem : MonoBehaviour
 
     public void OnHitCallback(int damage)
     {
-        if (agent.currentState != BustState.Attacking)
+        if (agent.currentState != State.Attacking && agent.isActiveAndEnabled)
         {
-            agent.stateMachine.ChangeState(BustState.Staggered);
+            agent.stateMachine.ChangeState(State.Staggered);
         }
     }
 }

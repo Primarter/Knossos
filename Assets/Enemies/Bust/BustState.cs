@@ -1,11 +1,12 @@
 namespace Knossos.Bust
 {
-    public enum BustState
+    public enum State
     {
-        Idle,
+        Pursue,
         Patrol,
         ChargeAttack,
         Attacking,
+        Endlag,
         Cooldown,
         Staggered
     }

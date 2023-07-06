@@ -65,7 +65,6 @@ public class Hitbox : MonoBehaviour
     {
         enemy.TakeDamage(damage);
         hitEnemies.Add(enemy);
-        print($"Hit {enemy.name}");
         animationController.OnHitConnectEvent(hitIdx);
         Destroy(GameObject.Instantiate(damageParticle, enemy.transform.position, player.rotation), .5f);
     }

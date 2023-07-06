@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Knossos.Bust
 {
-    public class StateCooldown : FSM.State
+    public class StateEndlag : FSM.State
     {
         BustAgent agent;
         Quaternion originalRotation;

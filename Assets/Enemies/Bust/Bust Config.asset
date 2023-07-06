@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246ed7919e9b8834380b3189f45d3230, type: 3}
   m_Name: Bust Config
   m_EditorClassIdentifier: 
-  attackSpeed: 25
+  attackSpeed: 40
   defaultSpeed: 2
-  triggerAttackDistance: 6
-  startAttackCooldown: 0.6
-  attackDuration: 0.5
-  endAttackCooldown: 1
-  nextAttackCooldown: 2
+  attackStartup: 0.5
+  attackDuration: 0.4
+  attackEndlag: 2
+  attackCooldown: 2
+  staggerDuration: 1
+  detectionRange: 12
+  maxDetectionRange: 50
+  attackRange: 8
   initialState: 1

@@ -35,7 +35,7 @@ namespace Knossos.Bust
         IEnumerator AttackTimer()
         {
             yield return new WaitForSeconds(agent.config.attackDuration);
-            agent.stateMachine.ChangeState(BustState.Cooldown);
+            agent.stateMachine.ChangeState(State.Endlag);
         }
     }
 }

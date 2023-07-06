@@ -45,7 +45,7 @@ namespace Knossos.Bust
         IEnumerator StaggeredTimer()
         {
             yield return new WaitForSeconds(agent.config.staggerDuration);
-            agent.stateMachine.ChangeState(BustState.Idle);
+            agent.stateMachine.ChangeState(State.Pursue);
         }
     }
 }

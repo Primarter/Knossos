@@ -10,7 +10,11 @@ namespace Knossos.Bust
         BustAgent agent;
         public Transform target;
 
-        public bool hasTarget;
+        [System.NonSerialized]
+        public bool hasTarget = false;
+        public bool isInRange { get => distanceToTarget <= agent.config.attackRange; }
+
+        float distanceToTarget;
 
         void Awake()
         {
@@ -20,14 +24,17 @@ namespace Knossos.Bust
         void Start()
         {
             target = GameObject.FindWithTag("Player").transform;
-            hasTarget = false;
+            distanceToTarget = Vector3.Distance(transform.position, target.position);
         }
 
         void FixedUpdate()
         {
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-            hasTarget = distanceToTarget < agent.config.triggerAttackDistance;
+            if (distanceToTarget < agent.config.detectionRange)
+                hasTarget = true;
+            if (distanceToTarget > agent.config.maxDetectionRange)
+                hasTarget = false;
         }
 
         void Update()
