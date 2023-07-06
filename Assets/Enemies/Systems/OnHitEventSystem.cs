@@ -13,12 +13,12 @@ public class OnHitEventSystem : MonoBehaviour
     public OnHit onHitCallbacks;
 
     private EnemyStats stats;
-    private Renderer renderer;
+    private Renderer rend;
     private Material regularMaterial;
 
     private void Awake() {
-        renderer = GetComponent<Renderer>();
-        regularMaterial = renderer.sharedMaterial;
+        rend = GetComponent<Renderer>();
+        regularMaterial = rend.sharedMaterial;
         stats = GetComponent<Enemy>().stats;
     }
 
@@ -36,13 +36,13 @@ public class OnHitEventSystem : MonoBehaviour
     IEnumerator MaterialChangeCoroutine()
     {
         int frame = Time.frameCount;
-        renderer.material = damageMaterial;
+        rend.material = damageMaterial;
 
         while (Time.frameCount < frame + 10)
         {
             yield return null;
         }
-        renderer.material = regularMaterial;
+        rend.material = regularMaterial;
     }
 }
 

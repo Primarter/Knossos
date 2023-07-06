@@ -31,8 +31,8 @@ public class Controller : MonoBehaviour
     }
 
     // States
-    private bool attacking = false;
     private bool dashing = false;
+    public bool attacking { get => !canDash && !dashing; }
 
     // Dash control
     private Stopwatch dashTimer = new();
@@ -137,7 +137,6 @@ public class Controller : MonoBehaviour
     {
         if (InputManager.CheckBuffer(BufferedInput.Attack, false))
         {
-            attacking = true;
             canDash = false;
             EnableSlowMotion();
             animationController.ResetDodge();
@@ -159,7 +158,6 @@ public class Controller : MonoBehaviour
 
     public void StopAttacking()
     {
-        attacking = false;
         canDash = true;
         DisableSlowMotion();
     }

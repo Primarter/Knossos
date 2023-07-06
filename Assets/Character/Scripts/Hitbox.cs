@@ -15,7 +15,6 @@ public class Hitbox : MonoBehaviour
     GameObject damageParticle;
 
     Transform player;
-    BoxCollider collider;
     List<Enemies.OnHitEventSystem> enemies = new();
     List<Enemies.OnHitEventSystem> hitEnemies = new();
     bool hitting = false;
@@ -24,7 +23,6 @@ public class Hitbox : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
-        collider = GetComponent<BoxCollider>();
     }
 
     private void Update()
