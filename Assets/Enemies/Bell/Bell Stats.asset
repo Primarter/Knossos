@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 246ed7919e9b8834380b3189f45d3230, type: 3}
-  m_Name: Scarecrow Config
+  m_Script: {fileID: 11500000, guid: f9535f6a22ae50c4d990bc57359281fa, type: 3}
+  m_Name: Bell Stats
   m_EditorClassIdentifier: 
-  attackSpeed: 25
-  defaultSpeed: 2
-  triggerAttackDistance: 6
-  startAttackCooldown: 0.6
-  attackDuration: 0.5
-  endAttackCooldown: 1
-  nextAttackCooldown: 2
-  initialState: 1
+  detectionPriority: 1
+  life: 20
+  damage: 3
+  moveSpeed: 5

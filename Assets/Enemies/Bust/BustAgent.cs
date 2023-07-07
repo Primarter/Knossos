@@ -19,11 +19,14 @@ namespace Knossos.Bust
         public TargetingSystem targetingSystem;
         [HideInInspector]
         public LocomotionSystem locomotionSystem;
+        [HideInInspector]
+        public CapsuleCollider capsuleCollider;
 
         void Awake()
         {
             targetingSystem = GetComponent<TargetingSystem>();
             locomotionSystem = GetComponent<LocomotionSystem>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
         }
 
         void Start()

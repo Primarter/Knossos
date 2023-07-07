@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
     // Player stats
     private Vector3 movement;
     private Quaternion targetRotation;
-    [System.NonSerialized]
+    [HideInInspector]
     public float speed = 10f;
     private float attMoveSpeedMult = 1f;
     private float attRotSpeedMult = 1f;
@@ -36,7 +36,7 @@ public class Controller : MonoBehaviour
 
     // Dash control
     private Stopwatch dashTimer = new();
-    [System.NonSerialized]
+    [HideInInspector]
     private bool canDash = true;
 
     // Movement Logic
@@ -101,8 +101,6 @@ public class Controller : MonoBehaviour
 
     private IEnumerator DashCoroutine()
     {
-        LoudSoundManager.playLoudSound(transform.position);
-
         dashing = true;
         canDash = false;
         if (movement.magnitude == 0f)

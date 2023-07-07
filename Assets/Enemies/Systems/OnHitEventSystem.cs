@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Knossos.Enemies
 {
@@ -11,6 +12,8 @@ public class OnHitEventSystem : MonoBehaviour
 
     public delegate void OnHit(int damage);
     public OnHit onHitCallbacks;
+
+    public UnityEvent<int> onHitEvent = new();
 
     private EnemyStats stats;
     private Renderer rend;
@@ -31,6 +34,7 @@ public class OnHitEventSystem : MonoBehaviour
         if (onHitCallbacks != null) {
             onHitCallbacks(damage);
         }
+        onHitEvent.Invoke(damage);
     }
 
     IEnumerator MaterialChangeCoroutine()

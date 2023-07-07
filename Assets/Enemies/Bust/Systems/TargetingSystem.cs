@@ -10,7 +10,7 @@ namespace Knossos.Bust
         BustAgent agent;
         public Transform target;
 
-        [System.NonSerialized]
+        [HideInInspector]
         public bool hasTarget = false;
         public bool isInRange { get => distanceToTarget <= agent.config.attackRange; }
 
