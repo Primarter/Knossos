@@ -12,7 +12,7 @@ public class AttackSystem : MonoBehaviour
     MinotaurAgent agent;
     [SerializeField] ColliderManager attackColliderManager;
 
-    int damage = 25;
+    [SerializeField] int damage = 50;
 
     void Awake()
     {

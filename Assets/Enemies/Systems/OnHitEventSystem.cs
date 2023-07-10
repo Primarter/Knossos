@@ -15,14 +15,12 @@ public class OnHitEventSystem : MonoBehaviour
 
     public UnityEvent<int> onHitEvent = new();
 
-    private EnemyStats stats;
     private Renderer rend;
     private Material regularMaterial;
 
     private void Awake() {
         rend = GetComponent<Renderer>();
         regularMaterial = rend.sharedMaterial;
-        stats = GetComponent<Enemy>().stats;
     }
 
     private void Start() {

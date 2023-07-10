@@ -5,20 +5,20 @@ using UnityEngine;
 namespace Knossos.Enemies
 {
 
-[RequireComponent(typeof(Enemy), typeof(OnHitEventSystem))]
+[RequireComponent(typeof(OnHitEventSystem))]
 public class LifeSystem : MonoBehaviour
 {
-    private EnemyStats stats;
+    [SerializeField]
+    int startHealth = 3;
 
-    float health;
+    int health;
 
     private void Awake() {
-        stats = GetComponent<Enemy>().stats;
         GetComponent<OnHitEventSystem>().onHitCallbacks += TakeDamage;
     }
 
     private void Start() {
-        health = stats.life;
+        health = startHealth;
     }
 
     public void TakeDamage(int damage)

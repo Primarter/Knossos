@@ -18,8 +18,6 @@ namespace Knossos.Bust
         public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.enabled = false;
-            // agent.locomotionSystem.navMeshAgent.speed = 0f;
-            // agent.locomotionSystem.navMeshAgent.isStopped = true;
 
             originalRotation = agent.transform.rotation;
             agent.transform.rotation *= Quaternion.AngleAxis(90f, new Vector3(1f, 0f, 0f));
@@ -31,7 +29,7 @@ namespace Knossos.Bust
         {
             agent.transform.rotation = originalRotation;
             agent.locomotionSystem.navMeshAgent.enabled = true;
-            // agent.locomotionSystem.navMeshAgent.isStopped = false;
+
             agent.StopCoroutine(cooldown);
         }
 
@@ -41,13 +39,11 @@ namespace Knossos.Bust
 
         public override void Update()
         {
-            // agent.transform.Rotate(new Vector3(0f, 360f, 0f) * Time.deltaTime);
         }
 
         IEnumerator CooldownTimer()
         {
             yield return new WaitForSeconds(agent.config.attackEndlag);
-            // agent.stateMachine.ChangeState(EnemyState.Idle);
             agent.stateMachine.ChangeState(State.Pursue);
         }
     }

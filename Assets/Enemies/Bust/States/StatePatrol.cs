@@ -20,7 +20,6 @@ namespace Knossos.Bust
         {
             agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
-
             patrolCoroutine = agent.StartCoroutine(Patrol());
         }
 

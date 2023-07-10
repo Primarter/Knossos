@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2085671819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2085671820}
+  - component: {fileID: 2085671821}
+  - component: {fileID: 2085671822}
+  m_Layer: 0
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2085671820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085671819}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.36, y: 0, z: -0.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5703805930383705209}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2085671821
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085671819}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2978415, y: 2.7602549, z: 1.5761018}
+  m_Center: {x: 0.15468287, y: -0.44044876, z: 0.28805068}
+--- !u!114 &2085671822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085671819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ab0688d7fc62944976671ec1141546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Player
+  collidingGameObjects: []
 --- !u!1 &5703805930188102587
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +159,6 @@ GameObject:
   - component: {fileID: 5703805930383705215}
   - component: {fileID: 5703805930383705214}
   - component: {fileID: 1132038318492796119}
-  - component: {fileID: 5433513802164724485}
   - component: {fileID: 2182131036365036010}
   m_Layer: 0
   m_Name: Minotaur
@@ -120,6 +180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5703805931472118903}
+  - {fileID: 2085671820}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,7 +197,7 @@ NavMeshAgent:
   m_Speed: 10
   m_Acceleration: 40
   avoidancePriority: 50
-  m_AngularSpeed: 270
+  m_AngularSpeed: 300
   m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -226,22 +287,6 @@ MonoBehaviour:
   suspiciousSoundPosition: {x: 0, y: 0, z: 0}
   heardSoundTime: 1
   heardSoundTimer: 0
---- !u!114 &5433513802164724485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5703805930383705206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e708e67a9e791d4a916c8ea69de065a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heardSuspiciousSound: 0
-  suspiciousSoundPosition: {x: 0, y: 0, z: 0}
-  heardSoundTime: 1
-  heardSoundTimer: 0
 --- !u!114 &2182131036365036010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b2aee66a6889d4e992dcc2f06f9472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackColliderManager: {fileID: 0}
+  attackColliderManager: {fileID: 2085671822}
+  damage: 50
 --- !u!1 &5703805930554419667
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,9 +492,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5703805931472118900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2128319, y: 0, z: -0.050729733}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5703805930554419671}
   - {fileID: 5703805931765826588}

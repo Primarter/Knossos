@@ -8,20 +8,17 @@ namespace Knossos.Bust
 
 public class AttackSystem : MonoBehaviour
 {
-    BustAgent agent;
+    [SerializeField]
+    int damage = 10;
 
     UnityEvent onHitPlayerEvent;
-
-    void Awake()
-    {
-        agent = GetComponent<BustAgent>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            print("Hit Player");
+            if ((other.GetComponent<Health>().TakeDamage(damage)))
+                print("Player Hit");
         }
 
         var bell = other.GetComponent<Bell.AttractMinotaur>();
