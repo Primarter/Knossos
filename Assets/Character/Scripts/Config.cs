@@ -26,8 +26,9 @@ public class Config : ScriptableObject
     public float dashCost = 1f;
     public float staminaRegenPerSec = 1f;
 
-    [Header("AttackStats")]
+    [Header("CombatStats")]
     public int[] hitStops = {2, 2, 4};
+    public int[] damageLevels = {3, 6, 12};
 
     [Header("Read Only Info")]
     public float DodgeAnimationSpeedMultiplier = 1f;

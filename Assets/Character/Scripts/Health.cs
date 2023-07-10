@@ -2,19 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Knossos.Character
+{
+
 public class Health : MonoBehaviour
 {
     [SerializeField] Transform spawn;
+    [SerializeField] int _startHealth = 100;
+    public int startHealth
+    {
+        get => _startHealth;
+        private set => _startHealth = value;
+    }
 
-    int _health = 100;
-    int health
+    int _health;
+    public int health
     {
         get => _health;
-        set => _health = Mathf.Clamp(value, 0, 100);
+        private set => _health = Mathf.Clamp(value, 0, startHealth);
     }
 
     bool invicible = false;
     float invicibilityTime = 1f;
+
+    private void Start()
+    {
+        health = startHealth;
+    }
 
     public bool TakeDamage(int value)
     {
@@ -26,6 +40,8 @@ public class Health : MonoBehaviour
             Die();
             return false;
         }
+
+        GetComponent<AnimationController>()?.OnDamageAnimStartEvent(value);
 
         StartCoroutine(Invicibility(invicibilityTime));
 
@@ -45,4 +61,6 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(time);
         invicible = false;
     }
+}
+
 }

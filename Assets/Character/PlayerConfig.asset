@@ -83,4 +83,5 @@ MonoBehaviour:
   dashCost: 1
   staminaRegenPerSec: 1
   hitStops: 0a0000000a00000014000000
+  damageLevels: 3c0000000f00000019000000
   DodgeAnimationSpeedMultiplier: 1.7499999

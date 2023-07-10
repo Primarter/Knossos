@@ -17,7 +17,7 @@ public class AttackSystem : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if ((other.GetComponent<Health>().TakeDamage(damage)))
+            if ((other.GetComponent<Character.Health>().TakeDamage(damage)))
                 print("Player Hit");
         }
 

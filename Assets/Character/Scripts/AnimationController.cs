@@ -9,14 +9,17 @@ namespace Knossos.Character
 [RequireComponent(typeof(Animator))]
 public class AnimationController : MonoBehaviour
 {
+    [SerializeField] Config config;
     [SerializeField]
-    private Config config;
+    Renderer characterRenderer;
 
     public delegate void OnHit(int hit);
     public UnityEvent<int> onHitActive;
     public UnityEvent<int> onHitInactive;
     public UnityEvent<int> onHitConnect;
     public UnityEvent<int> onHitStopEnd;
+    public UnityEvent<int> onDamageAnimStart;
+    public UnityEvent<int> onDamageAnimEnd;
 
     Animator animator;
     Vector3 smoothInput = Vector3.zero;
@@ -24,11 +27,15 @@ public class AnimationController : MonoBehaviour
     Camera mainCam;
 
     Coroutine hitStopCoroutine = null;
+    Coroutine damageAnimCoroutine = null;
+
+    Material damageMaterial;
 
     private void Awake()
     {
         mainCam = Camera.main;
         animator = GetComponent<Animator>();
+        damageMaterial = characterRenderer.sharedMaterial;
     }
 
     private void Start()
@@ -52,7 +59,7 @@ public class AnimationController : MonoBehaviour
 
     // Animator control functions
 
-    public void StopAnimation(int frames = -1)
+    public void StopAnimation()
     {
         animator.speed = 0;
     }
@@ -102,13 +109,23 @@ public class AnimationController : MonoBehaviour
         onHitInactive.Invoke(hit);
     }
 
+    public void OnDamageAnimStartEvent(int damage)
+    {
+        onDamageAnimStart.Invoke(damage);
+    }
+
+    public void OnDamageAnimEndEvent(int damage)
+    {
+        onDamageAnimEnd.Invoke(damage);
+    }
+
     // Hitstop control
 
     public void TriggerHitStop(int hitIdx)
     {
         if (hitIdx >= 0 && hitIdx < config.hitStops.Length)
         {
-            StopAnimation(config.hitStops[hitIdx]);
+            StopAnimation();
 
             if (config.hitStops[hitIdx] < 0)
                 return;
@@ -129,13 +146,47 @@ public class AnimationController : MonoBehaviour
 
         ResumeAnimation();
         onHitStopEnd.Invoke(hitIdx);
-        // print("HitstopEnd");
+
         hitStopCoroutine = null;
     }
 
-    //TODO
-    // bend back hand when running
-    // close hand on idle
+    public void StartDamageAnim(int damage)
+    {
+        if (damage > 0)
+        {
+            if (damageAnimCoroutine != null)
+                StopCoroutine(damageAnimCoroutine);
+
+            int frames;
+            Health healthManager = GetComponent<Health>();
+            if (healthManager == null)
+                frames = 0;
+            else if ((float)healthManager.health / (float)healthManager.startHealth <= .25)
+                frames = config.damageLevels[2];
+            else if ((float)healthManager.health / (float)healthManager.startHealth <= .50)
+                frames = config.damageLevels[1];
+            else
+                frames = config.damageLevels[0];
+
+            damageAnimCoroutine = StartCoroutine(EndDamageAnimAfter(frames, damage));
+        }
+    }
+
+    IEnumerator EndDamageAnimAfter(int frames, int damage)
+    {
+        int startFrame = Time.frameCount;
+
+        while (Time.frameCount < startFrame + frames)
+        {
+            print((float)(Time.frameCount - startFrame)/(float)(frames));
+            damageMaterial.SetFloat("_Progress", (float)(Time.frameCount - startFrame)/(float)(frames));
+            yield return null;
+        }
+
+        onDamageAnimEnd.Invoke(damage);
+
+        damageAnimCoroutine = null;
+    }
 }
 
 }
