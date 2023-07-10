@@ -38,6 +38,11 @@ GoHome:
 
 namespace Knossos.Minotaur
 {
+    [RequireComponent(typeof(PathSystem))]
+    [RequireComponent(typeof(LocomotionSystem))]
+    [RequireComponent(typeof(VisionSystem))]
+    [RequireComponent(typeof(SoundSensorSystem))]
+    [RequireComponent(typeof(AttackSystem))]
     public class MinotaurAgent : MonoBehaviour
     {
         public FSM.StateMachine stateMachine;

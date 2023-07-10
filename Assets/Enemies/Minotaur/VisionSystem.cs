@@ -22,6 +22,7 @@ namespace Knossos.Minotaur
         void Awake()
         {
             player = GameObject.FindWithTag("Player");
+            _ = heardSuspiciousSound;
         }
 
         void Start()

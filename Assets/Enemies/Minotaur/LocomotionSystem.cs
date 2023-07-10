@@ -18,6 +18,7 @@ namespace Knossos.Minotaur
 
         void Start()
         {
+            navMeshAgent.speed = 3f;
         }
 
         void Update()

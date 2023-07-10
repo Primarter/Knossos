@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class HideInFrontOfCamera : MonoBehaviour
 {
@@ -48,7 +49,8 @@ public class HideInFrontOfCamera : MonoBehaviour
         // bool sideZ = playerZPlane.GetSide(transform.position - new Vector3(8f, 0f, -8f));
         bool sideZ = playerCameraPlane.GetSide(transform.position - new Vector3(8f, 0f, -8f));
 
-        meshRenderer.enabled = !(!sideX & !sideZ);
+        // meshRenderer.enabled = !(!sideX & !sideZ);
+        meshRenderer.shadowCastingMode = (!sideX & !sideZ) ? ShadowCastingMode.ShadowsOnly : ShadowCastingMode.On;
 
         // planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
         // if (GeometryUtility.TestPlanesAABB(planes, objCollider.bounds))
