@@ -31,7 +31,6 @@ namespace Knossos.Bust
 
         public override void Update()
         {
-            // agent.transform.Rotate(new Vector3(0f, 90f, 0f) * Time.deltaTime);
         }
 
         IEnumerator AttackTimer()

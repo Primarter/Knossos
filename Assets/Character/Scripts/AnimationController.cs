@@ -9,7 +9,7 @@ namespace Knossos.Character
 [RequireComponent(typeof(Animator))]
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] Config config;
+    public Config config;
     [SerializeField]
     Renderer characterRenderer;
 
@@ -41,6 +41,7 @@ public class AnimationController : MonoBehaviour
     private void Start()
     {
         animator.SetFloat("DodgeSpeed", config.DodgeAnimationSpeedMultiplier);
+        damageMaterial.SetFloat("_Progress", 0f);
     }
 
     private void Update()
@@ -123,15 +124,15 @@ public class AnimationController : MonoBehaviour
 
     public void TriggerHitStop(int hitIdx)
     {
-        if (hitIdx >= 0 && hitIdx < config.hitStops.Length)
+        if (hitIdx >= 0 && hitIdx < config.moves.Length)
         {
             StopAnimation();
 
-            if (config.hitStops[hitIdx] < 0)
+            if (config.moves[hitIdx].hitStop < 0)
                 return;
             if (hitStopCoroutine != null)
                 StopCoroutine(hitStopCoroutine);
-            hitStopCoroutine = StartCoroutine(EndHitStopAfter(config.hitStops[hitIdx], hitIdx));
+            hitStopCoroutine = StartCoroutine(EndHitStopAfter(config.moves[hitIdx].hitStop, hitIdx));
         }
         else
             Debug.LogError("Invalid hitIdx in TriggerHitStop");
@@ -160,13 +161,13 @@ public class AnimationController : MonoBehaviour
             int frames;
             Health healthManager = GetComponent<Health>();
             if (healthManager == null)
-                frames = 0;
+                frames = 10;
             else if ((float)healthManager.health / (float)healthManager.startHealth <= .25)
-                frames = config.damageLevels[2];
+                frames = config.damageAnimationDurations[2];
             else if ((float)healthManager.health / (float)healthManager.startHealth <= .50)
-                frames = config.damageLevels[1];
+                frames = config.damageAnimationDurations[1];
             else
-                frames = config.damageLevels[0];
+                frames = config.damageAnimationDurations[0];
 
             damageAnimCoroutine = StartCoroutine(EndDamageAnimAfter(frames, damage));
         }
@@ -178,7 +179,6 @@ public class AnimationController : MonoBehaviour
 
         while (Time.frameCount < startFrame + frames)
         {
-            print((float)(Time.frameCount - startFrame)/(float)(frames));
             damageMaterial.SetFloat("_Progress", (float)(Time.frameCount - startFrame)/(float)(frames));
             yield return null;
         }

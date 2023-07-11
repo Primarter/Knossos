@@ -17,15 +17,14 @@ public class AttackSystem : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if ((other.GetComponent<Character.Health>().TakeDamage(damage)))
-                print("Player Hit");
+            other.GetComponent<Character.Health>().TakeDamage(damage);
         }
 
         var bell = other.GetComponent<Bell.AttractMinotaur>();
         if (bell != null)
         {
             bell.RingBell();
-            bell.GetComponent<Enemies.OnHitEventSystem>().TakeDamage(0);
+            bell.GetComponent<Enemies.OnHitEventSystem>().TakeDamage();
         }
     }
 }

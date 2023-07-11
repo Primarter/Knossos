@@ -21,9 +21,9 @@ public class LifeSystem : MonoBehaviour
         health = startHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(OnHitEventSystem.HitInfo hitInfo)
     {
-        health -= damage;
+        health -= hitInfo.damage;
         if (health <= 0)
         {
             gameObject.SetActive(false);

@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     }
 
     bool invicible = false;
-    float invicibilityTime = 1f;
+    [SerializeField] float invicibilityTime = 1f;
 
     private void Start()
     {

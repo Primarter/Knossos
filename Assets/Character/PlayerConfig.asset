@@ -82,6 +82,21 @@ MonoBehaviour:
   dashCooldown: 0.2
   dashCost: 1
   staminaRegenPerSec: 1
-  hitStops: 0a0000000a00000014000000
-  damageLevels: 3c0000000f00000019000000
+  moves:
+  - damage: 1
+    hitStop: 10
+    knockBackStrength: 0
+    knockBackDuration: 0
+    staggerDuration: 1
+  - damage: 1
+    hitStop: 10
+    knockBackStrength: 0
+    knockBackDuration: 0
+    staggerDuration: 1
+  - damage: 3
+    hitStop: 20
+    knockBackStrength: 2
+    knockBackDuration: 0.75
+    staggerDuration: 1.5
+  damageAnimationDurations: 0f0000001400000019000000
   DodgeAnimationSpeedMultiplier: 1.7499999
