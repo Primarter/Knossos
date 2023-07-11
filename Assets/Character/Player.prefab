@@ -816,7 +816,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2353560702782764262}
-  - component: {fileID: 92184965}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -842,20 +841,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &92184965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2861354690970034622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7269fcaf1d3fba4d9f7574e8a92595b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutoutObject: {fileID: 3325989323589724547}
-  cutoutGameObject: {fileID: 0}
 --- !u!1 &3000225110426182222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,6 +2378,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1113745621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694165254857749305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8f8c3915b822849b926573c21f0584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bushTag: Bush
+  isHidding: 0
 --- !u!114 &1754580896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,6 +2436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f04cffa6ddc314cb915cdfd572b1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn: {fileID: 0}
 --- !u!114 &3000225110171045484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2610,20 +2610,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8b3029aeafda8604b87143e53fa956f8, type: 3}
   - {fileID: 8300000, guid: 629769803100ed94eb99ccda18cd71b2, type: 3}
   - {fileID: 8300000, guid: d595962a7f25a54449e2182f0aabc99f, type: 3}
---- !u!114 &1113745621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694165254857749305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8f8c3915b822849b926573c21f0584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bushTag: Bush
-  isHidding: 0
 --- !u!4 &3325989323589724547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc0a4c54f6e07264ea72c907ca283e34,
