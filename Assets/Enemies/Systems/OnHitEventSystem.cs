@@ -6,14 +6,23 @@ using UnityEngine.Events;
 namespace Knossos.Enemies
 {
 
+
 public class OnHitEventSystem : MonoBehaviour
 {
+    public struct HitInfo
+    {
+        public int damage;
+        public float staggerDuration;
+        public float knockBackStrength;
+        public float knockBackDuration;
+        public Vector3 hitDirection;
+    }
     public Material damageMaterial;
 
-    public delegate void OnHit(int damage);
+    public delegate void OnHit(HitInfo hitInfo);
     public OnHit onHitCallbacks;
 
-    public UnityEvent<int> onHitEvent = new();
+    public UnityEvent<HitInfo> onHitEvent = new();
 
     private Renderer rend;
     private Material regularMaterial;
@@ -26,13 +35,20 @@ public class OnHitEventSystem : MonoBehaviour
     private void Start() {
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(Character.MoveInfo moveInfo = new(), Vector3 hitDirection = new())
     {
+        HitInfo hitInfo = new HitInfo {
+            damage=moveInfo.damage,
+            staggerDuration=moveInfo.staggerDuration,
+            knockBackStrength=moveInfo.knockBackStrength,
+            knockBackDuration=moveInfo.knockBackDuration,
+            hitDirection=hitDirection,
+        };
+
         StartCoroutine(MaterialChangeCoroutine());
-        if (onHitCallbacks != null) {
-            onHitCallbacks(damage);
-        }
-        onHitEvent.Invoke(damage);
+        if (onHitCallbacks != null)
+            onHitCallbacks(hitInfo);
+        onHitEvent.Invoke(hitInfo);
     }
 
     IEnumerator MaterialChangeCoroutine()

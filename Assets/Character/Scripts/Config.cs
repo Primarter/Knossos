@@ -5,6 +5,16 @@ using UnityEngine;
 namespace Knossos.Character
 {
 
+[System.Serializable]
+public struct MoveInfo
+{
+    public int damage;
+    public int hitStop;
+    public float knockBackStrength;
+    public float knockBackDuration;
+    public float staggerDuration;
+}
+
 [CreateAssetMenu()]
 public class Config : ScriptableObject
 {
@@ -26,8 +36,14 @@ public class Config : ScriptableObject
     public float dashCost = 1f;
     public float staminaRegenPerSec = 1f;
 
-    [Header("AttackStats")]
-    public int[] hitStops = {2, 2, 4};
+    [Header("CombatStats")]
+    public MoveInfo[] moves = {
+        new MoveInfo {damage=1, hitStop=2, knockBackStrength=0, knockBackDuration=0, staggerDuration=1f},
+        new MoveInfo {damage=1, hitStop=2, knockBackStrength=0, knockBackDuration=0, staggerDuration=1f},
+        new MoveInfo {damage=1, hitStop=4, knockBackStrength=2, knockBackDuration=0.75f, staggerDuration=1.5f},
+    };
+
+    public int[] damageAnimationDurations = {15, 20, 25};
 
     [Header("Read Only Info")]
     public float DodgeAnimationSpeedMultiplier = 1f;

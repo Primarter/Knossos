@@ -29,7 +29,7 @@ public class AttackSystem : MonoBehaviour
         {
             if (gameObject.tag == "Player")
             {
-                bool hit = gameObject.GetComponent<Health>().TakeDamage(damage);
+                bool hit = gameObject.GetComponent<Character.Health>().TakeDamage(damage);
             }
         }
     }

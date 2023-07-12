@@ -20,12 +20,15 @@ namespace Knossos.Bust
         [HideInInspector]
         public LocomotionSystem locomotionSystem;
         [HideInInspector]
+        public StaggerSystem staggerSystem;
+        [HideInInspector]
         public CapsuleCollider capsuleCollider;
 
         void Awake()
         {
             targetingSystem = GetComponent<TargetingSystem>();
             locomotionSystem = GetComponent<LocomotionSystem>();
+            staggerSystem = GetComponent<StaggerSystem>();
             capsuleCollider = GetComponent<CapsuleCollider>();
         }
 
