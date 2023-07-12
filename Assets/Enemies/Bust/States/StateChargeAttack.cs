@@ -17,19 +17,16 @@ namespace Knossos.Bust
 
         public override void Enter(int previousState)
         {
-            agent.locomotionSystem.navMeshAgent.speed = 0f;
             agent.locomotionSystem.navMeshAgent.isStopped = true;
 
-            Vector3 dir = agent.targetingSystem.target.position - agent.transform.position;
-            dir.y = 0f;
-
-            agent.transform.forward = dir.normalized;
+            agent.locomotionSystem.navMeshAgent.destination += (agent.locomotionSystem.navMeshAgent.destination - agent.transform.position).normalized * 10;
 
             attackTimerCoroutine = agent.StartCoroutine(attackTimer());
         }
 
         public override void Exit(int nextState)
         {
+            agent.locomotionSystem.navMeshAgent.isStopped = false;
             agent.StopCoroutine(attackTimerCoroutine);
         }
 
@@ -39,6 +36,10 @@ namespace Knossos.Bust
 
         public override void Update()
         {
+            Vector3 lookPos = agent.locomotionSystem.navMeshAgent.destination - agent.transform.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, 10 * Time.deltaTime);
         }
 
         IEnumerator attackTimer()

@@ -17,8 +17,7 @@ namespace Knossos.Bust
 
         public override void Enter(int previousState)
         {
-            agent.locomotionSystem.navMeshAgent.enabled = false;
-
+            agent.locomotionSystem.navMeshAgent.isStopped = true;
 
             originalRotation = agent.transform.rotation;
             agent.transform.rotation *= Quaternion.AngleAxis(90f, new Vector3(1f, 0f, 0f));
@@ -29,7 +28,7 @@ namespace Knossos.Bust
         public override void Exit(int nextState)
         {
             agent.transform.rotation = originalRotation;
-            agent.locomotionSystem.navMeshAgent.enabled = true;
+            agent.locomotionSystem.navMeshAgent.isStopped = false;
 
             agent.StopCoroutine(cooldown);
         }

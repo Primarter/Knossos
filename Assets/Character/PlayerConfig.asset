@@ -85,8 +85,8 @@ MonoBehaviour:
   moves:
   - damage: 1
     hitStop: 10
-    knockBackStrength: 0
-    knockBackDuration: 0
+    knockBackStrength: 50
+    knockBackDuration: 0.1
     staggerDuration: 1
   - damage: 1
     hitStop: 10

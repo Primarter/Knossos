@@ -21,9 +21,9 @@ namespace Knossos.Bust
         {
             this.previousState = previousState;
 
-            agent.transform.forward = -1 * agent.staggerSystem.lastHit.hitDirection.normalized;
-            // agent.locomotionSystem.navMeshAgent.velocity = agent.staggerSystem.lastHit.hitDirection.normalized * agent.config.defaultSpeed * agent.staggerSystem.lastHit.knockBackStrength;
-            originalRotation = agent.transform.rotation;
+            agent.locomotionSystem.navMeshAgent.updateRotation = false;
+            agent.locomotionSystem.navMeshAgent.destination = agent.transform.position + agent.staggerSystem.lastHit.hitDirection.normalized;
+            agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed * agent.staggerSystem.lastHit.knockBackStrength;
 
             knockback = agent.StartCoroutine(KnockBackTimer());
             staggered = agent.StartCoroutine(StaggeredTimer());
@@ -32,7 +32,8 @@ namespace Knossos.Bust
         public override void Exit(int nextState)
         {
             agent.transform.rotation = originalRotation;
-            agent.locomotionSystem.navMeshAgent.velocity = new Vector3();
+            agent.locomotionSystem.navMeshAgent.destination = agent.transform.position;
+            agent.locomotionSystem.navMeshAgent.updateRotation = true;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
             if (staggered != null)
                 agent.StopCoroutine(staggered);
@@ -55,13 +56,13 @@ namespace Knossos.Bust
 
             while (Time.time < start + agent.staggerSystem.lastHit.knockBackDuration)
             {
-                float progress = Easing.easeOutExpo(((Time.time - start) / agent.staggerSystem.lastHit.knockBackDuration));
-                agent.locomotionSystem.navMeshAgent.velocity = agent.staggerSystem.lastHit.hitDirection.normalized * agent.config.defaultSpeed * agent.staggerSystem.lastHit.knockBackStrength * Time.deltaTime * progress;
+                agent.locomotionSystem.navMeshAgent.destination = agent.locomotionSystem.navMeshAgent.transform.position + agent.staggerSystem.lastHit.hitDirection.normalized;
+                // float progress = Easing.easeOutExpo(1f - ((Time.time - start) / agent.staggerSystem.lastHit.knockBackDuration));
+                // agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed * agent.staggerSystem.lastHit.knockBackStrength * progress;
                 yield return null;
             }
-            agent.locomotionSystem.navMeshAgent.velocity = new Vector3();
+            agent.locomotionSystem.navMeshAgent.speed = 0;
             agent.locomotionSystem.navMeshAgent.isStopped = true;
-            // TODO: SET DESTINATION AND navmeshagent.updateRotation = false; and direction to smtg behind it
         }
 
         IEnumerator StaggeredTimer()

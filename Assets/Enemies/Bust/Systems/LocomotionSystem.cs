@@ -26,8 +26,15 @@ namespace Knossos.Bust
             if (!navMeshAgent.enabled) return;
             if (!navMeshAgent.isStopped) return;
 
-            Vector3 dir = new Vector3(transform.forward.x, 0f, transform.forward.z);
-            navMeshAgent.Move(dir * navMeshAgent.speed * Time.deltaTime);
+            // Vector3 dir = new Vector3(transform.forward.x, 0f, transform.forward.z);
+            // navMeshAgent.Move(dir * navMeshAgent.speed * Time.deltaTime);
+        }
+
+        private void OnDrawGizmos() {
+            if (navMeshAgent) {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(navMeshAgent.destination, 1f);
+            }
         }
     }
 }

@@ -31,18 +31,26 @@ namespace Knossos.Bust
         {
             if (cooldown != null)
                 agent.StopCoroutine(cooldown);
+            isCoolingDown = false;
         }
 
         public override void FixedUpdate()
         {
             if (agent.targetingSystem.hasTarget)
             {
-                agent.locomotionSystem.navMeshAgent.SetDestination(agent.targetingSystem.target.position);
+                agent.locomotionSystem.navMeshAgent.destination = agent.targetingSystem.target.position;
                 if (agent.targetingSystem.isInRange)
                 {
                     agent.locomotionSystem.navMeshAgent.isStopped = true;
                     if (!isCoolingDown)
                         agent.stateMachine.ChangeState(State.ChargeAttack);
+                    else
+                    {
+                        Vector3 lookPos = agent.locomotionSystem.navMeshAgent.destination - agent.transform.position;
+                        lookPos.y = 0;
+                        Quaternion rotation = Quaternion.LookRotation(lookPos);
+                        agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, 10 * Time.fixedDeltaTime);
+                    }
                 }
                 else
                     agent.locomotionSystem.navMeshAgent.isStopped = false;

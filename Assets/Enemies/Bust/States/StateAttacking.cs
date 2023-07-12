@@ -15,6 +15,7 @@ namespace Knossos.Bust
 
         public override void Enter(int previousState)
         {
+            agent.locomotionSystem.navMeshAgent.isStopped = false;
             agent.locomotionSystem.navMeshAgent.speed = agent.config.attackSpeed;
             agent.capsuleCollider.isTrigger = true;
             agent.StartCoroutine(AttackTimer());
@@ -22,6 +23,7 @@ namespace Knossos.Bust
 
         public override void Exit(int nextState)
         {
+            agent.locomotionSystem.navMeshAgent.destination = agent.targetingSystem.target.position;
             agent.capsuleCollider.isTrigger = false;
         }
 
