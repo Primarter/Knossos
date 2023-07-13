@@ -15,7 +15,7 @@ MonoBehaviour:
   attackSpeed: 40
   defaultSpeed: 2
   attackStartup: 0.5
-  attackDuration: 0.4
+  attackDuration: 0.35
   attackEndlag: 2
   attackCooldown: 2
   staggerDuration: 1

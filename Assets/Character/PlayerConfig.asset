@@ -85,8 +85,8 @@ MonoBehaviour:
   moves:
   - damage: 1
     hitStop: 10
-    knockBackStrength: 50
-    knockBackDuration: 0.1
+    knockBackStrength: 0
+    knockBackDuration: 0
     staggerDuration: 1
   - damage: 1
     hitStop: 10
@@ -95,8 +95,8 @@ MonoBehaviour:
     staggerDuration: 1
   - damage: 3
     hitStop: 20
-    knockBackStrength: 2
-    knockBackDuration: 0.75
+    knockBackStrength: 50
+    knockBackDuration: 0.1
     staggerDuration: 1.5
   damageAnimationDurations: 0f0000001400000019000000
   DodgeAnimationSpeedMultiplier: 1.7499999

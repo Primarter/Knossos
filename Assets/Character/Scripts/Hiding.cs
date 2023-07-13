@@ -9,18 +9,18 @@ public class Hiding : MonoBehaviour
 {
     [SerializeField] string bushTag;
 
-    public bool isHidding;
+    public bool isHiding;
 
     void Start()
     {
-       isHidding = false;
+       isHiding = false;
     }
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == bushTag)
         {
-            isHidding = true;
+            isHiding = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class Hiding : MonoBehaviour
     {
         if (collider.gameObject.tag == bushTag)
         {
-            isHidding = false;
+            isHiding = false;
         }
     }
 }

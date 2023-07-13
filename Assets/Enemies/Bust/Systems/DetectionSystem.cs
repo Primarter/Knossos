@@ -17,7 +17,7 @@ namespace Knossos.Bust
         }
 
         private void Update() {
-            if (GetComponent<TargetingSystem>().hasTarget == false)
+            if (agent.targetingSystem.hasTarget == false)
             {
                 propagated = false;
             }
