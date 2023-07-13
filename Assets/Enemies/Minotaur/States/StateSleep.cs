@@ -30,11 +30,6 @@ namespace Knossos.Minotaur
             {
                 agent.stateMachine.ChangeState(State.Alert);
             }
-
-            if (agent.visionSystem.CanSeePlayer())
-            {
-                agent.stateMachine.ChangeState(State.Follow);
-            }
         }
 
         public override void Update()
