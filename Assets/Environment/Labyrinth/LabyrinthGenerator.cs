@@ -102,7 +102,7 @@ public class LabyrinthGenerator : EditorWindow
                 // TODO: check for the 4 direction and also rotated in 4 ways
                 for (int i = 0 ; i < 4 ; ++i)
                 {
-                    float angle = i * -90f;
+                    float angle = i * -90f; // negative value because of the way the neighbours are manually rotated
                     if (isTileValid(tile, neigboursRotation[i]))
                         return (tile.prefab, angle);
 
