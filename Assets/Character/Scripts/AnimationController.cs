@@ -90,6 +90,11 @@ public class AnimationController : MonoBehaviour
         animator.ResetTrigger("Dodge");
     }
 
+    public void SetMoveSpeed(float moveSpeed)
+    {
+        animator.SetFloat("MovementSpeed", moveSpeed);
+    }
+
     // Event control functions
 
     public void OnHitActiveEvent(int hit)

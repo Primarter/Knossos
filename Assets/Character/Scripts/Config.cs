@@ -20,6 +20,8 @@ public class Config : ScriptableObject
 {
     [Header("Player stats")]
     public float speed = 10f;
+    public float runSpeed = 15f;
+    public float runTimer = 5f;
     public float attackMoveSpeedMultiplier = .01f;
     public float attackRotationSpeedMultiplier = .2f;
     public float maxStamina = 2f;
