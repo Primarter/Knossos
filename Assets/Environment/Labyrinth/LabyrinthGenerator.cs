@@ -44,17 +44,17 @@ public class LabyrinthGenerator : EditorWindow
         // North, East, South, West
         int[] neigbours = new int[] {0, 0, 0, 0};
 
-        // North
+        // South
         if (y > 0)
-            neigbours[0] = map[(y - 1) * mapWidth + x];
+            neigbours[2] = map[(y - 1) * mapWidth + x];
 
         // East
         if (x < mapWidth - 1)
             neigbours[1] = map[y * mapWidth + (x + 1)];
 
-        // South
+        // North
         if (y < mapHeight - 1)
-            neigbours[2] = map[(y + 1) * mapWidth + x];
+            neigbours[0] = map[(y + 1) * mapWidth + x];
 
         // West
         if (x > 0)
@@ -65,12 +65,22 @@ public class LabyrinthGenerator : EditorWindow
 
     bool isTileValid(Knossos.Map.Tile tile, int[] neighbours)
     {
-            // if (tile.hasConditionN)
-            //     if ()
+        // North, East, South, West
+        var (N, E, S, W) = (neighbours[0], neighbours[1], neighbours[2], neighbours[3]);
+
+        if (tile.hasConditionN && (tile.conditionN != N))
+            return false;
+        if (tile.hasConditionE && (tile.conditionE != E))
+            return false;
+        if (tile.hasConditionS && (tile.conditionS != S))
+            return false;
+        if (tile.hasConditionW && (tile.conditionW != W))
+            return false;
+
         return true;
     }
 
-    GameObject getTile(int x, int y)
+    (GameObject, float rotation) getTile(int x, int y)
     {
         int index = (y * image.width) + x;
         int id = map[index];
@@ -79,16 +89,33 @@ public class LabyrinthGenerator : EditorWindow
         {
             if (tile.id != id) continue;
 
-            // (int N, int E, int S, int W) = getNeighbourCells(x, y);
             int[] neighbours = getNeighbourCells(x, y);
-            // isTileValid(tile, neighbours);
 
+            Debug.Log((x, y, (neighbours[0], neighbours[1], neighbours[2], neighbours[3])));
 
+            if (tile.canRotate)
+            {
+                var neighboursRotate90 = new int[] {neighbours[3], neighbours[0], neighbours[1], neighbours[2]};
+                var neighboursRotate180 = new int[] {neighbours[2], neighbours[3], neighbours[0], neighbours[1]};
+                var neighboursRotate270 = new int[] {neighbours[1], neighbours[2], neighbours[3], neighbours[0]};
+                var neigboursRotation = new int[][] {neighbours, neighboursRotate90, neighboursRotate180, neighboursRotate270};
+                // TODO: check for the 4 direction and also rotated in 4 ways
+                for (int i = 0 ; i < 4 ; ++i)
+                {
+                    float angle = i * -90f;
+                    if (isTileValid(tile, neigboursRotation[i]))
+                        return (tile.prefab, angle);
 
-            // check for the 4 direction and also rotated in 4 ways
+                }
+            }
+            else
+            {
+                if (isTileValid(tile, neighbours))
+                    return (tile.prefab, 0);
+            }
         }
 
-        return tileConfig.tiles[0].prefab;
+        return (null, 0);
     }
 
     void generateMap()
@@ -97,12 +124,13 @@ public class LabyrinthGenerator : EditorWindow
 
         for (int y = 0 ; y < mapHeight ; ++y) {
         for (int x = 0 ; x < mapWidth ; ++x) {
-
             int index = (y * mapWidth) + x;
-            if (map[index] != 1) continue; // is not wall
 
-            GameObject prefab = getTile(x, y);
-            Instantiate(prefab, new Vector3(x, 0, y) * tileConfig.scale, Quaternion.identity, parent.transform);
+            (GameObject prefab, float angle) = getTile(x, y);
+            if (prefab != null)
+                Instantiate(prefab, new Vector3(x, 0, y) * tileConfig.scale, Quaternion.Euler(0f, angle, 0f), parent.transform);
+            else
+                Debug.LogError($"Tile could no be found for position x:{x} y:{y} in map!");
         }
         }
     }
