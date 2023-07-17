@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TilesConfig
   m_EditorClassIdentifier: Assembly-CSharp:Knossos.Map:TilesConfig
   tiles:
-  - id: 0
+  - type: 0
     prefab: {fileID: 4671169224719902327, guid: 2835bdb8d2d0c624596b11226fa03b8f,
       type: 3}
     canRotate: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     conditionS: 0
     hasConditionW: 0
     conditionW: 0
-  - id: 1
+  - type: 1
     prefab: {fileID: 1012827078900356045, guid: c8572775fdb565e489108c349767c363,
       type: 3}
     canRotate: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     conditionS: 0
     hasConditionW: 1
     conditionW: 0
-  - id: 1
+  - type: 1
     prefab: {fileID: 1692364728323311096, guid: f7a332da23033bd43aca3809390c2834,
       type: 3}
     canRotate: 1
@@ -49,7 +49,7 @@ MonoBehaviour:
     conditionS: 1
     hasConditionW: 1
     conditionW: 0
-  - id: 1
+  - type: 1
     prefab: {fileID: 3255162480236264444, guid: 12e15011ebefcb64baa8c73f6e338255,
       type: 3}
     canRotate: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
     conditionS: 1
     hasConditionW: 1
     conditionW: 1
-  - id: 1
+  - type: 1
     prefab: {fileID: 8618614574744743067, guid: 211b38617366b08419500acd0c718f7f,
       type: 3}
     canRotate: 1
@@ -73,7 +73,7 @@ MonoBehaviour:
     conditionS: 1
     hasConditionW: 1
     conditionW: 1
-  - id: 1
+  - type: 1
     prefab: {fileID: 7663777258809607963, guid: 962575506f6cce6418e256a5621d3908,
       type: 3}
     canRotate: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
     conditionS: 1
     hasConditionW: 1
     conditionW: 0
-  - id: 1
+  - type: 1
     prefab: {fileID: 8618614574744743067, guid: b23bfa1c566c81846be8382e09f6ad0e,
       type: 3}
     canRotate: 0

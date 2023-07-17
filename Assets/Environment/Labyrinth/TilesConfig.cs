@@ -7,7 +7,7 @@ namespace Knossos.Map
     [System.Serializable]
     public struct Tile
     {
-        public int id;
+        public int type;
 
         public GameObject prefab;
         public bool canRotate;
