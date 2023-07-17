@@ -16,7 +16,8 @@ namespace Knossos.Bust
             agent = GetComponent<BustAgent>();
         }
 
-        private void Update() {
+        private void Update()
+        {
             if (agent.targetingSystem.hasTarget == false)
             {
                 propagated = false;
@@ -25,15 +26,15 @@ namespace Knossos.Bust
 
         public void PropagateDetection()
         {
-            if (transform.parent == null || propagated)
+            if (transform.parent == null || transform.parent.tag != "Cluster" || propagated)
                 return;
             foreach (var ds in transform.parent.GetComponentsInChildren<DetectionSystem>())
             {
                 if ((State)ds.agent.stateMachine.currentState == State.Patrol)
                 {
                     ds.propagated = true;
+                    ds.agent.targetingSystem.hasTarget = true;
                     ds.agent.stateMachine.ChangeState(State.Pursue);
-                    ds.GetComponent<TargetingSystem>().hasTarget = true;
                 }
             }
         }

@@ -37,6 +37,7 @@ namespace Knossos.Bust
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
             stateMachine.RegisterState<StatePursue>(State.Pursue);
+            stateMachine.RegisterState<StateIdle>(State.Idle);
             stateMachine.RegisterState<StatePatrol>(State.Patrol);
             stateMachine.RegisterState<StateChargeAttack>(State.ChargeAttack);
             stateMachine.RegisterState<StateAttacking>(State.Attacking);
