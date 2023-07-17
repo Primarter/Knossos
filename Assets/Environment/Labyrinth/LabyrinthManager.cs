@@ -20,6 +20,25 @@ namespace Knossos.Map
         [SerializeField] public int mapHeight;
         [SerializeField] public int mapWidth;
         [SerializeField] public Vector3 origin;
+
+        Grid grid;
+        Transform playerTransform;
+
+        void Awake()
+        {
+            grid = GetComponent<Grid>();
+            playerTransform = GameObject.FindWithTag("Player").transform;
+        }
+
+        void Start()
+        {
+            grid.cellSize = new Vector3(16f, 0f, 16f);
+        }
+
+        void Update()
+        {
+            print( grid.WorldToCell(playerTransform.position) );
+        }
     }
 
 }
