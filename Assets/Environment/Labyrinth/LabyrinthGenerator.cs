@@ -134,7 +134,7 @@ public class LabyrinthGenerator : EditorWindow
         }
     }
 
-    public void imageToMap(Texture2D image)
+    public void imageToMap()
     {
         if (image == null) {
             Debug.LogError("Image is not set!");
