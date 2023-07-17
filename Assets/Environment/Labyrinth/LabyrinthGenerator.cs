@@ -90,8 +90,7 @@ public class LabyrinthGenerator : EditorWindow
             if (tile.id != id) continue;
 
             int[] neighbours = getNeighbourCells(x, y);
-
-            Debug.Log((x, y, (neighbours[0], neighbours[1], neighbours[2], neighbours[3])));
+            // Debug.Log((x, y, (neighbours[0], neighbours[1], neighbours[2], neighbours[3])));
 
             if (tile.canRotate)
             {
@@ -135,7 +134,7 @@ public class LabyrinthGenerator : EditorWindow
         }
     }
 
-    void imageToMap()
+    public void imageToMap(Texture2D image)
     {
         if (image == null) {
             Debug.LogError("Image is not set!");
