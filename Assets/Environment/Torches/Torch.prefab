@@ -1441,7 +1441,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2508
+  m_VersionIndex: 2520
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1571,7 +1571,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.83095306, b: 0.33490568, a: 1}
+  m_Color: {r: 1, g: 0.68235296, b: 0.25490198, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
