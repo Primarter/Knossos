@@ -30,7 +30,8 @@ namespace Knossos.Minotaur
         {
             if (!agent.visionSystem.hasTarget)
             {
-                agent.stateMachine.ChangeState(State.Patrol);
+                agent.soundSensorSystem.heardSound(agent.visionSystem.targetPosition);
+                agent.stateMachine.ChangeState(State.Alert);
             }
             else
             {

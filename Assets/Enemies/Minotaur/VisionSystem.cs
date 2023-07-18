@@ -7,43 +7,53 @@ namespace Knossos.Minotaur
     public class VisionSystem : MonoBehaviour
     {
         GameObject player;
-        GameObject target;
 
         public bool hasTarget = false;
+        public Vector3 targetPosition;
+        // public Vector3 lastSeenTargetPosition;
 
         [SerializeField] public float FOV = 150f; // field of view degrees
         [SerializeField] public float viewRange = 20f;
         [SerializeField] public float minDetectionRange = 5f;
         [SerializeField] LayerMask obstructionLayer;
 
-        Vector3 suspiciousSoundPosition;
-        bool heardSuspiciousSound;
-
         void Awake()
         {
             player = GameObject.FindWithTag("Player");
-            _ = heardSuspiciousSound;
         }
 
         void Start()
         {
             hasTarget = false;
-            heardSuspiciousSound = false;
         }
 
         void FixedUpdate()
         {
-            if (
-                !player.GetComponent<Character.Hiding>().isHiding &&
-                CanSeePlayer())
+            bool canSeePlayer = CanSeePlayer();
+
+            if (player.GetComponent<Character.Hiding>().isHiding)
             {
-                hasTarget = true;
-                target = player;
+                if (hasTarget || canSeePlayer)
+                {
+                    // keep target
+                }
+                else
+                {
+                    // lose target
+                    hasTarget = false;
+                }
             }
             else
             {
-                hasTarget = false;
-                target = null;
+                if (canSeePlayer)
+                {
+                    hasTarget = true;
+                    targetPosition = player.transform.position;
+                }
+                else
+                {
+                    hasTarget = false;
+                }
             }
         }
 
@@ -53,7 +63,10 @@ namespace Knossos.Minotaur
 
         public bool CanSeePlayer()
         {
-            return CanSeePosition(player.transform.position);
+            Vector3 playerPosition = player.transform.position;
+            bool isInMinDetectionRange = Vector3.Distance(transform.position, playerPosition) < minDetectionRange;
+
+            return isInMinDetectionRange || CanSeePosition(playerPosition);
         }
 
         public bool CanSeePosition(Vector3 p)
@@ -70,15 +83,11 @@ namespace Knossos.Minotaur
             bool isInViewRange = Vector3.Distance(transform.position, p) < viewRange;
             bool isInFOV = angle < (FOV / 2f);
             bool isInDirectVision = !Physics.Raycast(transform.position, towardPosition, towardPosition.magnitude, obstructionLayer);
-            bool isInMinDetectionRange = Vector3.Distance(transform.position, p) < minDetectionRange;
 
             return (
-                isInMinDetectionRange ||
-                (
-                    isInViewRange &&
-                    isInFOV &&
-                    isInDirectVision
-                )
+                isInViewRange &&
+                isInFOV &&
+                isInDirectVision
             );
         }
     }

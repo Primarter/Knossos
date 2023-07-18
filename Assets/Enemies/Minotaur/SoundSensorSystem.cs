@@ -36,7 +36,7 @@ namespace Knossos.Minotaur
             }
         }
 
-        void heardSound(Vector3 position)
+        public void heardSound(Vector3 position)
         {
             heardSoundTimer = heardSoundTime;
 
