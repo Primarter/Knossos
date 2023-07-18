@@ -1227,7 +1227,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.56256676, g: 0.8113208, b: 0.7616305, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2634,7 +2634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 692dc25c82a40f0469a709a03a71d063, type: 2}
-  speed: 10
 --- !u!114 &3000225110171045486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2812,6 +2811,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 129fabeaecd889b469877fd9d473eb02, type: 2}
+--- !u!114 &3812942491635935880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694165254857749305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072aab5f6d89c734887178d09f62cb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8707686826105622532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,18 +2848,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8b3029aeafda8604b87143e53fa956f8, type: 3}
   - {fileID: 8300000, guid: 629769803100ed94eb99ccda18cd71b2, type: 3}
   - {fileID: 8300000, guid: d595962a7f25a54449e2182f0aabc99f, type: 3}
---- !u!114 &3812942491635935880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694165254857749305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072aab5f6d89c734887178d09f62cb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!137 &2937565395652398716 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9122422582859759596, guid: fc0a4c54f6e07264ea72c907ca283e34,
