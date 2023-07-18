@@ -5,6 +5,8 @@ using Knossos;
 
 namespace Knossos.Bust
 {
+    [RequireComponent(typeof(TargetingSystem), typeof(LocomotionSystem), typeof(StaggerSystem))]
+    [RequireComponent(typeof(DetectionSystem), typeof(Enemies.OnHitEventSystem), typeof(CapsuleCollider))]
     public class BustAgent : MonoBehaviour
     {
         public FSM.StateMachine stateMachine;
@@ -22,6 +24,10 @@ namespace Knossos.Bust
         [HideInInspector]
         public StaggerSystem staggerSystem;
         [HideInInspector]
+        public DetectionSystem detectionSystem;
+        [HideInInspector]
+        public Enemies.OnHitEventSystem onHitEventSystem;
+        [HideInInspector]
         public CapsuleCollider capsuleCollider;
 
         void Awake()
@@ -29,6 +35,8 @@ namespace Knossos.Bust
             targetingSystem = GetComponent<TargetingSystem>();
             locomotionSystem = GetComponent<LocomotionSystem>();
             staggerSystem = GetComponent<StaggerSystem>();
+            detectionSystem = GetComponent<DetectionSystem>();
+            onHitEventSystem = GetComponent<Enemies.OnHitEventSystem>();
             capsuleCollider = GetComponent<CapsuleCollider>();
         }
 

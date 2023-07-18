@@ -13,13 +13,19 @@ public class Controller : MonoBehaviour
 
     private CharacterController characterController;
     private AnimationController animationController;
+    private VisibilitySystem visibilitySystem;
     private Camera mainCam;
 
     // Player stats
     private Vector3 movement;
     private Quaternion targetRotation;
-    [HideInInspector]
-    public float speed = 10f;
+    private float _speed = 10f;
+    private float targetSpeed;
+    public float speed
+    {
+        get => _speed;
+        set => targetSpeed = value;
+    }
     private float attMoveSpeedMult = 1f;
     private float attRotSpeedMult = 1f;
 
@@ -49,6 +55,7 @@ public class Controller : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animationController = GetComponent<AnimationController>();
+        visibilitySystem = GetComponent<VisibilitySystem>();
         mainCam = Camera.main;
     }
 
@@ -64,6 +71,8 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
+        _speed = Mathf.Lerp(speed, targetSpeed, .9f);
+
         if (!dashing) {
             stamina += config.staminaRegenPerSec * Time.deltaTime;
             movement = new Vector3(InputManager.inputs.horizontal, 0, InputManager.inputs.vertical);
@@ -89,9 +98,9 @@ public class Controller : MonoBehaviour
             }
         }
         else
-        {
             RestartRunTimer();
-        }
+        if (visibilitySystem.isDetected)
+            RestartRunTimer();
         targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, config.rotationSpeed * attRotSpeedMult * Time.deltaTime);
 

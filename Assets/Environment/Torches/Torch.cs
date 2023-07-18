@@ -7,6 +7,7 @@ public class Torch : MonoBehaviour
 {
     [SerializeField] VisualEffect bonfire;
     [SerializeField] VisualEffect sparks;
+    [SerializeField] Light pointLight;
     bool on = false;
 
     private void OnTriggerEnter(Collider other)
@@ -15,6 +16,7 @@ public class Torch : MonoBehaviour
         {
             bonfire.Play();
             sparks.Play();
+            pointLight.enabled = true;
             on = true;
             StartCoroutine(StopSparks());
         }
