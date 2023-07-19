@@ -48,6 +48,11 @@ namespace Knossos.Map
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly; // ShadowCastingMode.On;
         }
 
+        void Update()
+        {
+            updateVisibility();
+        }
+
         bool isInsideMap(Vector2Int coord)
         {
             return !(coord.x < 0 || coord.x > mapWidth-1 || coord.y < 0 || coord.y > mapHeight-1);
@@ -64,29 +69,70 @@ namespace Knossos.Map
             return borders;
         }
 
+        // Vector3[] getCellBorderPosition(Cell cell) // 8 point for traversal (not really the borders)
+        // {
+        //     Vector3 center = cell.obj.transform.position;
+        //     var borders = new Vector3[8];
+        //     borders[0] = new Vector3(center.x - 7.9990f, 1f, center.z - 7.9995f);
+        //     borders[1] = new Vector3(center.x - 7.9995f, 1f, center.z - 7.9990f);
+
+        //     borders[2] = new Vector3(center.x + 7.9990f, 1f, center.z - 7.9995f);
+        //     borders[3] = new Vector3(center.x + 7.9995f, 1f, center.z - 7.9990f);
+
+        //     borders[4] = new Vector3(center.x - 7.9990f, 1f, center.z + 7.9995f);
+        //     borders[5] = new Vector3(center.x - 7.9995f, 1f, center.z + 7.9990f);
+
+        //     borders[6] = new Vector3(center.x + 7.9990f, 1f, center.z + 7.9995f);
+        //     borders[7] = new Vector3(center.x + 7.9995f, 1f, center.z + 7.9990f);
+        //     return borders;
+        // }
+
         bool isTileVisibleFrom(Cell cell, Vector2 p)
         {
+            Vector3Int startTile3D = grid.WorldToCell(new Vector3(p.x, 0f, p.y));
+            Vector2Int startTile = new(startTile3D.x, startTile3D.z);
+            p = p / grid.cellSize.x;
+
+            int startTileType = map[startTile.y * mapWidth + startTile.x].type;
+
             Vector3[] borders = getCellBorderPosition(cell);
             foreach (Vector3 border in borders)
             {
                 Vector2 p2 = new Vector2(border.x, border.z) / 16f;
-                int i = 0;
+                int wallCount = 0;
 
                 // TODO: don't just check if first cell is a wall, need to check when the traversal get out of walls for the first time
-
+                bool doCheck = false;// = startTileType == 1 ? false : true;
                 bool isVisible = true;
                 foreach (Vector2 tile in gridTraverse(p, p2))
                 {
                     var gridPos = Vector2Int.RoundToInt(tile);
                     int index = gridPos.y * mapWidth + gridPos.x;
                     if (cell.Equals(map[index])) break;
-                    if (i > 0 && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    // if (doCheck && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    if (map[index].type == 0)
+                        doCheck = true;
+                    if (map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    // if ((doCheck || wallCount >= 2) && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    // if (wallCount > 2 && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
                     {
                         isVisible = false;
                         break;
                     }
-                    i += 1;
+
+                    if (map[index].type == 1)
+                        wallCount += 1;
                 }
+
+                // if (startTileType == 1 && wallCount > 1) // if camera is in wall, also check if in direct sight of player character
+                // {
+                //     RaycastHit hitInfo;
+                //     bool hit = Physics.Linecast(playerTransform.position, border, out hitInfo, wallLayer);
+                //     // TODO: traverse map from camera pose, if no wall, then false (OR MAYBE ONLY USE CAMERA instead of raycasting from player)
+                //     if (hit && Vector3.Distance(hitInfo.point, border) > 0.1f) {
+                //         isVisible = false;
+                //     }
+                // }
 
                 if (isVisible)
                     return true;
@@ -117,8 +163,8 @@ namespace Knossos.Map
                 +Z = 6
                 -Z = 1
             */
-            for (int dy = -1 ; dy < 6; ++dy) {
-            for (int dx = -1 ; dx < 6; ++dx) {
+            for (int dy = -2 ; dy < 6; ++dy) {
+            for (int dx = -2 ; dx < 6; ++dx) {
                 Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
                 if (!isInsideMap(coord)) continue;
 
@@ -127,14 +173,16 @@ namespace Knossos.Map
             }
             }
 
-            visibleCells.RemoveAll(cell =>
-            {
-                Vector2 p = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.z) / 16f;
-                if (isTileVisibleFrom(cell, p))
-                    return false;
-                return true;
-            });
+            // Solution 2
+            // visibleCells.RemoveAll(cell =>
+            // {
+            //     Vector2 p = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.z);// / 16f;
+            //     if (isTileVisibleFrom(cell, p))
+            //         return false;
+            //     return true;
+            // });
 
+            // Solution 1
             // visibleCells.RemoveAll(cell =>
             // {
             //     Vector3[] borders = getCellBorderPosition(cell);
@@ -149,7 +197,6 @@ namespace Knossos.Map
             //     }
             //     return true;
             // });
-
             // Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
             // Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
             // foreach (Vector2 tile in gridTraverse(p1, p2))
@@ -161,12 +208,6 @@ namespace Knossos.Map
 
             foreach (Cell cell in visibleCells)
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
-        }
-
-        void Update()
-        {
-            updateVisibility();
-
         }
 
         Vector2 Vector2Abs(Vector2 v)
