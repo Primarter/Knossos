@@ -11,6 +11,7 @@ public class AttackBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Debug.Log("OnStateEnter: " + Time.frameCount);
+        animator.GetComponent<Controller>().RestartRunTimer();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

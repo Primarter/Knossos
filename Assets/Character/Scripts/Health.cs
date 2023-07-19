@@ -22,7 +22,8 @@ public class Health : MonoBehaviour
         private set => _health = Mathf.Clamp(value, 0, startHealth);
     }
 
-    bool invicible = false;
+    [HideInInspector]
+    public bool invincible = false;
     [SerializeField] float invicibilityTime = 1f;
 
     private void Start()
@@ -32,7 +33,7 @@ public class Health : MonoBehaviour
 
     public bool TakeDamage(int value)
     {
-        if (invicible) return false;
+        if (invincible) return false;
 
         health -= value;
         if (health <= 0)
@@ -57,9 +58,9 @@ public class Health : MonoBehaviour
 
     IEnumerator Invicibility(float time)
     {
-        invicible = true;
+        invincible = true;
         yield return new WaitForSeconds(time);
-        invicible = false;
+        invincible = false;
     }
 }
 

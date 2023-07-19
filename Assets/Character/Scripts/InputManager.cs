@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
         public float vertical;
         public bool dodge;
         public bool attack;
+        public bool interact;
     }
 
     public static Inputs inputs;
@@ -69,6 +70,7 @@ public class InputManager : MonoBehaviour
         inputs.vertical = Input.GetAxisRaw("Vertical");
         inputs.dodge = Input.GetButtonDown("Dash");
         inputs.attack = Input.GetButtonDown("Attack");
+        inputs.interact = Input.GetButtonDown("Interact");
         if (inputs.dodge)
         {
             inputBuffer.Enqueue((BufferedInput.Dodge, sw.ElapsedMilliseconds + config.dodgeBufferDuration));

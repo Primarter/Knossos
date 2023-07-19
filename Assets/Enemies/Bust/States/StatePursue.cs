@@ -21,9 +21,9 @@ namespace Knossos.Bust
             if ((State)previousState == State.Endlag)
                 cooldown = agent.StartCoroutine(Cooldown());
 
-            if ((State)previousState == State.Patrol)
+            if ((State)previousState == State.Patrol || (State)previousState == State.Idle)
             {
-                agent.GetComponent<DetectionSystem>()?.PropagateDetection();
+                agent.detectionSystem?.PropagateDetection();
             }
         }
 

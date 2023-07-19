@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Knossos.Bust
 {
 
-[RequireComponent(typeof(BustAgent))]
 public class StaggerSystem : MonoBehaviour
 {
     BustAgent agent;
@@ -15,7 +14,13 @@ public class StaggerSystem : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<BustAgent>();
-        agent.GetComponent<Enemies.OnHitEventSystem>().onHitCallbacks += OnHitCallback;
+        if (agent == null)
+                Debug.LogError("StaggerSystem is lacking BustAgent");
+    }
+
+    void Start()
+    {
+        agent.onHitEventSystem.onHitCallbacks += OnHitCallback;
     }
 
     public void OnHitCallback(Enemies.OnHitEventSystem.HitInfo hit)
