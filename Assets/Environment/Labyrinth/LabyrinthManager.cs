@@ -51,6 +51,7 @@ namespace Knossos.Map
         void Update()
         {
             updateVisibility();
+            // updateVisibility2();
         }
 
         bool isInsideMap(Vector2Int coord)
@@ -141,6 +142,35 @@ namespace Knossos.Map
         }
 
         void updateVisibility()
+        {
+            foreach (Cell cell in visibleCells)
+                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+            visibleCells.Clear();
+
+            Vector3Int playerCoord3D = grid.WorldToCell(playerTransform.position);
+            Vector2Int playerCoord = new Vector2Int(playerCoord3D.x, playerCoord3D.z);
+            int mapIndex = (playerCoord.y * mapWidth) + playerCoord.x;
+
+            if (!isInsideMap(playerCoord))
+                return;
+            if (map[mapIndex].type == 1) // if inside a wall
+                return;
+
+            for (int dy = -2 ; dy <= 2; ++dy) {
+            for (int dx = -2 ; dx <= 2; ++dx) {
+                Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
+                if (!isInsideMap(coord)) continue;
+
+                int index = coord.y * mapWidth + coord.x;
+                visibleCells.Add(map[index]);
+            }
+            }
+
+            foreach (Cell cell in visibleCells)
+                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
+        }
+
+        void updateVisibility2()
         {
             foreach (Cell cell in visibleCells)
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
@@ -249,17 +279,17 @@ namespace Knossos.Map
 
         void OnDrawGizmos()
         {
-            if (debug1 == null || debug2 == null) return;
+            // if (debug1 == null || debug2 == null) return;
 
-            Gizmos.color = Color.red;
+            // Gizmos.color = Color.red;
 
-            Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
-            Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
-            foreach (Vector2 tile in gridTraverse(p1, p2))
-            {
-                Vector2 v = (tile + Vector2.one*0.5f) * 16f;
-                Gizmos.DrawCube(new Vector3(v.x, 30f, v.y), Vector3.one * 8f);
-            }
+            // Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
+            // Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
+            // foreach (Vector2 tile in gridTraverse(p1, p2))
+            // {
+            //     Vector2 v = (tile + Vector2.one*0.5f) * 16f;
+            //     Gizmos.DrawCube(new Vector3(v.x, 30f, v.y), Vector3.one * 8f);
+            // }
         }
 
     }
