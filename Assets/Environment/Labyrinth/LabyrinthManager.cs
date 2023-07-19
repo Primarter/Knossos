@@ -30,6 +30,9 @@ namespace Knossos.Map
 
         List<Cell> visibleCells = new();
 
+        [SerializeField] GameObject debug1;
+        [SerializeField] GameObject debug2;
+
         void Awake()
         {
             grid = GetComponent<Grid>();
@@ -41,8 +44,8 @@ namespace Knossos.Map
         {
             grid.cellSize = new Vector3(16f, 0f, 16f);
 
-            // foreach (Cell cell in map)
-            //     cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly; // ShadowCastingMode.On;
+            foreach (Cell cell in map)
+                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly; // ShadowCastingMode.On;
         }
 
         bool isInsideMap(Vector2Int coord)
@@ -54,11 +57,41 @@ namespace Knossos.Map
         {
             Vector3 center = cell.obj.transform.position;
             var borders = new Vector3[4];
-            borders[0] = new Vector3(center.x - 8f, 1f, center.z - 8f);
-            borders[1] = new Vector3(center.x + 8f, 1f, center.z - 8f);
-            borders[2] = new Vector3(center.x - 8f, 1f, center.z + 8f);
-            borders[3] = new Vector3(center.x + 8f, 1f, center.z + 8f);
+            borders[0] = new Vector3(center.x - 7.999f, 1f, center.z - 7.999f);
+            borders[1] = new Vector3(center.x + 7.999f, 1f, center.z - 7.999f);
+            borders[2] = new Vector3(center.x - 7.999f, 1f, center.z + 7.999f);
+            borders[3] = new Vector3(center.x + 7.999f, 1f, center.z + 7.999f);
             return borders;
+        }
+
+        bool isTileVisibleFrom(Cell cell, Vector2 p)
+        {
+            Vector3[] borders = getCellBorderPosition(cell);
+            foreach (Vector3 border in borders)
+            {
+                Vector2 p2 = new Vector2(border.x, border.z) / 16f;
+                int i = 0;
+
+                // TODO: don't just check if first cell is a wall, need to check when the traversal get out of walls for the first time
+
+                bool isVisible = true;
+                foreach (Vector2 tile in gridTraverse(p, p2))
+                {
+                    var gridPos = Vector2Int.RoundToInt(tile);
+                    int index = gridPos.y * mapWidth + gridPos.x;
+                    if (cell.Equals(map[index])) break;
+                    if (i > 0 && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    {
+                        isVisible = false;
+                        break;
+                    }
+                    i += 1;
+                }
+
+                if (isVisible)
+                    return true;
+            }
+            return false;
         }
 
         void updateVisibility()
@@ -77,18 +110,15 @@ namespace Knossos.Map
                 return;
 
             // Naive solution: get walls in area that match view frustrum around player, then do a raycast to each wall from the player to see if it can be seen
-            // can't get it to work
             /*
                 max view range
-                +X = 5
+                +X = 6
                 -X = 1
                 +Z = 6
                 -Z = 1
             */
             for (int dy = -1 ; dy < 6; ++dy) {
-            for (int dx = -1 ; dx < 5; ++dx) {
-            // for (int dy = -1 ; dy <= 1; ++dy) {
-            // for (int dx = -1 ; dx <= 1; ++dx) {
+            for (int dx = -1 ; dx < 6; ++dx) {
                 Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
                 if (!isInsideMap(coord)) continue;
 
@@ -97,39 +127,13 @@ namespace Knossos.Map
             }
             }
 
-            /*
-            def raytrace(v0, v1):
-                # The equation of the ray is v = v0 + t*d
-                d = v1 - v0
-                inc = np.sign(d)  # Gives the quadrant in which the ray progress
-
-                # Rounding coordinates give us the current tile
-                tile = np.array(np.round(v0), dtype=int)
-                tiles = [tile]
-                v = v0
-                endtile = np.array(np.round(v1), dtype=int)
-
-                # Continue as long as we are not in the last tile
-                while np.max(np.abs(endtile - v)) > 0.5:
-                    # L = (Lx, Ly) where Lx is the x coordinate of the next vertical
-                    # line and Ly the y coordinate of the next horizontal line
-                    L = tile + 0.5*inc
-
-                    # Solve the equation v + d*t == L for t, simultaneously for the next
-                    # horizontal line and vertical line
-                    t = (L - v)/d
-
-                    if t[0] < t[1]:  # The vertical line is intersected first
-                        tile[0] += inc[0]
-                        v += t[0]*d
-                    else:  # The horizontal line is intersected first
-                        tile[1] += inc[1]
-                        v += t[1]*d
-
-                    tiles.append(tile)
-
-                return tiles
-            */
+            visibleCells.RemoveAll(cell =>
+            {
+                Vector2 p = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.z) / 16f;
+                if (isTileVisibleFrom(cell, p))
+                    return false;
+                return true;
+            });
 
             // visibleCells.RemoveAll(cell =>
             // {
@@ -138,7 +142,7 @@ namespace Knossos.Map
             //     {
             //         RaycastHit hitInfo;
             //         bool hit = Physics.Linecast(playerTransform.position, border, out hitInfo, wallLayer);
-            //         TODO: traverse map from camera pose, if no wall, then false (OR MAYBE ONLY USE CAMERA instead of raycasting from player)
+            //         // TODO: traverse map from camera pose, if no wall, then false (OR MAYBE ONLY USE CAMERA instead of raycasting from player)
             //         if (hit == false || Vector3.Distance(hitInfo.point, border) <= 0.1f) {
             //             return false;
             //         }
@@ -146,14 +150,14 @@ namespace Knossos.Map
             //     return true;
             // });
 
-            /* better solution
-                Do dijkstra search
-                    - if wall, just stop there and take it
-                    - if floor in same direction as previous continue
-                    - if floor but it turned, stop
-            */
-            // code here
-
+            // Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
+            // Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
+            // foreach (Vector2 tile in gridTraverse(p1, p2))
+            // {
+            //     var gridPos = Vector2Int.RoundToInt(tile);
+            //     int index = gridPos.y * mapWidth + gridPos.x;
+            //     visibleCells.Add(map[index]);
+            // }
 
             foreach (Cell cell in visibleCells)
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
@@ -161,8 +165,91 @@ namespace Knossos.Map
 
         void Update()
         {
-            // updateVisibility();
+            updateVisibility();
+
         }
+
+        Vector2 Vector2Abs(Vector2 v)
+        {
+            return new Vector2(Mathf.Abs(v.x), Mathf.Abs(v.y));
+        }
+
+        Vector2 Step(Vector2 edge, Vector2 x)
+        {
+            return new(
+                x.x < edge.x ? 0.0f : 1.0f,
+                x.y < edge.y ? 0.0f : 1.0f
+            );
+        }
+
+        IEnumerable<Vector2> gridTraverse(Vector2 p0, Vector2 p1)
+        {
+            Vector2 rd = p1 - p0;
+            Vector2 p = new(Mathf.Floor(p0.x), Mathf.Floor(p0.y));
+            Vector2 rdinv = Vector2.one / rd;
+            Vector2 stp = new(rd.x == 0f ? 0f : Mathf.Sign(rd.x),
+                              rd.y == 0f ? 0f : Mathf.Sign(rd.y));
+
+            Vector2 delta = new(Mathf.Min(rdinv.x * stp.x, 1f), Mathf.Min(rdinv.y * stp.y, 1f));
+            Vector2 t_max = Vector2Abs((p + Vector2.Max(stp, Vector2.zero) - p0) * rdinv);
+
+            for (int i = 0 ; i < 16 ; ++i)
+            {
+                yield return p; // TODO: return Vector2Int
+
+                float next_t = Mathf.Min(t_max.x, t_max.y);
+                if (next_t > 1.0) break;
+
+                Vector2 cmp = Step(t_max, new Vector2(t_max.y, t_max.x));
+                t_max += delta * cmp;
+                p += stp * cmp;
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            if (debug1 == null || debug2 == null) return;
+
+            Gizmos.color = Color.red;
+
+            Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
+            Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
+            foreach (Vector2 tile in gridTraverse(p1, p2))
+            {
+                Vector2 v = (tile + Vector2.one*0.5f) * 16f;
+                Gizmos.DrawCube(new Vector3(v.x, 30f, v.y), Vector3.one * 8f);
+            }
+        }
+
     }
+    /*
+        https://www.shadertoy.com/view/XddcWn
+        void traverse(vec2 p0, vec2 p1) {
+            vec2 rd = p1 - p0;
+            vec2 p = floor(p0);
+            vec2 rdinv = 1.0 / rd;
+            vec2 stp = sign(rd);
+            vec2 delta = min(rdinv * stp, 1.0);
+            // start at intersection of ray with initial cell
+            vec2 t_max = abs((p + max(stp, vec2(0.0)) - p0) * rdinv);
+
+            for (int i = 0; i < 128; ++i) {
+                set_source_rgba(0.2,0.5,1.0,0.5);
+                rectangle(p.x, p.y, 1.0, 1.0);
+                fill();
+
+                float next_t = min(t_max.x,t_max.y);
+                if (next_t > 1.0) break;
+
+                set_source_rgb(vec3(0.0));
+                circle(p0 + next_t * rd, 0.15);
+                fill();
+
+                vec2 cmp = step(t_max.xy, t_max.yx);
+                t_max += delta * cmp;
+                p += stp * cmp;
+            }
+        }
+    */
 
 }
