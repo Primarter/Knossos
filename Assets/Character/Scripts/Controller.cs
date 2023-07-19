@@ -148,6 +148,10 @@ public class Controller : MonoBehaviour
 
     private IEnumerator DashCoroutine()
     {
+        Health health = GetComponent<Health>();
+        if (health != null)
+            health.invincible = true;
+
         dashing = true;
         canDash = false;
         if (movement.magnitude == 0f)
@@ -166,6 +170,8 @@ public class Controller : MonoBehaviour
 
         speed = config.speed;
         dashing = false;
+        if (health != null)
+            health.invincible = false;
 
         yield return new WaitForSeconds(config.dashCooldown);
         canDash = true;

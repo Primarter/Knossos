@@ -1553,7 +1553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142660187767536015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.044, y: 1.203, z: -0.16}
+  m_LocalPosition: {x: -0.044, y: 1.108, z: -0.377}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1762,32 +1762,32 @@ PrefabInstance:
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.067993164
+      value: -0.062
       objectReference: {fileID: 0}
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5665498
+      value: 0.567
       objectReference: {fileID: 0}
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.35414124
+      value: -0.376
       objectReference: {fileID: 0}
     - target: {fileID: 8233687240993079132, guid: baf9b3cbc1b6f6b43b56f9385a79686f,
         type: 3}
@@ -1873,12 +1873,12 @@ PrefabInstance:
     - target: {fileID: 2226897728461677869, guid: 66827c59bc6abbc4ca6634d6c119529d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5665498
+      value: 0.567
       objectReference: {fileID: 0}
     - target: {fileID: 2226897728461677869, guid: 66827c59bc6abbc4ca6634d6c119529d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.35414124
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 2226897728461677869, guid: 66827c59bc6abbc4ca6634d6c119529d,
         type: 3}
@@ -1928,6 +1928,41 @@ PrefabInstance:
     - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
         type: 3}
       propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: Spawn Area_radius
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Name
+      value: Flames Rate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496441856251220223, guid: 66827c59bc6abbc4ca6634d6c119529d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Overridden
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
