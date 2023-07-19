@@ -308,7 +308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245203890}
   m_LocalRotation: {x: 0.053632826, y: 0.053632826, z: 0.7050699, w: 0.7050699}
-  m_LocalPosition: {x: 0.9128418, y: 1.4192997, z: 0.9377327}
+  m_LocalPosition: {x: 0.9128455, y: 1.4192997, z: 0.93773365}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -531,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375671790}
   m_LocalRotation: {x: 0.053632826, y: 0.053632826, z: 0.7050699, w: 0.7050699}
-  m_LocalPosition: {x: 0.9128418, y: 1.4192997, z: 0.9377327}
+  m_LocalPosition: {x: 0.9128455, y: 1.4192997, z: 0.93773365}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -620,7 +620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576730109}
   m_LocalRotation: {x: 0.053632826, y: 0.053632826, z: 0.7050699, w: 0.7050699}
-  m_LocalPosition: {x: 0.9128418, y: 1.4192997, z: 0.9377327}
+  m_LocalPosition: {x: 0.9128455, y: 1.4192997, z: 0.93773365}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -973,7 +973,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000225111545071804}
   m_LocalRotation: {x: 0.30337554, y: 0.43390182, z: -0.1579273, w: 0.8335176}
-  m_LocalPosition: {x: -10.981361, y: 12.26878, z: -7.6892242}
+  m_LocalPosition: {x: -10.981374, y: 12.268783, z: -7.6892385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1210,7 +1210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000225111823255534}
   m_LocalRotation: {x: 0.30337554, y: 0.43390182, z: -0.1579273, w: 0.8335176}
-  m_LocalPosition: {x: -10.981361, y: 12.26878, z: -7.6892242}
+  m_LocalPosition: {x: -10.981374, y: 12.268783, z: -7.6892385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2848,6 +2848,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8b3029aeafda8604b87143e53fa956f8, type: 3}
   - {fileID: 8300000, guid: 629769803100ed94eb99ccda18cd71b2, type: 3}
   - {fileID: 8300000, guid: d595962a7f25a54449e2182f0aabc99f, type: 3}
+--- !u!114 &7034311240404628148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694165254857749305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ccc5239359a714d9b14a09414d8374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &2937565395652398716 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9122422582859759596, guid: fc0a4c54f6e07264ea72c907ca283e34,
@@ -2884,7 +2896,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.811, y: 1.4193, z: -0.04516983}
   m_RotationAtRest: {x: 0, y: 8.699931, z: 90}
   m_TranslationOffsets:
-  - {x: 0, y: 0.09766388, z: 0.04126835}
+  - {x: 0, y: 0.09766805, z: 0.04126811}
   m_RotationOffsets:
   - {x: -8.699986, y: -90, z: -180}
   m_AffectTranslationX: 1
