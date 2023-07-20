@@ -129,7 +129,8 @@ public class LabyrinthGenerator : EditorWindow
         labyrinthManager.map = map;
         labyrinthManager.mapWidth = width;
         labyrinthManager.mapHeight = height;
-        labyrinthManager.origin = new Vector3(-tileConfig.scale/2f, 0f, -tileConfig.scale/2f); // divide by 2 because tiles are centered
+        labyrinthManager.mapOrigin = new Vector3(-tileConfig.scale/2f, 0f, -tileConfig.scale/2f); // divide by 2 because tiles are centered
+        labyrinthManager.mapScale = tileConfig.scale;
 
         for (int y = 0 ; y < height ; ++y) {
         for (int x = 0 ; x < width ; ++x) {
