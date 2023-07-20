@@ -65,5 +65,11 @@ namespace Knossos.Bust
         {
             stateMachine.Update();
         }
+
+        void OnDrawGizmosSelected()
+        {
+            if (config != null)
+                Gizmos.DrawWireSphere(transform.position, config.detectionRange);
+        }
     }
 }

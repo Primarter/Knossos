@@ -29,6 +29,7 @@ namespace Knossos.Bust
         {
             if (transform.parent == null || transform.parent.tag != "Cluster" || propagated)
                 return;
+            transform.parent.GetComponent<Enemies.Cluster>()?.StartEncounter();
             foreach (var ds in transform.parent.GetComponentsInChildren<DetectionSystem>())
             {
                 if ((State)ds.agent.stateMachine.currentState == State.Patrol || (State)ds.agent.stateMachine.currentState == State.Idle)

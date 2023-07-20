@@ -8,8 +8,9 @@ namespace Knossos.Bust
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (transform.parent == null || other.tag != "Player")
+            if (transform.parent == null || transform.parent.tag != "Cluster" || other.tag != "Player")
                 return;
+            transform.parent.GetComponent<Enemies.Cluster>()?.StartEncounter();
             foreach (var agent in transform.parent.GetComponentsInChildren<BustAgent>())
             {
                 agent.targetingSystem.hasTarget = true;
