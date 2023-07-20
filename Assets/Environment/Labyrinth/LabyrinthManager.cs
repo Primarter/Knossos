@@ -54,6 +54,14 @@ namespace Knossos.Map
             // updateVisibilitySimple();
             updateVisibilityComplex();
 
+            // hide tile camera is within if wall
+            Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
+            Vector2Int tileCameraCoord = new Vector2Int(tileCamera.x, tileCamera.z);
+            int tileCameraIndex = CoordToIndex(tileCameraCoord);
+            if (map[tileCameraIndex].type == 1)
+                map[tileCameraIndex].obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+
+            // hide wall if between camera and player
             RaycastHit hitInfo;
             if (Physics.Linecast(mainCamera.transform.position, playerTransform.position, out hitInfo, wallLayer))
             {
