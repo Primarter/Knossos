@@ -50,8 +50,8 @@ namespace Knossos.Map
 
         void Update()
         {
-            updateVisibility();
-            // updateVisibility2();
+            // updateVisibility();
+            updateVisibility2();
         }
 
         bool isInsideMap(Vector2Int coord)
@@ -113,9 +113,9 @@ namespace Knossos.Map
                     // if (doCheck && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
                     if (map[index].type == 0)
                         doCheck = true;
-                    if (map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
-                    // if ((doCheck || wallCount >= 2) && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    // if (map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
                     // if (wallCount > 2 && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
+                    if ((doCheck || wallCount >= 2) && map[index].type == 1 && !cell.Equals(map[index] )) // encoutered a wall
                     {
                         isVisible = false;
                         break;
@@ -204,13 +204,13 @@ namespace Knossos.Map
             }
 
             // Solution 2
-            // visibleCells.RemoveAll(cell =>
-            // {
-            //     Vector2 p = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.z);// / 16f;
-            //     if (isTileVisibleFrom(cell, p))
-            //         return false;
-            //     return true;
-            // });
+            visibleCells.RemoveAll(cell =>
+            {
+                Vector2 p = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.z);// / 16f;
+                if (isTileVisibleFrom(cell, p))
+                    return false;
+                return true;
+            });
 
             // Solution 1
             // visibleCells.RemoveAll(cell =>
@@ -279,17 +279,17 @@ namespace Knossos.Map
 
         void OnDrawGizmos()
         {
-            // if (debug1 == null || debug2 == null) return;
+            if (debug1 == null || debug2 == null) return;
 
-            // Gizmos.color = Color.red;
+            Gizmos.color = Color.red;
 
-            // Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
-            // Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
-            // foreach (Vector2 tile in gridTraverse(p1, p2))
-            // {
-            //     Vector2 v = (tile + Vector2.one*0.5f) * 16f;
-            //     Gizmos.DrawCube(new Vector3(v.x, 30f, v.y), Vector3.one * 8f);
-            // }
+            Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / 16f;
+            Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / 16f;
+            foreach (Vector2 tile in gridTraverse(p1, p2))
+            {
+                Vector2 v = (tile + Vector2.one*0.5f) * 16f;
+                Gizmos.DrawCube(new Vector3(v.x, 30f, v.y), Vector3.one * 8f);
+            }
         }
 
     }
