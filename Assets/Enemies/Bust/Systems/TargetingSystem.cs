@@ -34,7 +34,7 @@ namespace Knossos.Bust
             if (agent == null)
                 Debug.LogError("TargetingSystem is lacking BustAgent");
             if (transform.parent != null && transform.parent.tag == "Cluster")
-                usesTriggerZones = transform.parent.GetComponentsInChildren<TriggerZone>().Length > 0;
+                usesTriggerZones = transform.parent.GetComponentsInChildren<Enemies.TriggerZone>().Length > 0;
         }
 
         void Start()

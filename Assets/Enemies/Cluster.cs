@@ -15,28 +15,31 @@ public class Cluster : MonoBehaviour
     public EncounterEventCallback startEncounterCallbacks;
     public EncounterEventCallback endEncounterCallbacks;
 
-    Bust.BustAgent[] busts;
+    EnemyAgent[] enemies;
     bool startedEncounter = false;
 
     private void Awake()
     {
-        busts = GetComponentsInChildren<Bust.BustAgent>();
-        if (busts.Length == 0)
+        enemies = GetComponentsInChildren<EnemyAgent>();
+        if (enemies.Length == 0)
             this.gameObject.SetActive(false);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (startedEncounter)
         {
-            foreach (var bust in busts)
+            foreach (var bust in enemies)
             {
                 if (bust.gameObject.activeSelf)
                     return;
             }
             endEncounterEvent.Invoke();
             if (endEncounterCallbacks != null)
+            {
                 endEncounterCallbacks();
+                this.enabled = false;
+            }
         }
     }
 
@@ -47,7 +50,16 @@ public class Cluster : MonoBehaviour
             startEncounterEvent.Invoke();
             if (startEncounterCallbacks != null)
                 startEncounterCallbacks();
+            ActivateAgents();
             startedEncounter = true;
+        }
+    }
+
+    public virtual void ActivateAgents()
+    {
+        foreach (var agent in transform.parent.GetComponentsInChildren<EnemyAgent>())
+        {
+            agent.Enable();
         }
     }
 }

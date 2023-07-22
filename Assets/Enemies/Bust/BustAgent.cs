@@ -7,7 +7,7 @@ namespace Knossos.Bust
 {
     [RequireComponent(typeof(TargetingSystem), typeof(LocomotionSystem), typeof(StaggerSystem))]
     [RequireComponent(typeof(DetectionSystem), typeof(Enemies.OnHitEventSystem), typeof(CapsuleCollider))]
-    public class BustAgent : MonoBehaviour
+    public class BustAgent : Enemies.EnemyAgent
     {
         public FSM.StateMachine stateMachine;
 
@@ -70,6 +70,22 @@ namespace Knossos.Bust
         {
             if (config != null)
                 Gizmos.DrawWireSphere(transform.position, config.detectionRange);
+        }
+
+        public override void Disable()
+        {
+            targetingSystem.enabled = false;
+            locomotionSystem.enabled = false;
+            staggerSystem.enabled = false;
+            detectionSystem.enabled = false;
+            onHitEventSystem.enabled = false;
+            this.enabled = false;
+        }
+
+        public override void Enable()
+        {
+            targetingSystem.hasTarget = true;
+            stateMachine.ChangeState(Bust.State.Pursue);
         }
     }
 }
