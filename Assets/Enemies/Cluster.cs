@@ -16,7 +16,7 @@ public class Cluster : MonoBehaviour
     public EncounterEventCallback endEncounterCallbacks;
 
     EnemyAgent[] enemies;
-    bool startedEncounter = false;
+    protected bool startedEncounter = false;
 
     private void Awake()
     {
@@ -50,14 +50,14 @@ public class Cluster : MonoBehaviour
             startEncounterEvent.Invoke();
             if (startEncounterCallbacks != null)
                 startEncounterCallbacks();
-            ActivateAgents();
             startedEncounter = true;
+            ActivateAgents();
         }
     }
 
     public virtual void ActivateAgents()
     {
-        foreach (var agent in transform.parent.GetComponentsInChildren<EnemyAgent>())
+        foreach (var agent in enemies)
         {
             agent.Enable();
         }

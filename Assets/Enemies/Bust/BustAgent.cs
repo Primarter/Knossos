@@ -38,10 +38,6 @@ namespace Knossos.Bust
             detectionSystem = GetComponent<DetectionSystem>();
             onHitEventSystem = GetComponent<Enemies.OnHitEventSystem>();
             capsuleCollider = GetComponent<CapsuleCollider>();
-        }
-
-        void Start()
-        {
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
             stateMachine.RegisterState<StatePursue>(State.Pursue);
@@ -66,12 +62,6 @@ namespace Knossos.Bust
             stateMachine.Update();
         }
 
-        void OnDrawGizmosSelected()
-        {
-            if (config != null)
-                Gizmos.DrawWireSphere(transform.position, config.detectionRange);
-        }
-
         public override void Disable()
         {
             targetingSystem.enabled = false;
@@ -84,6 +74,12 @@ namespace Knossos.Bust
 
         public override void Enable()
         {
+            this.enabled = true;
+            targetingSystem.enabled = true;
+            locomotionSystem.enabled = true;
+            staggerSystem.enabled = true;
+            detectionSystem.enabled = true;
+            onHitEventSystem.enabled = true;
             targetingSystem.hasTarget = true;
             stateMachine.ChangeState(Bust.State.Pursue);
         }

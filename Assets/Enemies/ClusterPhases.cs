@@ -35,17 +35,20 @@ public class ClusterPhases : Cluster
     protected override void Update()
     {
         base.Update();
-        foreach (EnemyAgent enemy in phases[currentPhase].enemies)
-        {
-            if (enemy.enabled)
-                return;
-        }
-        currentPhase += 1;
-        if (currentPhase < phases.Length)
+        if (startedEncounter)
         {
             foreach (EnemyAgent enemy in phases[currentPhase].enemies)
             {
-                enemy.Enable();
+                if (enemy.enabled)
+                    return;
+            }
+            currentPhase += 1;
+            if (currentPhase < phases.Length)
+            {
+                foreach (EnemyAgent enemy in phases[currentPhase].enemies)
+                {
+                    enemy.Enable();
+                }
             }
         }
     }

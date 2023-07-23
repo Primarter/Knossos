@@ -27,18 +27,20 @@ namespace Knossos.Bust
 
         public void PropagateDetection()
         {
+            Debug.Log("Propagate");
             if (transform.parent == null || transform.parent.tag != "Cluster" || propagated)
                 return;
-            transform.parent.GetComponent<Enemies.Cluster>()?.StartEncounter();
-            foreach (var ds in transform.parent.GetComponentsInChildren<DetectionSystem>())
-            {
-                if ((State)ds.agent.stateMachine.currentState == State.Patrol || (State)ds.agent.stateMachine.currentState == State.Idle)
-                {
-                    ds.propagated = true;
-                    ds.agent.targetingSystem.hasTarget = true;
-                    ds.agent.stateMachine.ChangeState(State.Pursue);
-                }
-            }
+            transform.parent.GetComponent<Enemies.Cluster>().StartEncounter();
+            // foreach (var ds in transform.parent.GetComponentsInChildren<DetectionSystem>())
+            // {
+            //     if ((State)ds.agent.stateMachine.currentState == State.Patrol || (State)ds.agent.stateMachine.currentState == State.Idle)
+            //     {
+            //         ds.propagated = true;
+            //         ds.agent.targetingSystem.hasTarget = true;
+            //         print($"Detect from propagate {transform.parent.name}");
+            //         ds.agent.stateMachine.ChangeState(State.Pursue);
+            //     }
+            // }
         }
 
         public void AlertPlayer()
