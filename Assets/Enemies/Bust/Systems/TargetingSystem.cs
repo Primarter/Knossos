@@ -49,8 +49,8 @@ namespace Knossos.Bust
 
             if (!hasTarget && !usesTriggerZones && distanceToTarget < agent.config.detectionRange && CheckLineOfSight())
                 hasTarget = true;
-            if (distanceToTarget > agent.config.maxDetectionRange)
-                hasTarget = false;
+            // if (distanceToTarget > agent.config.maxDetectionRange)
+            //     hasTarget = false;
         }
 
         bool CheckLineOfSight()

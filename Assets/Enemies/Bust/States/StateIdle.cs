@@ -29,7 +29,6 @@ namespace Knossos.Bust
         {
             if (agent.targetingSystem.hasTarget)
             {
-                Debug.Log("Detect from Idle");
                 agent.stateMachine.ChangeState(State.Pursue);
             }
         }
