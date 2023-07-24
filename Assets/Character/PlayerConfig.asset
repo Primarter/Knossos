@@ -96,7 +96,7 @@ MonoBehaviour:
     knockBackDuration: 0
     staggerDuration: 1
   - damage: 3
-    hitStop: 20
+    hitStop: 12
     knockBackStrength: 50
     knockBackDuration: 0.1
     staggerDuration: 1.5
