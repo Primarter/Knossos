@@ -37,15 +37,15 @@ public class ClusterPhases : Cluster
         base.Update();
         if (startedEncounter)
         {
-            foreach (EnemyAgent enemy in phases[currentPhase].enemies)
+            foreach (var enemy in phases[currentPhase].enemies)
             {
-                if (enemy.enabled)
+                if (enemy.isActiveAndEnabled)
                     return;
             }
             currentPhase += 1;
             if (currentPhase < phases.Length)
             {
-                foreach (EnemyAgent enemy in phases[currentPhase].enemies)
+                foreach (var enemy in phases[currentPhase].enemies)
                 {
                     enemy.Enable();
                 }
@@ -57,7 +57,7 @@ public class ClusterPhases : Cluster
     {
         if (phases.Length > 0)
         {
-            foreach (EnemyAgent agent in phases[0].enemies)
+            foreach (var agent in phases[0].enemies)
             {
                 agent.Enable();
             }
