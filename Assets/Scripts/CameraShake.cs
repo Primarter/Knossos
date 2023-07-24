@@ -21,6 +21,9 @@ public class CameraShake : MonoBehaviour
     [SerializeField] int defaultDuration = 10;
     [SerializeField] AnimationCurve defaultCurve;
 
+    [SerializeField] float shakeAmplitude = .5f;
+    [SerializeField] float shakeFrequency = .3f;
+
     private void Awake()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
@@ -31,7 +34,7 @@ public class CameraShake : MonoBehaviour
         if (coroutine != null || hit < 0 || hit >= config.damageAnimationDurations.Length)
             return;
 
-        coroutine = StartCoroutine(SimpleShakeCoroutine((int)(config.damageAnimationDurations[hit] * .75), .3f, 2f));
+        coroutine = StartCoroutine(SimpleShakeCoroutine((int)(config.damageAnimationDurations[hit] * .75), shakeAmplitude, shakeFrequency));
     }
 
     public void DamageShakeScreen(int damage)
@@ -87,11 +90,11 @@ public class CameraShake : MonoBehaviour
 
         var noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        noise.m_AmplitudeGain = amplitude;
-        noise.m_FrequencyGain = frequency;
 
         while (Time.frameCount < startFrame + frames)
         {
+            noise.m_AmplitudeGain = amplitude * defaultCurve.Evaluate((float)(Time.frameCount - startFrame)/(float)(frames));
+            noise.m_FrequencyGain = frequency * defaultCurve.Evaluate((float)(Time.frameCount - startFrame)/(float)(frames));
             yield return null;
         }
 
