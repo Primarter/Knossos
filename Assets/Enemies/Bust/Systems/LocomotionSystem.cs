@@ -13,6 +13,8 @@ namespace Knossos.Bust
         void Awake()
         {
             agent = GetComponent<BustAgent>();
+            if (agent == null)
+                Debug.LogError("GetComponent failed");
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
 

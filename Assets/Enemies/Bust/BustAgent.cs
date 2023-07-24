@@ -6,7 +6,8 @@ using Knossos;
 namespace Knossos.Bust
 {
     [RequireComponent(typeof(TargetingSystem), typeof(LocomotionSystem), typeof(StaggerSystem))]
-    [RequireComponent(typeof(DetectionSystem), typeof(Enemies.OnHitEventSystem), typeof(CapsuleCollider))]
+    [RequireComponent(typeof(DetectionSystem), typeof(Enemies.OnHitEventSystem), typeof(AttackSystem))]
+    [RequireComponent(typeof(CapsuleCollider))]
     public class BustAgent : Enemies.EnemyAgent
     {
         public FSM.StateMachine stateMachine;
@@ -17,6 +18,8 @@ namespace Knossos.Bust
         // public bool isAttacking;
         // public bool canAttack;
 
+        [HideInInspector]
+        public AttackSystem attackSystem;
         [HideInInspector]
         public TargetingSystem targetingSystem;
         [HideInInspector]
@@ -32,6 +35,7 @@ namespace Knossos.Bust
 
         void Awake()
         {
+            attackSystem = GetComponent<AttackSystem>();
             targetingSystem = GetComponent<TargetingSystem>();
             locomotionSystem = GetComponent<LocomotionSystem>();
             staggerSystem = GetComponent<StaggerSystem>();
@@ -48,7 +52,10 @@ namespace Knossos.Bust
             stateMachine.RegisterState<StateEndlag>(State.Endlag);
             stateMachine.RegisterState<StateCooldown>(State.Cooldown);
             stateMachine.RegisterState<StateStagered>(State.Staggered);
+        }
 
+        void Start()
+        {
             stateMachine.ChangeState(config.initialState);
         }
 
