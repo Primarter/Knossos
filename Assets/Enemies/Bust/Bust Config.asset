@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 40
   defaultSpeed: 2.5
-  attackStartup: 0.5
+  attackStartup: 0.75
   attackDuration: 0.35
   attackEndlag: 2
-  attackCooldown: 1
+  attackCooldown: 0.75
   staggerDuration: 1
   detectionRange: 12
   maxDetectionRange: 50

@@ -17,6 +17,7 @@ namespace Knossos.Bust
 
         public override void Enter(int previousState)
         {
+            agent.attackSystem.chargingVFX.Play();
             agent.locomotionSystem.navMeshAgent.isStopped = true;
 
             agent.locomotionSystem.navMeshAgent.destination += (agent.locomotionSystem.navMeshAgent.destination - agent.transform.position).normalized * 10;
@@ -26,6 +27,7 @@ namespace Knossos.Bust
 
         public override void Exit(int nextState)
         {
+            agent.attackSystem.chargingVFX.Stop();
             agent.locomotionSystem.navMeshAgent.isStopped = false;
             agent.StopCoroutine(attackTimerCoroutine);
         }

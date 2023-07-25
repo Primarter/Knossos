@@ -34,7 +34,7 @@ namespace Knossos.Bust
             if (agent == null)
                 Debug.LogError("TargetingSystem is lacking BustAgent");
             if (transform.parent != null && transform.parent.tag == "Cluster")
-                usesTriggerZones = transform.parent.GetComponentsInChildren<TriggerZone>().Length > 0;
+                usesTriggerZones = transform.parent.GetComponentsInChildren<Enemies.TriggerZone>().Length > 0;
         }
 
         void Start()
@@ -47,15 +47,25 @@ namespace Knossos.Bust
         {
             distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-            if (distanceToTarget < agent.config.detectionRange && !usesTriggerZones)
+            if (!hasTarget && !usesTriggerZones && distanceToTarget < agent.config.detectionRange && CheckLineOfSight())
                 hasTarget = true;
-            if (distanceToTarget > agent.config.maxDetectionRange)
-                hasTarget = false;
+            // if (distanceToTarget > agent.config.maxDetectionRange)
+            //     hasTarget = false;
         }
 
-        void Update()
+        bool CheckLineOfSight()
         {
+            RaycastHit hit;
+            Vector3 targetPos = target.position + new Vector3(0f, 1.0f, 0f);
+            return Physics.Raycast(transform.position, targetPos - transform.position, out hit)
+                && hit.transform.tag == "Player";
+        }
 
+        void OnDrawGizmosSelected()
+        {
+            var ag = GetComponent<BustAgent>();
+            if (ag.config != null)
+                Gizmos.DrawWireSphere(transform.position, ag.config.detectionRange);
         }
     }
 }

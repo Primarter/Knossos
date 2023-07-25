@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 namespace Knossos.Bust
 {
 
 public class AttackSystem : MonoBehaviour
 {
-    [SerializeField]
-    int damage = 10;
+    [SerializeField] int damage = 10;
+
+    public VisualEffect chargingVFX;
 
     UnityEvent onHitPlayerEvent;
 

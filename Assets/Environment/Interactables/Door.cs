@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     private Vector3 doorStartPosition;
     private Vector3 doorEndPosition;
     private System.Diagnostics.Stopwatch sw = new();
+    private bool opened = false;
 
     private void Start()
     {
@@ -19,7 +20,8 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        StartCoroutine(OpenDoorCoroutine());
+        if (!opened)
+            StartCoroutine(OpenDoorCoroutine());
     }
 
     private IEnumerator OpenDoorCoroutine()
@@ -32,5 +34,6 @@ public class Door : MonoBehaviour
             transform.position = Vector3.Lerp(doorStartPosition, doorEndPosition, progress);
             yield return null;
         }
+        opened = true;
     }
 }

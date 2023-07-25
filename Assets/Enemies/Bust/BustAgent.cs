@@ -6,8 +6,9 @@ using Knossos;
 namespace Knossos.Bust
 {
     [RequireComponent(typeof(TargetingSystem), typeof(LocomotionSystem), typeof(StaggerSystem))]
-    [RequireComponent(typeof(DetectionSystem), typeof(Enemies.OnHitEventSystem), typeof(CapsuleCollider))]
-    public class BustAgent : MonoBehaviour
+    [RequireComponent(typeof(DetectionSystem), typeof(Enemies.OnHitEventSystem), typeof(AttackSystem))]
+    [RequireComponent(typeof(CapsuleCollider))]
+    public class BustAgent : Enemies.EnemyAgent
     {
         public FSM.StateMachine stateMachine;
 
@@ -17,6 +18,8 @@ namespace Knossos.Bust
         // public bool isAttacking;
         // public bool canAttack;
 
+        [HideInInspector]
+        public AttackSystem attackSystem;
         [HideInInspector]
         public TargetingSystem targetingSystem;
         [HideInInspector]
@@ -32,16 +35,13 @@ namespace Knossos.Bust
 
         void Awake()
         {
+            attackSystem = GetComponent<AttackSystem>();
             targetingSystem = GetComponent<TargetingSystem>();
             locomotionSystem = GetComponent<LocomotionSystem>();
             staggerSystem = GetComponent<StaggerSystem>();
             detectionSystem = GetComponent<DetectionSystem>();
             onHitEventSystem = GetComponent<Enemies.OnHitEventSystem>();
             capsuleCollider = GetComponent<CapsuleCollider>();
-        }
-
-        void Start()
-        {
             stateMachine = new FSM.StateMachine(this.gameObject, typeof(State));
 
             stateMachine.RegisterState<StatePursue>(State.Pursue);
@@ -52,7 +52,10 @@ namespace Knossos.Bust
             stateMachine.RegisterState<StateEndlag>(State.Endlag);
             stateMachine.RegisterState<StateCooldown>(State.Cooldown);
             stateMachine.RegisterState<StateStagered>(State.Staggered);
+        }
 
+        void Start()
+        {
             stateMachine.ChangeState(config.initialState);
         }
 
@@ -64,6 +67,28 @@ namespace Knossos.Bust
         void Update()
         {
             stateMachine.Update();
+        }
+
+        public override void Disable()
+        {
+            targetingSystem.enabled = false;
+            locomotionSystem.enabled = false;
+            staggerSystem.enabled = false;
+            detectionSystem.enabled = false;
+            onHitEventSystem.enabled = false;
+            this.enabled = false;
+        }
+
+        public override void Enable()
+        {
+            this.enabled = true;
+            targetingSystem.enabled = true;
+            locomotionSystem.enabled = true;
+            staggerSystem.enabled = true;
+            detectionSystem.enabled = true;
+            onHitEventSystem.enabled = true;
+            targetingSystem.hasTarget = true;
+            stateMachine.ChangeState(Bust.State.Pursue);
         }
     }
 }
