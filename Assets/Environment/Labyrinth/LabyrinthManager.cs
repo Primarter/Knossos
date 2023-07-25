@@ -73,10 +73,11 @@ namespace Knossos.Map
         {
             Vector3 center = cell.obj.transform.position;
             var borders = new Vector3[4];
-            borders[0] = new Vector3(center.x - 7.999f, 1f, center.z - 7.999f);
-            borders[1] = new Vector3(center.x + 7.999f, 1f, center.z - 7.999f);
-            borders[2] = new Vector3(center.x - 7.999f, 1f, center.z + 7.999f);
-            borders[3] = new Vector3(center.x + 7.999f, 1f, center.z + 7.999f);
+            float offset = mapScale / 2f - 0.001f;
+            borders[0] = new Vector3(center.x - offset, 1f, center.z - offset);
+            borders[1] = new Vector3(center.x + offset, 1f, center.z - offset);
+            borders[2] = new Vector3(center.x - offset, 1f, center.z + offset);
+            borders[3] = new Vector3(center.x + offset, 1f, center.z + offset);
             return borders;
         }
 
@@ -87,7 +88,8 @@ namespace Knossos.Map
 
         bool isInsideMap(Vector2Int coord)
         {
-            return !(coord.x < 0 || coord.x > mapWidth-1 || coord.y < 0 || coord.y > mapHeight-1);
+            // return !(coord.x < 0 || coord.x > mapWidth-1 || coord.y < 0 || coord.y > mapHeight-1);
+            return (coord.x >= 0 && coord.x < mapWidth && coord.y >= 0 && coord.y < mapHeight);
         }
 
         bool isTileVisibleFrom(Cell cell, Vector2 p)
@@ -107,6 +109,8 @@ namespace Knossos.Map
                     var gridPos = Vector2Int.RoundToInt(tile);
                     int index = CoordToIndex(gridPos);
 
+                    // print(gridPos);
+                    // if (!isInsideMap(gridPos)) break;
                     if (cell.obj == map[index].obj) break;
                     // if (map[index].type == 0) { doCheck = true };
                     // if (doCheck && map[index].type == 1 ))
@@ -174,8 +178,9 @@ namespace Knossos.Map
             if (map[mapIndex].type == 1) // if player is inside a wall
                 return;
 
-            for (int dy = -2 ; dy < 6; ++dy) {
-            for (int dx = -2 ; dx < 6; ++dx) {
+            // [-2, 8] approximately frustum of camera
+            for (int dy = -2 ; dy < 8; ++dy) {
+            for (int dx = -2 ; dx < 8; ++dx) {
                 Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
                 if (!isInsideMap(coord)) continue;
 
