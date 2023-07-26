@@ -106,6 +106,7 @@ public class Controller : MonoBehaviour
 
         UpdateDash();
         UpdateAttack();
+        UpdateSpecial();
 
     }
 
@@ -143,6 +144,7 @@ public class Controller : MonoBehaviour
         {
             animationController.TriggerDodge();
             animationController.ResetAttack();
+            animationController.ResetSpecial();
         }
     }
 
@@ -191,7 +193,20 @@ public class Controller : MonoBehaviour
             canDash = false;
             EnableSlowMotion();
             animationController.ResetDodge();
+            animationController.ResetSpecial();
             animationController.TriggerAttack();
+        }
+    }
+
+    private void UpdateSpecial()
+    {
+        if (InputManager.CheckBuffer(BufferedInput.Special, false))
+        {
+            canDash = false;
+            EnableSlowMotion();
+            animationController.ResetDodge();
+            animationController.ResetAttack();
+            animationController.TriggerSpecial();
         }
     }
 

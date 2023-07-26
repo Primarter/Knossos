@@ -12,6 +12,8 @@ public class SlashEffectController : MonoBehaviour
     [SerializeField]
     private VisualEffect[] visualEffects;
 
+    public VisualEffect specialBurst;
+
     public void PlayEffect(int effectIdx)
     {
         if (effectIdx >= 0 && effectIdx < visualEffects.Length)

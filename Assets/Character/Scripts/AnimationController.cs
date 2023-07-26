@@ -80,9 +80,19 @@ public class AnimationController : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
+    public void TriggerSpecial()
+    {
+        animator.SetTrigger("Special");
+    }
+
     public void ResetAttack()
     {
         animator.ResetTrigger("Attack");
+    }
+
+    public void ResetSpecial()
+    {
+        animator.ResetTrigger("Special");
     }
 
     public void ResetDodge()

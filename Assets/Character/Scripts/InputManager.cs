@@ -10,7 +10,8 @@ namespace Knossos.Character
 public enum BufferedInput
 {
     Dodge,
-    Attack
+    Attack,
+    Special
 }
 
 [RequireComponent(typeof(AnimationController))]
@@ -22,6 +23,7 @@ public class InputManager : MonoBehaviour
         public float vertical;
         public bool dodge;
         public bool attack;
+        public bool special;
         public bool interact;
     }
 
@@ -66,15 +68,25 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        inputs.horizontal = Input.GetAxisRaw("Horizontal");
-        inputs.vertical = Input.GetAxisRaw("Vertical");
-        inputs.dodge = Input.GetButtonDown("Dash");
-        inputs.attack = Input.GetButtonDown("Attack");
-        inputs.interact = Input.GetButtonDown("Interact");
+        inputs = new Inputs
+        {
+            horizontal = Input.GetAxisRaw("Horizontal"),
+            vertical = Input.GetAxisRaw("Vertical"),
+            dodge = Input.GetButtonDown("Dash"),
+            attack = Input.GetButtonDown("Attack"),
+            special = Input.GetButtonDown("Special"),
+            interact = Input.GetButtonDown("Interact"),
+        };
+
         if (inputs.dodge)
         {
             inputBuffer.Enqueue((BufferedInput.Dodge, sw.ElapsedMilliseconds + config.dodgeBufferDuration));
             inputCounts[BufferedInput.Dodge] += 1;
+        }
+        else if (inputs.special)
+        {
+            inputBuffer.Enqueue((BufferedInput.Special, sw.ElapsedMilliseconds + config.specialBufferDuration));
+            inputCounts[BufferedInput.Special] += 1;
         }
         else if (inputs.attack)
         {

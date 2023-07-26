@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeBufferDuration: 500
   attackBufferDuration: 500
+  specialBufferDuration: 500
