@@ -12,7 +12,6 @@ public class AOEBehaviour : StateMachineBehaviour
     {
         // Debug.Log("OnStateEnter: " + Time.frameCount);
         animator.GetComponent<Controller>().RestartRunTimer();
-        animator.GetComponent<SlashEffectController>().specialBurst.Play();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,7 +23,6 @@ public class AOEBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Debug.Log("OnStateExit: " + Time.frameCount);
-        animator.GetComponent<Controller>().StopAttacking();
     }
 }
 

@@ -20,6 +20,9 @@ public class AnimationController : MonoBehaviour
     public UnityEvent<int> onHitStopEnd;
     public UnityEvent<int> onDamageAnimStart;
     public UnityEvent<int> onDamageAnimEnd;
+    public UnityEvent onSpecialActive;
+    public UnityEvent onSpecialInactive;
+    public UnityEvent onSpecialConnect;
 
     Animator animator;
     Vector3 smoothInput = Vector3.zero;
@@ -123,6 +126,24 @@ public class AnimationController : MonoBehaviour
     {
         // print("HitInactive");
         onHitInactive.Invoke(hit);
+    }
+
+    public void OnSpecialActiveEvent()
+    {
+        // print("SpecialActive");
+        onSpecialActive.Invoke();
+    }
+
+    public void OnSpecialConnectEvent()
+    {
+        // print("SpecialConnect");
+        onSpecialConnect.Invoke();
+    }
+
+    public void OnSpecialInactiveEvent()
+    {
+        // print("SpecialInactive");
+        onSpecialInactive.Invoke();
     }
 
     public void OnDamageAnimStartEvent(int damage)
