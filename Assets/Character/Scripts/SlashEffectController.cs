@@ -19,7 +19,7 @@ public class SlashEffectController : MonoBehaviour
         if (effectIdx >= 0 && effectIdx < visualEffects.Length)
             visualEffects[effectIdx].Play();
         else
-            Debug.LogError("Invalid effectIdx in PlayEffect");
+            Debug.Log("Invalid effectIdx in PlayEffect");
     }
 
     public void PauseEffect(int effectIdx)
@@ -29,7 +29,7 @@ public class SlashEffectController : MonoBehaviour
             // print(effectIdx);
             visualEffects[effectIdx].playRate = 0f;
         } else
-            Debug.LogError("Invalid effectIdx in PlayEffect");
+            Debug.Log("Invalid effectIdx in PlayEffect");
     }
 
     public void ResumeEffect(int effectIdx)
@@ -39,7 +39,7 @@ public class SlashEffectController : MonoBehaviour
             // print(effectIdx);
             visualEffects[effectIdx].playRate = 1f;
         } else
-            Debug.LogError("Invalid effectIdx in PlayEffect");
+            Debug.Log("Invalid effectIdx in PlayEffect");
     }
 
 }

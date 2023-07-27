@@ -19,7 +19,7 @@ MonoBehaviour:
   attackEndlag: 2
   attackCooldown: 0.75
   staggerDuration: 1
-  detectionRange: 12
+  detectionRange: 11
   maxDetectionRange: 50
   attackRange: 8
   initialState: 1

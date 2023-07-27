@@ -164,8 +164,8 @@ public class AnimationController : MonoBehaviour
         {
             StopAnimation();
 
-            if (config.moves[hitIdx].hitStop < 0)
-                return;
+            // if (config.moves[hitIdx].hitStop < 0)
+            //     return;
             if (hitStopCoroutine != null)
                 StopCoroutine(hitStopCoroutine);
             hitStopCoroutine = StartCoroutine(EndHitStopAfter(config.moves[hitIdx].hitStop, hitIdx));

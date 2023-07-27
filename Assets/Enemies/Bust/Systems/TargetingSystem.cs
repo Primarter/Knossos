@@ -8,6 +8,7 @@ namespace Knossos.Bust
     {
         BustAgent agent;
         public Transform target;
+        [SerializeField] LayerMask visionLayers;
 
         private bool _hasTarget = false;
         public bool hasTarget
@@ -47,7 +48,7 @@ namespace Knossos.Bust
         {
             distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-            if (!hasTarget && !usesTriggerZones && distanceToTarget < agent.config.detectionRange && CheckLineOfSight())
+            if (!hasTarget && !usesTriggerZones && distanceToTarget < agent.config.detectionRange)
                 hasTarget = true;
             // if (distanceToTarget > agent.config.maxDetectionRange)
             //     hasTarget = false;
@@ -57,7 +58,10 @@ namespace Knossos.Bust
         {
             RaycastHit hit;
             Vector3 targetPos = target.position + new Vector3(0f, 1.0f, 0f);
-            return Physics.Raycast(transform.position, targetPos - transform.position, out hit)
+            bool res = Physics.Raycast(transform.position, targetPos - transform.position, out hit, agent.config.detectionRange, visionLayers);
+            if (res)
+                Debug.Log($"HIT {hit.collider.name} {hit.transform.tag} {hit.transform.gameObject.layer}");
+            return res
                 && hit.transform.tag == "Player";
         }
 

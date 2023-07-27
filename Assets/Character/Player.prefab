@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 1245203893}
   - component: {fileID: 1245203892}
   - component: {fileID: 1245203894}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Hitbox (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 1375671794}
   - component: {fileID: 1375671793}
   - component: {fileID: 1375671792}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Hitbox (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 1576730112}
   - component: {fileID: 1576730110}
   - component: {fileID: 1576730111}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Hitbox (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1357,7 +1357,10 @@ GameObject:
   - component: {fileID: 626472094223216428}
   - component: {fileID: 3907416042098708884}
   - component: {fileID: 2281290964076576029}
-  m_Layer: 0
+  - component: {fileID: 7928272605803087321}
+  - component: {fileID: 6136299240799920200}
+  - component: {fileID: 212553311703006340}
+  m_Layer: 1
   m_Name: AOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1388,8 +1391,8 @@ VisualEffect:
   m_GameObject: {fileID: 3278295381126942763}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 40d9c16352ae8a241984ee45eadf39ce, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_ResourceVersion: 1
@@ -1475,6 +1478,80 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &7928272605803087321
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278295381126942763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.43
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6136299240799920200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278295381126942763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0991a49284f84394d81dd072292404ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 3000225110171045486}
+  hitIdx: 3
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
+--- !u!114 &212553311703006340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278295381126942763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6b641fe3165cc4ba842390afcf145d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxEvolution:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 0.98
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3000225110171045480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2835,18 +2912,6 @@ MonoBehaviour:
   onHitConnect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3000225110171045486}
-        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
-        m_MethodName: TriggerHitStop
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1754580896}
         m_TargetAssemblyTypeName: SlashEffectController, Assembly-CSharp
         m_MethodName: PauseEffect
@@ -2871,6 +2936,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1086668272}
+        m_TargetAssemblyTypeName: Knossos.CameraShake, Assembly-CSharp
+        m_MethodName: HitShakeScreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3000225110171045486}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: TriggerHitStop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHitStopEnd:
     m_PersistentCalls:
       m_Calls:
@@ -2885,18 +2974,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1086668272}
-        m_TargetAssemblyTypeName: Knossos.CameraShake, Assembly-CSharp
-        m_MethodName: HitShakeScreen
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 3000225110171045484}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
@@ -2943,9 +3020,9 @@ MonoBehaviour:
   onSpecialActive:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3907416042098708884}
-        m_TargetAssemblyTypeName: UnityEngine.VFX.VisualEffect, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Knossos.Character.AOEController, Assembly-CSharp
+        m_MethodName: ActivateAOE
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

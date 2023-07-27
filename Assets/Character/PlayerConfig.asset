@@ -100,5 +100,10 @@ MonoBehaviour:
     knockBackStrength: 50
     knockBackDuration: 0.1
     staggerDuration: 1.5
-  damageAnimationDurations: 0f0000001400000019000000
+  - damage: 2
+    hitStop: 0
+    knockBackStrength: 100
+    knockBackDuration: 0.2
+    staggerDuration: 2
+  damageAnimationDurations: 0f000000140000001900000014000000
   DodgeAnimationSpeedMultiplier: 1.7499999

@@ -31,7 +31,7 @@ namespace Knossos.Bust
 
         public override void Exit(int nextState)
         {
-            agent.transform.rotation = originalRotation;
+            // agent.transform.rotation = originalRotation;
             agent.locomotionSystem.navMeshAgent.destination = agent.transform.position;
             agent.locomotionSystem.navMeshAgent.updateRotation = true;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
@@ -47,7 +47,7 @@ namespace Knossos.Bust
 
         public override void Update()
         {
-            agent.transform.rotation = originalRotation;
+            // agent.transform.rotation = originalRotation;
         }
 
         IEnumerator KnockBackTimer()
@@ -57,8 +57,8 @@ namespace Knossos.Bust
             while (Time.time < start + agent.staggerSystem.lastHit.knockBackDuration)
             {
                 agent.locomotionSystem.navMeshAgent.destination = agent.locomotionSystem.navMeshAgent.transform.position + agent.staggerSystem.lastHit.hitDirection.normalized;
-                // float progress = Easing.easeOutExpo(1f - ((Time.time - start) / agent.staggerSystem.lastHit.knockBackDuration));
-                // agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed * agent.staggerSystem.lastHit.knockBackStrength * progress;
+                float progress = Easing.easeOutExpo(1f - ((Time.time - start) / agent.staggerSystem.lastHit.knockBackDuration));
+                agent.locomotionSystem.navMeshAgent.speed = agent.config.defaultSpeed * agent.staggerSystem.lastHit.knockBackStrength * progress;
                 yield return null;
             }
             agent.locomotionSystem.navMeshAgent.speed = 0;

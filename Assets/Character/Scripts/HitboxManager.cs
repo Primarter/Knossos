@@ -13,7 +13,7 @@ public class HitboxManager : MonoBehaviour
 
     public void TriggerHitbox(int hitboxIdx)
     {
-        comboHitboxes[hitboxIdx].EnableHitbox(1);
+        comboHitboxes[hitboxIdx].EnableHitbox();
     }
 
     public void DisableHitbox(int hitboxIdx)

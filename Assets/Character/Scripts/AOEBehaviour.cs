@@ -23,6 +23,7 @@ public class AOEBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Debug.Log("OnStateExit: " + Time.frameCount);
+        animator.GetComponent<Controller>().StopAttacking();
     }
 }
 

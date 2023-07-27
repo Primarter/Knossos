@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Knossos.Character
 {
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Collider))]
 public class Hitbox : MonoBehaviour
 {
     [SerializeField]
@@ -18,7 +18,6 @@ public class Hitbox : MonoBehaviour
     List<Enemies.OnHitEventSystem> enemies = new();
     List<Enemies.OnHitEventSystem> hitEnemies = new();
     bool hitting = false;
-    int damage;
 
     private void Awake()
     {
@@ -69,10 +68,9 @@ public class Hitbox : MonoBehaviour
         Destroy(GameObject.Instantiate(damageParticle, enemy.transform.position, player.rotation), .5f);
     }
 
-    public void EnableHitbox(int damage)
+    public void EnableHitbox()
     {
         hitting = true;
-        this.damage = damage;
         foreach (Enemies.OnHitEventSystem enemy in enemies)
         {
             Hit(enemy);

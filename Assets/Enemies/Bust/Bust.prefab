@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3882211738399043802}
   - component: {fileID: 3882211738399043803}
   - component: {fileID: 3882211738399043804}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 6142005899244872460}
   - component: {fileID: 5709877797081639865}
   - component: {fileID: 900903614995655103}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bust
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3882211738945492244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83, y: 0.54, z: -3.19}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -262,6 +262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  visionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3882211738945492235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +372,7 @@ GameObject:
   - component: {fileID: 1567193086775350356}
   - component: {fileID: 203345032146105058}
   - component: {fileID: 1806598967058869593}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ChargeVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
