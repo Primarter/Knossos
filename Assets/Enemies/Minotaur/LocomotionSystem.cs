@@ -8,7 +8,7 @@ namespace Knossos.Minotaur
     public class LocomotionSystem : MonoBehaviour
     {
         MinotaurAgent agent;
-        public UnityEngine.AI.NavMeshAgent navMeshAgent;
+        public NavMeshAgent navMeshAgent;
 
         void Awake()
         {

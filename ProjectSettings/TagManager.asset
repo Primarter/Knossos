@@ -8,6 +8,7 @@ TagManager:
   - Bush
   - Waypoint
   - Cluster
+  - Minotaur
   layers:
   - Default
   - TransparentFX

@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Knossos.Map;
 
 public class LabyrinthGenerator : EditorWindow
 {
@@ -28,37 +27,43 @@ public class LabyrinthGenerator : EditorWindow
         EditorGUILayout.Separator();
         if (GUILayout.Button("Generate"))
         {
-            imageToMap();
-            generateMap();
+            if (tileConfig == null)
+            {
+                Debug.LogError("Image is not set!");
+            }
+            else if (image == null)
+            {
+                Debug.LogError("Image is not set!");
+            }
+            else
+            {
+                generateLabyrinth();
+            }
         }
     }
 
     // ---
 
-    [System.NonSerialized] string[] colorWalls = {"000080", "0000FF"}; // System.NonSerialized is needed because otherwise the values don't get updated when changed
-    int[] map;
-    int mapWidth, mapHeight;
-
-    int[] getNeighbourCells(int x, int y)
+    int[] getNeighbourCells(Cell[] map, int x, int y, int width, int height)
     {
         // North, East, South, West
         int[] neigbours = new int[] {0, 0, 0, 0};
 
         // South
         if (y > 0)
-            neigbours[2] = map[(y - 1) * mapWidth + x];
+            neigbours[2] = map[(y - 1) * width + x].type;
 
         // East
-        if (x < mapWidth - 1)
-            neigbours[1] = map[y * mapWidth + (x + 1)];
+        if (x < width - 1)
+            neigbours[1] = map[y * width + (x + 1)].type;
 
         // North
-        if (y < mapHeight - 1)
-            neigbours[0] = map[(y + 1) * mapWidth + x];
+        if (y < width - 1)
+            neigbours[0] = map[(y + 1) * width + x].type;
 
         // West
         if (x > 0)
-            neigbours[3] = map[y * mapWidth + (x - 1)];
+            neigbours[3] = map[y * width + (x - 1)].type;
 
         return neigbours;
     }
@@ -80,17 +85,16 @@ public class LabyrinthGenerator : EditorWindow
         return true;
     }
 
-    (GameObject, float rotation) getTile(int x, int y)
+    (GameObject, float rotation) getTile(Cell[] map, int x, int y, int width, int height)
     {
         int index = (y * image.width) + x;
-        int id = map[index];
+        int type = map[index].type;
 
         foreach (var tile in tileConfig.tiles)
         {
-            if (tile.id != id) continue;
+            if (tile.type != type) continue;
 
-            int[] neighbours = getNeighbourCells(x, y);
-            // Debug.Log((x, y, (neighbours[0], neighbours[1], neighbours[2], neighbours[3])));
+            int[] neighbours = getNeighbourCells(map, x, y, width, height);
 
             if (tile.canRotate)
             {
@@ -98,13 +102,11 @@ public class LabyrinthGenerator : EditorWindow
                 var neighboursRotate180 = new int[] {neighbours[2], neighbours[3], neighbours[0], neighbours[1]};
                 var neighboursRotate270 = new int[] {neighbours[1], neighbours[2], neighbours[3], neighbours[0]};
                 var neigboursRotation = new int[][] {neighbours, neighboursRotate90, neighboursRotate180, neighboursRotate270};
-                // TODO: check for the 4 direction and also rotated in 4 ways
                 for (int i = 0 ; i < 4 ; ++i)
                 {
                     float angle = i * -90f; // negative value because of the way the neighbours are manually rotated
                     if (isTileValid(tile, neigboursRotation[i]))
                         return (tile.prefab, angle);
-
                 }
             }
             else
@@ -117,49 +119,64 @@ public class LabyrinthGenerator : EditorWindow
         return (null, 0);
     }
 
-    void generateMap()
+    void generateLabyrinth()
     {
+        (Cell[] map, int width, int height) = imageToMap(image);
+
         GameObject parent = new GameObject("Labyrinth");
+        LabyrinthManager labyrinthManager = parent.AddComponent<LabyrinthManager>();
 
-        for (int y = 0 ; y < mapHeight ; ++y) {
-        for (int x = 0 ; x < mapWidth ; ++x) {
-            int index = (y * mapWidth) + x;
+        labyrinthManager.map = map;
+        labyrinthManager.mapWidth = width;
+        labyrinthManager.mapHeight = height;
+        labyrinthManager.mapOrigin = new Vector3(-tileConfig.scale/2f, 0f, -tileConfig.scale/2f); // divide by 2 because tiles are centered
+        labyrinthManager.mapScale = tileConfig.scale;
 
-            (GameObject prefab, float angle) = getTile(x, y);
+        for (int y = 0 ; y < height ; ++y) {
+        for (int x = 0 ; x < width ; ++x) {
+            int index = (y * width) + x;
+
+            (GameObject prefab, float angle) = getTile(map, x, y, width, height);
             if (prefab != null)
-                Instantiate(prefab, new Vector3(x, 0, y) * tileConfig.scale, Quaternion.Euler(0f, angle, 0f), parent.transform);
+            {
+                GameObject obj = Instantiate(
+                    prefab,
+                    new Vector3(x, 0, y) * tileConfig.scale + new Vector3(tileConfig.scale/2f, 0, tileConfig.scale/2f), // because tiles are centered
+                    Quaternion.Euler(0f, angle, 0f),
+                    parent.transform
+                );
+                labyrinthManager.map[index].obj = obj;
+            }
             else
+            {
                 Debug.LogError($"Tile could no be found for position x:{x} y:{y} in map!");
+            }
         }
         }
     }
 
-    public void imageToMap()
+    public (Cell[] map, int width, int height) imageToMap(Texture2D imageMap)
     {
-        if (image == null) {
-            Debug.LogError("Image is not set!");
-            return;
-        }
+        string[] colorWalls = {"000080", "0000FF"};
+        int width = imageMap.width;
+        int height = imageMap.height;
 
-        mapWidth = image.width;
-        mapHeight = image.height;
+        Color32[] pixels = imageMap.GetPixels32();
 
-        Color32[] pixels = image.GetPixels32();
+        Cell[] map = new Cell[width * height];
 
-        map = new int[mapWidth * mapHeight];
-        Array.Clear(map, 0, map.Length); // fill with zeros
-
-        for (int y = 0 ; y < mapHeight ; ++y) {
-        for (int x = 0 ; x < mapWidth ; ++x) {
-            int index = (y * mapWidth) + x;
+        for (int y = 0 ; y < height ; ++y) {
+        for (int x = 0 ; x < width ; ++x) {
+            int index = (y * width) + x;
 
             Color32 pixel = pixels[index];
             string colorHex = ColorUtility.ToHtmlStringRGB(pixel);
 
             bool isWall = colorWalls.Contains(colorHex);
-            map[index] = isWall ? 1 : 0;
+            map[index].type = isWall ? 1 : 0;
+            map[index].obj = null;
         }
         }
-
+        return (map, width, height);
     }
 }

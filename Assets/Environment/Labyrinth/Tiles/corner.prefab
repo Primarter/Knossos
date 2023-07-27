@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 3255162480236264443}
   - component: {fileID: 3255162480236264442}
   - component: {fileID: 3255162480236264441}
-  - component: {fileID: 3255162480236264440}
   - component: {fileID: 3255162480236264447}
-  - component: {fileID: 3255162480236264446}
   m_Layer: 6
   m_Name: corner
   m_TagString: Untagged
@@ -271,14 +269,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &3255162480236264440
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3255162480236264444}
-  m_Mesh: {fileID: 0}
 --- !u!64 &3255162480236264447
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -293,18 +283,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &3255162480236264446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3255162480236264444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46e8954cbffd6b488e3e4f2eb1d2ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
