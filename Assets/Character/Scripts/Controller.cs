@@ -117,14 +117,14 @@ public class Controller : MonoBehaviour
 
     public void StartRunning()
     {
-        animationController.SetMoveSpeed(config.runSpeed / config.speed);
-        speed = config.runSpeed;
+        // animationController.SetMoveSpeed(config.runSpeed / config.speed);
+        // speed = config.runSpeed;
     }
 
     public void StopRunning()
     {
-        animationController.SetMoveSpeed(1f);
-        speed = config.speed;
+        // animationController.SetMoveSpeed(1f);
+        // speed = config.speed;
     }
 
     private void OnBufferClear(BufferedInput input)
