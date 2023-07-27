@@ -88,7 +88,6 @@ namespace Knossos.Map
 
         bool isInsideMap(Vector2Int coord)
         {
-            // return !(coord.x < 0 || coord.x > mapWidth-1 || coord.y < 0 || coord.y > mapHeight-1);
             return (coord.x >= 0 && coord.x < mapWidth && coord.y >= 0 && coord.y < mapHeight);
         }
 

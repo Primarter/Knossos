@@ -73,6 +73,8 @@ namespace Knossos.Minotaur
             stateMachine.RegisterState<StateGoHome>(State.GoHome);
             stateMachine.RegisterState<StateAttack>(State.Attack);
             stateMachine.ChangeState(State.Sleep);
+
+            gameObject.SetActive(false); // TODO: TEMPORARY CODE, REMOVE!! USED SO THE BELL CAN GET THE MINOTAUR BEFORE BEING DISABLED
         }
 
         void FixedUpdate()

@@ -12,7 +12,7 @@ public class PathSystemEditor : Editor
     {
         var s = (PathSystem)target;
 
-        if (s.waypoints == null) return;
+        if (s.waypoints == null || s.waypoints.Length == 0) return;
 
         Waypoint waypoint = s.getClosestWaypoint();
         Handles.DrawLine(s.transform.position, waypoint.obj.transform.position);

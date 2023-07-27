@@ -10,7 +10,7 @@ namespace Knossos.Minotaur
 
         public bool hasTarget = false;
         public Vector3 targetPosition;
-        // public Vector3 lastSeenTargetPosition;
+        public float timeSinceLastSeePlayer;
 
         [SerializeField] public float FOV = 150f; // field of view degrees
         [SerializeField] public float viewRange = 20f;
@@ -25,6 +25,7 @@ namespace Knossos.Minotaur
         void Start()
         {
             hasTarget = false;
+            timeSinceLastSeePlayer = 0f;
         }
 
         void FixedUpdate()
@@ -33,17 +34,13 @@ namespace Knossos.Minotaur
 
             if (player.GetComponent<Character.Hiding>().isHiding)
             {
-                if (hasTarget || canSeePlayer)
-                {
-                    // keep target
-                }
-                else
+                if (!(hasTarget || canSeePlayer))
                 {
                     // lose target
                     hasTarget = false;
                 }
             }
-            else
+            else // if not hiding
             {
                 if (canSeePlayer)
                 {
@@ -55,6 +52,10 @@ namespace Knossos.Minotaur
                     hasTarget = false;
                 }
             }
+
+            timeSinceLastSeePlayer += Time.fixedDeltaTime;
+            if (hasTarget)
+                timeSinceLastSeePlayer = 0f;
         }
 
         void Update()
