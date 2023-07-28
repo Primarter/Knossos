@@ -7,17 +7,19 @@ namespace Knossos.Character
 {
 
 [RequireComponent(typeof(CharacterController), typeof(AnimationController))]
+[RequireComponent(typeof(DodgeController), typeof(AttackController))]
 public class Controller : MonoBehaviour
 {
     public Config config;
 
     private CharacterController characterController;
     private AnimationController animationController;
-    private VisibilitySystem visibilitySystem;
+    private DodgeController dodgeController;
+    private AttackController attackController;
     private Camera mainCam;
 
     // Player stats
-    private Vector3 movement;
+    public Vector3 movement;
     private Quaternion targetRotation;
     private float _speed = 10f;
     private float targetSpeed;
@@ -26,23 +28,6 @@ public class Controller : MonoBehaviour
         get => _speed;
         set => targetSpeed = value;
     }
-    private float attMoveSpeedMult = 1f;
-    private float attRotSpeedMult = 1f;
-
-    private float _stamina;
-    public float stamina
-    {
-        get => _stamina;
-        set => _stamina = Mathf.Clamp(value, 0, config.maxStamina);
-    }
-
-    // States
-    private bool dashing = false;
-    public bool attacking { get => !canDash && !dashing; }
-
-    // Dash control
-    private Stopwatch dashTimer = new();
-    private bool canDash = true;
 
     // Movement Logic
 
@@ -50,13 +35,13 @@ public class Controller : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animationController = GetComponent<AnimationController>();
-        visibilitySystem = GetComponent<VisibilitySystem>();
+        dodgeController = GetComponent<DodgeController>();
+        attackController = GetComponent<AttackController>();
         mainCam = Camera.main;
     }
 
     private void Start()
     {
-        _stamina = config.maxStamina;
         speed = config.speed;
         targetRotation = Quaternion.LookRotation(transform.forward);
         InputManager.onClearedInput += OnBufferClear;
@@ -66,12 +51,12 @@ public class Controller : MonoBehaviour
     {
         _speed = Mathf.Lerp(speed, targetSpeed, .9f);
 
-        if (!dashing) {
-            stamina += config.staminaRegenPerSec * Time.deltaTime;
+        if (!dodgeController.dashing)
+        {
             movement = new Vector3(InputManager.inputs.horizontal, 0, InputManager.inputs.vertical);
             movement = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * movement;
             movement = Vector3.ClampMagnitude(movement, 1);
-            characterController.Move(movement * Time.deltaTime * speed * attMoveSpeedMult);
+            characterController.Move(movement * Time.deltaTime * speed * attackController.attMoveSpeedMult);
         }
         else
             characterController.Move(movement.normalized * Time.deltaTime * speed);
@@ -81,11 +66,10 @@ public class Controller : MonoBehaviour
             targetRotation = Quaternion.LookRotation(movement, Vector3.up);
         }
         targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, config.rotationSpeed * attRotSpeedMult * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, config.rotationSpeed * attackController.attRotSpeedMult * Time.deltaTime);
 
-        UpdateDash();
-        UpdateAttack();
-        UpdateSpecial();
+        dodgeController.UpdateDodge();
+        attackController.UpdateAttack();
 
     }
 
@@ -95,98 +79,6 @@ public class Controller : MonoBehaviour
             animationController.ResetDodge();
         else if (input == BufferedInput.Attack)
             animationController.ResetAttack();
-    }
-
-    // Dash Control
-
-    private void UpdateDash()
-    {
-        if (canDash && stamina >= config.dashCost && InputManager.CheckBuffer(BufferedInput.Dodge, false))
-        {
-            animationController.TriggerDodge();
-            animationController.ResetAttack();
-            animationController.ResetSpecial();
-        }
-    }
-
-    private IEnumerator DashCoroutine()
-    {
-        Health health = GetComponent<Health>();
-        if (health != null)
-            health.invincible = true;
-
-        dashing = true;
-        canDash = false;
-        if (movement.magnitude == 0f)
-        {
-            movement = transform.forward;
-        }
-
-        stamina -= config.dashCost;
-        dashTimer.Restart();
-
-        while (dashTimer.ElapsedMilliseconds < config.dashDuration * 1000f) {
-            float curveValue = config.DashSpeedCurve.Evaluate((float)dashTimer.ElapsedMilliseconds / (config.dashDuration * 1000f));
-            speed = (curveValue * config.dashStrength + 1) * config.speed;
-            yield return null;
-        }
-
-        speed = config.speed;
-        dashing = false;
-        if (health != null)
-            health.invincible = false;
-
-        yield return new WaitForSeconds(config.dashCooldown);
-        canDash = true;
-    }
-
-    public void TriggerDash()
-    {
-        StartCoroutine(DashCoroutine());
-    }
-
-    // Attack Control
-
-    private void UpdateAttack()
-    {
-        if (InputManager.CheckBuffer(BufferedInput.Attack, false))
-        {
-            canDash = false;
-            EnableSlowMotion();
-            animationController.ResetDodge();
-            animationController.ResetSpecial();
-            animationController.TriggerAttack();
-        }
-    }
-
-    private void UpdateSpecial()
-    {
-        if (InputManager.CheckBuffer(BufferedInput.Special, false))
-        {
-            canDash = false;
-            EnableSlowMotion();
-            animationController.ResetDodge();
-            animationController.ResetAttack();
-            animationController.TriggerSpecial();
-        }
-    }
-
-    public void EnableSlowMotion()
-    {
-        attMoveSpeedMult = config.attackMoveSpeedMultiplier;
-        attRotSpeedMult = config.attackRotationSpeedMultiplier;
-    }
-
-    public void DisableSlowMotion()
-    {
-        attMoveSpeedMult = 1f;
-        attRotSpeedMult = 1f;
-    }
-
-    public void StopAttacking()
-    {
-        canDash = true;
-        DisableSlowMotion();
     }
 }
 
