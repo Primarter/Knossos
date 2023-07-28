@@ -22,7 +22,6 @@ public class Config : ScriptableObject
     public float speed = 10f;
     public float attackMoveSpeedMultiplier = .01f;
     public float attackRotationSpeedMultiplier = .2f;
-    public float maxStamina = 2f;
 
     [Header("ControllerConfig")]
     public float rotationSpeed = 10f;
@@ -33,8 +32,9 @@ public class Config : ScriptableObject
     [Tooltip("Dash animation duration is 1.05s")]
     public float dashDuration = .5f;
     public float dashCooldown = .2f;
-    public float dashCost = 1f;
-    public float staminaRegenPerSec = 1f;
+    public float lastDashCooldown = .7f;
+    public float quickDashTiming = .2f;
+    public int maxQuickDash = 2;
 
     [Header("CombatStats")]
     public MoveInfo[] moves = {

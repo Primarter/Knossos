@@ -11,27 +11,20 @@ public class DodgeController : MonoBehaviour
 
     Controller mainController;
     AnimationController animationController;
-    AttackController attackController;
     Config config;
 
     [HideInInspector] public bool dashing = false;
     [HideInInspector] public bool canDash = true;
 
-    private float _stamina;
-    public float stamina
-    {
-        get => _stamina;
-        set => _stamina = Mathf.Clamp(value, 0, config.maxStamina);
-    }
+    int dodgesLeft = 1;
 
-    private System.Diagnostics.Stopwatch dashTimer = new();
+    Coroutine coroutine;
 
     private void Awake()
     {
         mainController = GetComponent<Controller>();
         animationController = GetComponent<AnimationController>();
-        attackController = GetComponent<AttackController>();
-        if (mainController == null || animationController == null || attackController == null) {
+        if (mainController == null || animationController == null) {
             this.enabled = false;
             return;
         }
@@ -40,14 +33,12 @@ public class DodgeController : MonoBehaviour
 
     private void Start()
     {
-        _stamina = config.maxStamina;
+        dodgesLeft = config.maxQuickDash;
     }
 
     public void UpdateDodge()
     {
-        if (!dashing)
-            stamina += config.staminaRegenPerSec * Time.deltaTime;
-        if (canDash && stamina >= config.dashCost && InputManager.CheckBuffer(BufferedInput.Dodge, false))
+        if (canDash && dodgesLeft > 0 && InputManager.CheckBuffer(BufferedInput.Dodge, false))
         {
             animationController.TriggerDodge();
             animationController.ResetAttack();
@@ -63,17 +54,17 @@ public class DodgeController : MonoBehaviour
 
         dashing = true;
         canDash = false;
+        dodgesLeft -= 1;
+
         if (mainController.movement.magnitude == 0f)
         {
             mainController.movement = transform.forward;
         }
 
-        stamina -= config.dashCost;
-        dashTimer.Restart();
-
-        while (dashTimer.ElapsedMilliseconds < config.dashDuration * 1000f)
+        float startTime = Time.time;
+        while (Time.time < startTime + config.dashDuration)
         {
-            float curveValue = config.DashSpeedCurve.Evaluate((float)dashTimer.ElapsedMilliseconds / (config.dashDuration * 1000f));
+            float curveValue = config.DashSpeedCurve.Evaluate((Time.time - startTime) / config.dashDuration);
             mainController.speed = (curveValue * config.dashStrength + 1) * config.speed;
             yield return null;
         }
@@ -85,11 +76,20 @@ public class DodgeController : MonoBehaviour
 
         yield return new WaitForSeconds(config.dashCooldown);
         canDash = true;
+
+        yield return new WaitForSeconds(config.quickDashTiming);
+        canDash = false;
+
+        yield return new WaitForSeconds(config.lastDashCooldown);
+        canDash = true;
+        dodgesLeft = config.maxQuickDash;
     }
 
     public void TriggerDash()
     {
-        StartCoroutine(DashCoroutine());
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+        coroutine = StartCoroutine(DashCoroutine());
     }
 }
 
