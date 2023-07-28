@@ -44,11 +44,6 @@ public class Controller : MonoBehaviour
     private Stopwatch dashTimer = new();
     private bool canDash = true;
 
-    // Run Logic
-    private Stopwatch runTimer = new();
-    Vector3 previousDirection;
-    Vector3 newDirection;
-
     // Movement Logic
 
     private void Awake()
@@ -65,8 +60,6 @@ public class Controller : MonoBehaviour
         speed = config.speed;
         targetRotation = Quaternion.LookRotation(transform.forward);
         InputManager.onClearedInput += OnBufferClear;
-        runTimer.Start();
-        previousDirection = new Vector3(0f, 0f, 1f);
     }
 
     private void Update()
@@ -76,8 +69,6 @@ public class Controller : MonoBehaviour
         if (!dashing) {
             stamina += config.staminaRegenPerSec * Time.deltaTime;
             movement = new Vector3(InputManager.inputs.horizontal, 0, InputManager.inputs.vertical);
-            previousDirection = newDirection;
-            newDirection = movement.normalized;
             movement = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * movement;
             movement = Vector3.ClampMagnitude(movement, 1);
             characterController.Move(movement * Time.deltaTime * speed * attMoveSpeedMult);
@@ -88,19 +79,7 @@ public class Controller : MonoBehaviour
         if (movement.magnitude > 0)
         {
             targetRotation = Quaternion.LookRotation(movement, Vector3.up);
-
-            if (runTimer.IsRunning && runTimer.ElapsedMilliseconds > config.runTimer * 1000f)
-                StartRunning();
-
-            if (Vector3.Dot(previousDirection, newDirection) < .5f)
-            {
-                RestartRunTimer();
-            }
         }
-        else
-            RestartRunTimer();
-        if (visibilitySystem.isDetected)
-            RestartRunTimer();
         targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, config.rotationSpeed * attRotSpeedMult * Time.deltaTime);
 
@@ -108,24 +87,6 @@ public class Controller : MonoBehaviour
         UpdateAttack();
         UpdateSpecial();
 
-    }
-
-    public void RestartRunTimer()
-    {
-        runTimer.Restart();
-        StopRunning();
-    }
-
-    public void StartRunning()
-    {
-        // animationController.SetMoveSpeed(config.runSpeed / config.speed);
-        // speed = config.runSpeed;
-    }
-
-    public void StopRunning()
-    {
-        // animationController.SetMoveSpeed(1f);
-        // speed = config.speed;
     }
 
     private void OnBufferClear(BufferedInput input)
