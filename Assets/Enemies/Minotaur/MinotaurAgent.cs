@@ -43,6 +43,7 @@ namespace Knossos.Minotaur
     [RequireComponent(typeof(VisionSystem))]
     [RequireComponent(typeof(SoundSensorSystem))]
     [RequireComponent(typeof(AttackSystem))]
+    [RequireComponent(typeof(PlayerMinotaurVisibilitySystem))]
     public class MinotaurAgent : MonoBehaviour
     {
         public FSM.StateMachine stateMachine;
@@ -74,7 +75,7 @@ namespace Knossos.Minotaur
             stateMachine.RegisterState<StateAttack>(State.Attack);
             stateMachine.ChangeState(State.Sleep);
 
-            gameObject.SetActive(false); // TODO: TEMPORARY CODE, REMOVE!! USED SO THE BELL CAN GET THE MINOTAUR BEFORE BEING DISABLED
+            // gameObject.SetActive(false); // TODO: TEMPORARY CODE, REMOVE!! USED SO THE BELL CAN GET THE MINOTAUR BEFORE BEING DISABLED
         }
 
         void FixedUpdate()

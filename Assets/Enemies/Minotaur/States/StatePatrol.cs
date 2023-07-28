@@ -37,7 +37,8 @@ namespace Knossos.Minotaur
             patrolTimeRemaining -= Time.fixedDeltaTime;
             if (patrolTimeRemaining <= 0f)
             {
-                agent.stateMachine.ChangeState(State.GoHome);
+                // Now disapear when in patrol and goes out of view of the player
+                // agent.stateMachine.ChangeState(State.GoHome);
             }
 
             if (agent.visionSystem.hasTarget)
@@ -63,7 +64,7 @@ namespace Knossos.Minotaur
                 Vector3 targetWaypoint2D = new Vector3(targetWaypoint.obj.transform.position.x, 0f, targetWaypoint.obj.transform.position.z);
                 Vector3 agentPosition2D = new Vector3(agent.transform.position.x, 0f, agent.transform.position.z);
 
-                // TODO use navmeshAgent.remaining distance instead of doing math myself
+                // TODO: use navmeshAgent.remaining distance instead of doing math myself
 
                 if (Vector3.Distance(targetWaypoint2D, agentPosition2D) < 1f)
                 {

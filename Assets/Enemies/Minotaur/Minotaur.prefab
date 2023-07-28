@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2085671820}
   - component: {fileID: 2085671821}
   - component: {fileID: 2085671822}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 5703805930188102586}
   - component: {fileID: 5703805930188102591}
   - component: {fileID: 5703805930188102588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9c8f05b05cd108d47ba0d46fe58ac99a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,14 +155,15 @@ GameObject:
   - component: {fileID: 5703805930383705209}
   - component: {fileID: 5703805930383705210}
   - component: {fileID: 5703805930383705212}
-  - component: {fileID: 5703805930383705213}
-  - component: {fileID: 5703805930383705215}
-  - component: {fileID: 5703805930383705214}
+  - component: {fileID: 4942555519413303855}
+  - component: {fileID: 2568482272704067686}
+  - component: {fileID: 2133025936391399067}
   - component: {fileID: 1132038318492796119}
-  - component: {fileID: 2182131036365036010}
-  m_Layer: 0
+  - component: {fileID: 2550917536028846964}
+  - component: {fileID: 3488779665127788195}
+  m_Layer: 7
   m_Name: Minotaur
-  m_TagString: Untagged
+  m_TagString: Minotaur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +194,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5703805930383705206}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 1.5
   m_Speed: 10
   m_Acceleration: 40
   avoidancePriority: 50
@@ -224,7 +225,7 @@ MonoBehaviour:
   visionSystem: {fileID: 0}
   soundSensorSystem: {fileID: 0}
   attackSystem: {fileID: 0}
---- !u!114 &5703805930383705213
+--- !u!114 &4942555519413303855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,30 +234,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5703805930383705206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46cefa9430b9f4c46ba9fd9d1448a2ee, type: 3}
+  m_Script: {fileID: 11500000, guid: db5dae93855c33548b5147fc910e7d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 5703805930383705210}
---- !u!114 &5703805930383705215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5703805930383705206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58bc31c4f98b64848a4d37cb31dc9a1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasTarget: 0
-  FOV: 175
-  viewRange: 25
-  minDetectionRange: 5
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &5703805930383705214
+--- !u!114 &2568482272704067686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,9 +249,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5703805930383705206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6a5344ebe63c248bb9c7a577ac0ddd, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ffcd75b2395c34ba4be3d274796729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 5703805930383705210}
+--- !u!114 &2133025936391399067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703805930383705206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6fa69d13da1a84e862dcffb0140ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTarget: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  timeSinceLastSeePlayer: 0
+  FOV: 150
+  viewRange: 18
+  minDetectionRange: 4
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -280,14 +283,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5703805930383705206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e708e67a9e791d4a916c8ea69de065a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cfff7ed36c085949b6cbf77952caf01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heardSuspiciousSound: 0
   suspiciousSoundPosition: {x: 0, y: 0, z: 0}
   heardSoundTime: 1
   heardSoundTimer: 0
---- !u!114 &2182131036365036010
+--- !u!114 &2550917536028846964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,11 +299,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5703805930383705206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b2aee66a6889d4e992dcc2f06f9472, type: 3}
+  m_Script: {fileID: 11500000, guid: 688e47b79581a1046b8eefc883035845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackColliderManager: {fileID: 2085671822}
-  damage: 50
+  damage: 60
+--- !u!114 &3488779665127788195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703805930383705206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f191369b7736146876b87892b5dd75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCollider: {fileID: 5703805931472118902}
 --- !u!1 &5703805930554419667
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +328,7 @@ GameObject:
   - component: {fileID: 5703805930554419671}
   - component: {fileID: 5703805930554419668}
   - component: {fileID: 5703805930554419669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +378,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9c8f05b05cd108d47ba0d46fe58ac99a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -395,7 +411,7 @@ GameObject:
   - component: {fileID: 5703805930855045400}
   - component: {fileID: 5703805930855045405}
   - component: {fileID: 5703805930855045402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5703805931472118903}
   - component: {fileID: 5703805931472118902}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +545,7 @@ GameObject:
   - component: {fileID: 5703805931662510742}
   - component: {fileID: 5703805931662510747}
   - component: {fileID: 5703805931662510744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +595,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9c8f05b05cd108d47ba0d46fe58ac99a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -612,7 +628,7 @@ GameObject:
   - component: {fileID: 5703805931765826588}
   - component: {fileID: 5703805931765826785}
   - component: {fileID: 5703805931765826590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
