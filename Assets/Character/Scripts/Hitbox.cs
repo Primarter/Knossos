@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Knossos.Character
 {
@@ -8,11 +9,13 @@ namespace Knossos.Character
 [RequireComponent(typeof(Collider))]
 public class Hitbox : MonoBehaviour
 {
-    [SerializeField]
-    AnimationController animationController;
     public int hitIdx = 0;
-    [SerializeField]
-    GameObject damageParticle;
+    [SerializeField] AnimationController animationController;
+    [SerializeField] GameObject damageParticle;
+    [Tooltip("This is not linked to MonoBehaviour OnEnable")]
+    [SerializeField] UnityEvent onEnableHitbox;
+    [Tooltip("This is not linked to MonoBehaviour OnDisable")]
+    [SerializeField] UnityEvent onDisableHitbox;
 
     Transform player;
     List<Enemies.OnHitEventSystem> enemies = new();
@@ -70,6 +73,7 @@ public class Hitbox : MonoBehaviour
 
     public void EnableHitbox()
     {
+        onEnableHitbox.Invoke();
         hitting = true;
         foreach (Enemies.OnHitEventSystem enemy in enemies)
         {
@@ -79,6 +83,7 @@ public class Hitbox : MonoBehaviour
 
     public void DisableHitbox()
     {
+        onDisableHitbox.Invoke();
         hitting = false;
         hitEnemies.Clear();
     }

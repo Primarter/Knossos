@@ -11,30 +11,25 @@ public class AOEController : MonoBehaviour
 {
     [SerializeField] AnimationCurve hitboxEvolution;
 
-    VisualEffect specialBurst;
+    float lifetime = 0f;
 
     SphereCollider areaOfEffect;
-
-    Hitbox hitbox;
 
     float baseRadius;
 
     private void Awake()
     {
-        specialBurst = GetComponent<VisualEffect>();
+        lifetime = GetComponent<VisualEffect>()?.GetFloat("Lifetime") ?? 0f;
         areaOfEffect = GetComponent<SphereCollider>();
-        hitbox = GetComponent<Hitbox>();
     }
 
     public void ActivateAOE()
     {
-        specialBurst.Play();
         baseRadius = areaOfEffect.radius;
-        hitbox.EnableHitbox();
-        StartCoroutine(UpdateAOE(specialBurst.GetFloat("Lifetime")));
+        StartCoroutine(UpdateAOE());
     }
 
-    IEnumerator UpdateAOE(float lifetime)
+    IEnumerator UpdateAOE()
     {
         var start = Time.time;
 
@@ -45,7 +40,6 @@ public class AOEController : MonoBehaviour
             yield return null;
         }
         areaOfEffect.radius = baseRadius;
-        hitbox.DisableHitbox();
     }
 }
 

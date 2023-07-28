@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 60994740}
   - component: {fileID: 60994744}
   - component: {fileID: 60994743}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: VFXHit (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.75999993, z: 0.5409999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1375671791}
   m_Father: {fileID: 3325989323589724547}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -308,12 +309,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245203890}
   m_LocalRotation: {x: 0.053632826, y: 0.053632826, z: 0.7050699, w: 0.7050699}
-  m_LocalPosition: {x: 0.9128418, y: 1.4192997, z: 0.9377365}
+  m_LocalPosition: {x: 0.9128455, y: 0.6592998, z: 0.39673376}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3325989323589724547}
-  m_RootOrder: 7
+  m_Father: {fileID: 1765190788}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1245203893
 BoxCollider:
@@ -340,10 +341,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0991a49284f84394d81dd072292404ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationController: {fileID: 3000225110171045486}
   hitIdx: 0
+  animationController: {fileID: 3000225110171045486}
   damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
     type: 3}
+  onEnableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1773428102 &1245203894
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -381,7 +388,7 @@ GameObject:
   - component: {fileID: 1304698816}
   - component: {fileID: 1304698820}
   - component: {fileID: 1304698819}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: VFXHit (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +406,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.75999993, z: 0.5409999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1576730113}
   m_Father: {fileID: 3325989323589724547}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -531,12 +539,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375671790}
   m_LocalRotation: {x: 0.053632826, y: 0.053632826, z: 0.7050699, w: 0.7050699}
-  m_LocalPosition: {x: 0.9128418, y: 1.4192997, z: 0.9377365}
+  m_LocalPosition: {x: 0.9128455, y: 0.6592998, z: 0.39673376}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3325989323589724547}
-  m_RootOrder: 9
+  m_Father: {fileID: 60994740}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1375671794
 BoxCollider:
@@ -563,10 +571,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0991a49284f84394d81dd072292404ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationController: {fileID: 3000225110171045486}
   hitIdx: 2
+  animationController: {fileID: 3000225110171045486}
   damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
     type: 3}
+  onEnableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1773428102 &1375671792
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -620,12 +634,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576730109}
   m_LocalRotation: {x: 0.053632826, y: 0.053632826, z: 0.7050699, w: 0.7050699}
-  m_LocalPosition: {x: 0.9128418, y: 1.4192997, z: 0.9377365}
+  m_LocalPosition: {x: 0.9128455, y: 0.6592998, z: 0.39673376}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3325989323589724547}
-  m_RootOrder: 8
+  m_Father: {fileID: 1304698816}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1576730112
 BoxCollider:
@@ -652,10 +666,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0991a49284f84394d81dd072292404ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationController: {fileID: 3000225110171045486}
   hitIdx: 1
+  animationController: {fileID: 3000225110171045486}
   damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
     type: 3}
+  onEnableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1773428102 &1576730111
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -693,7 +713,7 @@ GameObject:
   - component: {fileID: 1765190788}
   - component: {fileID: 1765190792}
   - component: {fileID: 1765190791}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: VFXHit (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +731,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.75999993, z: 0.5409999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1245203891}
   m_Father: {fileID: 3325989323589724547}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -973,7 +994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000225111545071804}
   m_LocalRotation: {x: 0.30337554, y: 0.43390182, z: -0.1579273, w: 0.8335176}
-  m_LocalPosition: {x: -10.981354, y: 12.2687845, z: -7.6892166}
+  m_LocalPosition: {x: -10.981374, y: 12.268783, z: -7.6892385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1221,7 +1242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000225111823255534}
   m_LocalRotation: {x: 0.30337554, y: 0.43390182, z: -0.1579273, w: 0.8335176}
-  m_LocalPosition: {x: -10.981354, y: 12.2687845, z: -7.6892166}
+  m_LocalPosition: {x: 118.338646, y: 12.283779, z: 108.80078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1380,7 +1401,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3325989323589724547}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &3907416042098708884
 VisualEffect:
@@ -1503,10 +1524,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0991a49284f84394d81dd072292404ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationController: {fileID: 3000225110171045486}
   hitIdx: 3
+  animationController: {fileID: 3000225110171045486}
   damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
     type: 3}
+  onEnableHitbox:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 212553311703006340}
+        m_TargetAssemblyTypeName: Knossos.Character.AOEController, Assembly-CSharp
+        m_MethodName: ActivateAOE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDisableHitbox:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &212553311703006340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2807,7 +2846,7 @@ MonoBehaviour:
   - {fileID: 1765190792}
   - {fileID: 1304698820}
   - {fileID: 60994744}
-  specialBurst: {fileID: 3907416042098708884}
+  - {fileID: 3907416042098708884}
 --- !u!114 &1754580897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2824,6 +2863,7 @@ MonoBehaviour:
   - {fileID: 1245203892}
   - {fileID: 1576730110}
   - {fileID: 1375671793}
+  - {fileID: 6136299240799920200}
 --- !u!114 &863640871670590778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3019,19 +3059,7 @@ MonoBehaviour:
       m_Calls: []
   onSpecialActive:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Knossos.Character.AOEController, Assembly-CSharp
-        m_MethodName: ActivateAOE
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onSpecialInactive:
     m_PersistentCalls:
       m_Calls: []
@@ -3136,7 +3164,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.811, y: 1.4193, z: -0.04516983}
   m_RotationAtRest: {x: 0, y: 8.699931, z: 90}
   m_TranslationOffsets:
-  - {x: -0.0000076293945, y: 0.09766388, z: 0.04126835}
+  - {x: -0.0000076293945, y: 0.09766388, z: 0.04126811}
   m_RotationOffsets:
   - {x: -8.699986, y: -90, z: -180}
   m_AffectTranslationX: 1
