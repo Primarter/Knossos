@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   speed: 5
-  runSpeed: 15
-  runTimer: 3
   attackMoveSpeedMultiplier: 0.05
   attackRotationSpeedMultiplier: 0.2
-  maxStamina: 3
   rotationSpeed: 10
   DashSpeedCurve:
     serializedVersion: 2
@@ -81,9 +78,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   dashStrength: 2
   dashDuration: 0.6
-  dashCooldown: 0.2
-  dashCost: 1
-  staminaRegenPerSec: 1
+  dashCooldown: 0.1
+  lastDashCooldown: 1
+  quickDashTiming: 0.1
+  maxQuickDash: 2
   moves:
   - damage: 1
     hitStop: 10
