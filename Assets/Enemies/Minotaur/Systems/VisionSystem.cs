@@ -6,7 +6,7 @@ namespace Knossos.Minotaur
 {
     public class VisionSystem : MonoBehaviour
     {
-        GameObject player;
+        [HideInInspector] public GameObject player;
 
         public bool hasTarget = false;
         public Vector3 targetPosition;

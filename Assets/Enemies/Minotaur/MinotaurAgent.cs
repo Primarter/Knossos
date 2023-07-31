@@ -54,6 +54,7 @@ namespace Knossos.Minotaur
         [HideInInspector] public VisionSystem visionSystem;
         [HideInInspector] public SoundSensorSystem soundSensorSystem;
         [HideInInspector] public AttackSystem attackSystem;
+        [HideInInspector] public PlayerMinotaurVisibilitySystem playerMinotaurVisibilitySystem;
 
         void Awake()
         {
@@ -62,6 +63,7 @@ namespace Knossos.Minotaur
             visionSystem = GetComponent<VisionSystem>();
             soundSensorSystem = GetComponent<SoundSensorSystem>();
             attackSystem = GetComponent<AttackSystem>();
+            playerMinotaurVisibilitySystem = GetComponent<PlayerMinotaurVisibilitySystem>();
         }
 
         void Start()
@@ -75,7 +77,7 @@ namespace Knossos.Minotaur
             stateMachine.RegisterState<StateAttack>(State.Attack);
             stateMachine.ChangeState(State.Sleep);
 
-            // gameObject.SetActive(false); // TODO: TEMPORARY CODE, REMOVE!! USED SO THE BELL CAN GET THE MINOTAUR BEFORE BEING DISABLED
+            gameObject.SetActive(false); // TODO: TEMPORARY CODE, REMOVE!! USED SO THE BELL CAN GET THE MINOTAUR BEFORE BEING DISABLED
         }
 
         void FixedUpdate()
