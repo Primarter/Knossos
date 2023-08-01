@@ -29,6 +29,8 @@ public class Controller : MonoBehaviour
         set => targetSpeed = value;
     }
 
+    private float startHeight;
+
     // Movement Logic
 
     private void Awake()
@@ -38,6 +40,7 @@ public class Controller : MonoBehaviour
         dodgeController = GetComponent<DodgeController>();
         attackController = GetComponent<AttackController>();
         mainCam = Camera.main;
+        startHeight = transform.position.y;
     }
 
     private void Start()
@@ -49,6 +52,7 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
+        transform.position = new Vector3(transform.position.x, startHeight, transform.position.z);
         _speed = Mathf.Lerp(speed, targetSpeed, .9f);
 
         if (!dodgeController.dashing)

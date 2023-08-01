@@ -24,20 +24,18 @@ public class OnHitEventSystem : MonoBehaviour
 
     public UnityEvent<HitInfo> onHitEvent = new();
 
-    private Renderer rend;
+    [SerializeField] Renderer meshRenderer;
     private Material regularMaterial;
 
-    private void Awake() {
-        rend = GetComponent<Renderer>();
-        regularMaterial = rend.sharedMaterial;
-    }
-
-    private void Start() {
+    private void Awake()
+    {
+        regularMaterial = meshRenderer.sharedMaterial;
     }
 
     public void TakeDamage(Character.MoveInfo moveInfo = new(), Vector3 hitDirection = new())
     {
-        HitInfo hitInfo = new HitInfo {
+        HitInfo hitInfo = new HitInfo
+        {
             damage=moveInfo.damage,
             staggerDuration=moveInfo.staggerDuration,
             knockBackStrength=moveInfo.knockBackStrength,
@@ -54,13 +52,13 @@ public class OnHitEventSystem : MonoBehaviour
     IEnumerator MaterialChangeCoroutine()
     {
         int frame = Time.frameCount;
-        rend.material = damageMaterial;
+        meshRenderer.material = damageMaterial;
 
         while (Time.frameCount < frame + 10)
         {
             yield return null;
         }
-        rend.material = regularMaterial;
+        meshRenderer.material = regularMaterial;
     }
 }
 

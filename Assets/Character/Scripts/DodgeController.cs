@@ -24,7 +24,8 @@ public class DodgeController : MonoBehaviour
     {
         mainController = GetComponent<Controller>();
         animationController = GetComponent<AnimationController>();
-        if (mainController == null || animationController == null) {
+        if (mainController == null || animationController == null)
+        {
             this.enabled = false;
             return;
         }

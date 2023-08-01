@@ -20,7 +20,7 @@ public class AttractMinotaur : MonoBehaviour
 
     public void RingBell()
     {
-        if (!minautor.activeInHierarchy) // if not active, place minautor at random spawnPoint and activate it
+        if (minautor != null && !minautor.activeInHierarchy) // if not active, place minautor at random spawnPoint and activate it
         {
             Vector3 p = closeMinautorSpawnPoints[Random.Range(0, closeMinautorSpawnPoints.Length)].transform.position;
             minautor.SetActive(true);
