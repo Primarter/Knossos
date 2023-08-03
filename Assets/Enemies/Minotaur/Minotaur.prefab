@@ -225,6 +225,7 @@ MonoBehaviour:
   visionSystem: {fileID: 0}
   soundSensorSystem: {fileID: 0}
   attackSystem: {fileID: 0}
+  playerMinotaurVisibilitySystem: {fileID: 0}
 --- !u!114 &4942555519413303855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6fa69d13da1a84e862dcffb0140ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   hasTarget: 0
   targetPosition: {x: 0, y: 0, z: 0}
   timeSinceLastSeePlayer: 0
@@ -317,6 +319,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectCollider: {fileID: 5703805931472118902}
+  occlusionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  timeSinceVisible: 0
+  isVisible: 0
 --- !u!1 &5703805930554419667
 GameObject:
   m_ObjectHideFlags: 0

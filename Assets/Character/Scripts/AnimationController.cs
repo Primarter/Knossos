@@ -202,6 +202,11 @@ public class AnimationController : MonoBehaviour
 
         damageAnimCoroutine = null;
     }
+
+    private void OnDestroy()
+    {
+        damageMaterial.SetFloat("_Progress", 0f);
+    }
 }
 
 }
