@@ -10,7 +10,11 @@ namespace Knossos.Minotaur
     {
         MinotaurAgent agent;
 
-        Waypoint targetWaypoint;
+        // Waypoint targetWaypoint;
+        Vector3 targetWaypoint;
+        bool hasTarget = false;
+        float timeOnTarget = 0f;
+
         public float patrolTime = 60f;
         [SerializeField] float patrolTimeRemaining;
 
@@ -24,7 +28,7 @@ namespace Knossos.Minotaur
             agent.locomotionSystem.navMeshAgent.speed = 3f;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
-            targetWaypoint = null;
+            // targetWaypoint = null;
             patrolTimeRemaining = patrolTime;
         }
 
@@ -32,13 +36,23 @@ namespace Knossos.Minotaur
         {
         }
 
+        public override void Update()
+        {
+        }
+
         public override void FixedUpdate()
         {
-            patrolTimeRemaining -= Time.fixedDeltaTime;
-            if (patrolTimeRemaining <= 0f)
+            float distanceMinotaurPlayer = Vector3.Distance(agent.visionSystem.player.transform.position, agent.transform.position);
+            if (agent.playerMinotaurVisibilitySystem.timeSinceVisible > 3f && distanceMinotaurPlayer > 30f)
             {
-                agent.stateMachine.ChangeState(State.GoHome);
+                agent.gameObject.SetActive(false);
+                return;
             }
+            // patrolTimeRemaining -= Time.fixedDeltaTime;
+            // if (patrolTimeRemaining <= 0f)
+            // {
+            //     agent.stateMachine.ChangeState(State.GoHome);
+            // }
 
             if (agent.visionSystem.hasTarget)
             {
@@ -50,49 +64,69 @@ namespace Knossos.Minotaur
                 agent.stateMachine.ChangeState(State.Alert);
             }
 
-            if (targetWaypoint == null)
-            {
-                Waypoint waypoint = agent.pathSystem.getClosestWaypoint();
-                if (waypoint == null)
-                    return;
-                targetWaypoint = waypoint;
-                agent.locomotionSystem.navMeshAgent.destination = targetWaypoint.obj.transform.position;
-            }
-            else
-            {
-                Vector3 targetWaypoint2D = new Vector3(targetWaypoint.obj.transform.position.x, 0f, targetWaypoint.obj.transform.position.z);
-                Vector3 agentPosition2D = new Vector3(agent.transform.position.x, 0f, agent.transform.position.z);
+            updateDestination();
+        }
 
-                // TODO use navmeshAgent.remaining distance instead of doing math myself
-
-                if (Vector3.Distance(targetWaypoint2D, agentPosition2D) < 1f)
-                {
-                    setTarget(findNewTarget());
-                }
+        void updateDestination()
+        {
+            if (agent.locomotionSystem.navMeshAgent.remainingDistance < 1.5f)
+            {
+                setTarget(findNewTarget());
             }
         }
 
-        public override void Update()
+        void setTarget(Vector3 target)
         {
-        }
-
-        void setTarget(Waypoint target)
-        {
+            hasTarget = true;
             targetWaypoint = target;
-            agent.locomotionSystem.navMeshAgent.destination = target.obj.transform.position;
+            agent.locomotionSystem.navMeshAgent.destination = targetWaypoint;
         }
 
-        Waypoint findNewTarget()
+        Vector3 findNewTarget()
         {
-            Waypoint randomWaypoint = targetWaypoint.neighbours[Random.Range(0, targetWaypoint.neighbours.Length)];
-            return randomWaypoint;
+            float minRange = 8f;
+            float maxRange = 40f;
 
-            // float minRange = 20f;
-            // float maxRange = 70f;
-            // Vector3 point = Random.onUnitSphere * Random.Range(minRange, maxRange);
-            // NavMeshHit hit;
-            // NavMesh.SamplePosition(agent.transform.position + point, out hit, 30f, 1);
-            // return hit.position;
+            Vector3 point = Random.onUnitSphere * Random.Range(minRange, maxRange);
+            NavMeshHit hit;
+            NavMesh.SamplePosition(agent.transform.position + point, out hit, 20f, 1);
+
+            return hit.position;
         }
+
+        // void updateDestination()
+        // {
+        //     if (targetWaypoint == null)
+        //     {
+        //         Waypoint waypoint = agent.pathSystem.getClosestWaypoint();
+        //         if (waypoint == null)
+        //             return;
+        //         targetWaypoint = waypoint;
+        //         agent.locomotionSystem.navMeshAgent.destination = targetWaypoint.obj.transform.position;
+        //     }
+        //     else
+        //     {
+        //         Vector3 targetWaypoint2D = new Vector3(targetWaypoint.obj.transform.position.x, 0f, targetWaypoint.obj.transform.position.z);
+        //         Vector3 agentPosition2D = new Vector3(agent.transform.position.x, 0f, agent.transform.position.z);
+
+        //         // TODO: use navmeshAgent.remaining distance instead of doing math myself
+        //         if (Vector3.Distance(targetWaypoint2D, agentPosition2D) < 1f)
+        //         {
+        //             setTarget(findNewTarget());
+        //         }
+        //     }
+        // }
+
+        // void setTarget(Waypoint target)
+        // {
+        //     targetWaypoint = target;
+        //     agent.locomotionSystem.navMeshAgent.destination = target.obj.transform.position;
+        // }
+
+        // Waypoint findNewTarget()
+        // {
+        //     Waypoint randomWaypoint = targetWaypoint.neighbours[Random.Range(0, targetWaypoint.neighbours.Length)];
+        //     return randomWaypoint;
+        // }
     }
 }
