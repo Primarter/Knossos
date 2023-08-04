@@ -7,7 +7,6 @@ namespace Knossos.Bust
     public class StateEndlag : FSM.State
     {
         BustAgent agent;
-        Quaternion originalRotation;
         Coroutine cooldown;
 
         public override void Init()
@@ -24,7 +23,6 @@ namespace Knossos.Bust
 
         public override void Exit(int nextState)
         {
-            agent.transform.rotation = originalRotation;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
 
             agent.StopCoroutine(cooldown);

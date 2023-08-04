@@ -42,7 +42,7 @@ public class Health : MonoBehaviour
             return false;
         }
 
-        GetComponent<AnimationController>()?.OnDamageAnimStartEvent(value);
+        GetComponent<AnimationController>()?.onDamageAnimStart.Invoke(value);
 
         StartCoroutine(Invicibility(invicibilityTime));
 

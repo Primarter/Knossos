@@ -5641,7 +5641,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614975}
   m_ExposedName: Burst Count Min/Max
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: Emission
   m_Min:
     m_Type:
@@ -5789,7 +5789,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614979}
   m_ExposedName: Lifetime Min/Max
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 8
   m_Category: Emission
   m_Min:
     m_Type:
@@ -5940,7 +5940,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614983}
   m_ExposedName: Bounds
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 6
   m_Category: Emission
   m_Min:
     m_Type:
@@ -6292,7 +6292,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614993}
   m_ExposedName: Initial Position
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 10
   m_Category: Emission
   m_Min:
     m_Type:
@@ -6690,7 +6690,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615004}
   m_ExposedName: Initial Direction Divergence
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 4
   m_Category: Motion
   m_Min:
     m_Type:
@@ -6770,7 +6770,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615006}
   m_ExposedName: Turbulence Noise Position
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 11
   m_Category: Motion
   m_Min:
     m_Type:
@@ -6952,7 +6952,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615011}
   m_ExposedName: Turbulence Intensity
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 13
   m_Category: Motion
   m_Min:
     m_Type:
@@ -7032,7 +7032,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615013}
   m_ExposedName: Drag
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 14
   m_Category: Motion
   m_Min:
     m_Type:
@@ -7294,7 +7294,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615020}
   m_ExposedName: Size Min/Max
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 15
   m_Category: Size and Weight
   m_Min:
     m_Type:
@@ -7445,7 +7445,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615024}
   m_ExposedName: Density
   m_Exposed: 1
-  m_Order: 13
+  m_Order: 19
   m_Category: Size and Weight
   m_Min:
     m_Type:
@@ -7525,7 +7525,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615026}
   m_ExposedName: Sparkle Texture
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 12
   m_Category: Rendering
   m_Min:
     m_Type:
@@ -7605,7 +7605,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615028}
   m_ExposedName: Sparkle Fire Gradient
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 16
   m_Category: Rendering
   m_Min:
     m_Type:
@@ -7685,7 +7685,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615030}
   m_ExposedName: HDRP Exposure Weight
   m_Exposed: 1
-  m_Order: 11
+  m_Order: 18
   m_Category: Rendering
   m_Min:
     m_Type:
@@ -7762,7 +7762,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615032}
   m_ExposedName: Color Over Life
   m_Exposed: 1
-  m_Order: 10
+  m_Order: 17
   m_Category: Rendering
   m_Min:
     m_Type:
@@ -7842,7 +7842,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615037}
   m_ExposedName: Sparkle Width
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 5
   m_Category: Rendering
   m_Min:
     m_Type:
@@ -7979,7 +7979,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615044}
   m_ExposedName: Spawn Rate
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 2
   m_Category: Emission
   m_Min:
     m_Type:
@@ -8217,7 +8217,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615062}
   m_ExposedName: Initial Velocity
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 7
   m_Category: Motion
   m_Min:
     m_Type:
@@ -8303,7 +8303,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615068}
   m_ExposedName: Initial Velocity Amplitude
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 9
   m_Category: Motion
   m_Min:
     m_Type:

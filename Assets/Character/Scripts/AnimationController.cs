@@ -13,13 +13,13 @@ public class AnimationController : MonoBehaviour
     [SerializeField]
     Renderer characterRenderer;
 
-    public delegate void OnHit(int hit);
     public UnityEvent<int> onHitActive;
     public UnityEvent<int> onHitInactive;
     public UnityEvent<int> onHitConnect;
     public UnityEvent<int> onHitStopEnd;
     public UnityEvent<int> onDamageAnimStart;
     public UnityEvent<int> onDamageAnimEnd;
+    public UnityEvent onSpecialAvailable;
 
     Animator animator;
     Vector3 smoothInput = Vector3.zero;
@@ -46,7 +46,7 @@ public class AnimationController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 movement = new Vector3(InputManager.inputs.horizontal, 0f, InputManager.inputs.vertical);
+        Vector3 movement = new(InputManager.inputs.horizontal, 0f, InputManager.inputs.vertical);
         smoothInput = Vector3.SmoothDamp(smoothInput, movement, ref velocity, 5 * Time.deltaTime);
         movement = Quaternion.Euler(0, mainCam.transform.rotation.eulerAngles.y, 0) * smoothInput;
         movement = Vector3.ClampMagnitude(movement, 1);
@@ -105,7 +105,7 @@ public class AnimationController : MonoBehaviour
         animator.SetFloat("MovementSpeed", moveSpeed);
     }
 
-    // Event control functions
+    // Animation Events control functions
 
     public void OnHitActiveEvent(int hit)
     {
@@ -123,16 +123,6 @@ public class AnimationController : MonoBehaviour
     {
         // print("HitInactive");
         onHitInactive.Invoke(hit);
-    }
-
-    public void OnDamageAnimStartEvent(int damage)
-    {
-        onDamageAnimStart.Invoke(damage);
-    }
-
-    public void OnDamageAnimEndEvent(int damage)
-    {
-        onDamageAnimEnd.Invoke(damage);
     }
 
     // Hitstop control

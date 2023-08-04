@@ -45,6 +45,8 @@ public class Config : ScriptableObject
 
     public int[] damageAnimationDurations = {15, 20, 25};
 
+    public float specialCooldown = 5f;
+
     [Header("Read Only Info")]
     public float DodgeAnimationSpeedMultiplier = 1f;
 

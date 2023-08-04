@@ -15,6 +15,8 @@ public class AttackController : MonoBehaviour
     [HideInInspector] public float attMoveSpeedMult = 1f;
     [HideInInspector] public float attRotSpeedMult = 1f;
 
+    private bool canSpecial = true;
+
     private void Awake()
     {
         mainController = GetComponent<Controller>();
@@ -37,7 +39,7 @@ public class AttackController : MonoBehaviour
             animationController.ResetSpecial();
             animationController.TriggerAttack();
         }
-        if (InputManager.CheckBuffer(BufferedInput.Special, false))
+        if (InputManager.CheckBuffer(BufferedInput.Special, false) && canSpecial)
         {
             dodgeController.canDash = false;
             EnableSlowMotion();
@@ -63,6 +65,19 @@ public class AttackController : MonoBehaviour
     {
         dodgeController.canDash = true;
         DisableSlowMotion();
+    }
+
+    public void StartSpecial()
+    {
+        StartCoroutine(SpecialCooldown());
+    }
+
+    private IEnumerator SpecialCooldown()
+    {
+        canSpecial = false;
+        yield return new WaitForSeconds(config.specialCooldown);
+        canSpecial = true;
+        animationController.onSpecialAvailable.Invoke();
     }
 }
 
