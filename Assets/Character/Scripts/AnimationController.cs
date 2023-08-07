@@ -10,8 +10,6 @@ namespace Knossos.Character
 public class AnimationController : MonoBehaviour
 {
     public Config config;
-    [SerializeField]
-    Renderer characterRenderer;
 
     public UnityEvent<int> onHitActive;
     public UnityEvent<int> onHitInactive;
@@ -27,21 +25,16 @@ public class AnimationController : MonoBehaviour
     Camera mainCam;
 
     Coroutine hitStopCoroutine = null;
-    Coroutine damageAnimCoroutine = null;
-
-    Material damageMaterial;
 
     private void Awake()
     {
         mainCam = Camera.main;
         animator = GetComponent<Animator>();
-        damageMaterial = characterRenderer.sharedMaterial;
     }
 
     private void Start()
     {
         animator.SetFloat("DodgeSpeed", config.DodgeAnimationSpeedMultiplier);
-        damageMaterial.SetFloat("_Progress", 0f);
     }
 
     private void Update()
@@ -154,48 +147,6 @@ public class AnimationController : MonoBehaviour
         onHitStopEnd.Invoke(hitIdx);
 
         hitStopCoroutine = null;
-    }
-
-    public void StartDamageAnim(int damage)
-    {
-        if (damage > 0)
-        {
-            if (damageAnimCoroutine != null)
-                StopCoroutine(damageAnimCoroutine);
-
-            int frames;
-            Health healthManager = GetComponent<Health>();
-            if (healthManager == null)
-                frames = 10;
-            else if ((float)healthManager.health / (float)healthManager.startHealth <= .25)
-                frames = config.damageAnimationDurations[2];
-            else if ((float)healthManager.health / (float)healthManager.startHealth <= .50)
-                frames = config.damageAnimationDurations[1];
-            else
-                frames = config.damageAnimationDurations[0];
-
-            damageAnimCoroutine = StartCoroutine(EndDamageAnimAfter(frames, damage));
-        }
-    }
-
-    IEnumerator EndDamageAnimAfter(int frames, int damage)
-    {
-        int startFrame = Time.frameCount;
-
-        while (Time.frameCount < startFrame + frames)
-        {
-            damageMaterial.SetFloat("_Progress", (float)(Time.frameCount - startFrame)/(float)(frames));
-            yield return null;
-        }
-
-        onDamageAnimEnd.Invoke(damage);
-
-        damageAnimCoroutine = null;
-    }
-
-    private void OnDestroy()
-    {
-        damageMaterial.SetFloat("_Progress", 0f);
     }
 }
 
