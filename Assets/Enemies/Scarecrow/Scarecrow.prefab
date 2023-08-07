@@ -198,4 +198,4 @@ MonoBehaviour:
   onHitEvent:
     m_PersistentCalls:
       m_Calls: []
-  meshRenderer: {fileID: 0}
+  meshRenderer: {fileID: 3882211738399043803}
