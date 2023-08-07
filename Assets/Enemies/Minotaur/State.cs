@@ -7,6 +7,7 @@ namespace Knossos.Minotaur
         Patrol,
         Follow,
         GoHome,
-        Attack
+        Attack,
+        Staggered
     }
 }

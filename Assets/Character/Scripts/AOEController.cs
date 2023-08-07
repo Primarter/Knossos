@@ -11,11 +11,12 @@ public class AOEController : MonoBehaviour
 {
     [SerializeField] AnimationCurve hitboxEvolution;
 
-    float lifetime = 0f;
-
     SphereCollider areaOfEffect;
-
+    float lifetime;
     float baseRadius;
+    bool hitMinotaur = false;
+
+    Minotaur.StaggerSystem minotaur;
 
     private void Awake()
     {
@@ -32,14 +33,37 @@ public class AOEController : MonoBehaviour
     IEnumerator UpdateAOE()
     {
         var start = Time.time;
+        hitMinotaur = false;
 
         while (Time.time < start + lifetime)
         {
             float progress = hitboxEvolution.Evaluate((Time.time - start) / lifetime);
             areaOfEffect.radius = baseRadius * progress;
+
+            if (!hitMinotaur && minotaur != null)
+            {
+                hitMinotaur = true;
+                minotaur.Stagger();
+            }
             yield return null;
         }
         areaOfEffect.radius = baseRadius;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Minotaur")
+        {
+            minotaur = other.GetComponent<Minotaur.StaggerSystem>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Minotaur")
+        {
+            minotaur = null;
+        }
     }
 }
 
