@@ -43,6 +43,7 @@ namespace Knossos.Minotaur
     [RequireComponent(typeof(VisionSystem))]
     [RequireComponent(typeof(SoundSensorSystem))]
     [RequireComponent(typeof(AttackSystem))]
+    [RequireComponent(typeof(AnimationSystem))]
     [RequireComponent(typeof(PlayerMinotaurVisibilitySystem))]
     public class MinotaurAgent : MonoBehaviour
     {
@@ -54,6 +55,7 @@ namespace Knossos.Minotaur
         [HideInInspector] public VisionSystem visionSystem;
         [HideInInspector] public SoundSensorSystem soundSensorSystem;
         [HideInInspector] public AttackSystem attackSystem;
+        [HideInInspector] public AnimationSystem animationSystem;
         [HideInInspector] public PlayerMinotaurVisibilitySystem playerMinotaurVisibilitySystem;
 
         void Awake()
@@ -63,6 +65,7 @@ namespace Knossos.Minotaur
             visionSystem = GetComponent<VisionSystem>();
             soundSensorSystem = GetComponent<SoundSensorSystem>();
             attackSystem = GetComponent<AttackSystem>();
+            animationSystem = GetComponent<AnimationSystem>();
             playerMinotaurVisibilitySystem = GetComponent<PlayerMinotaurVisibilitySystem>();
         }
 

@@ -19,7 +19,9 @@ namespace Knossos.Minotaur
         public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.isStopped = true;
-            timer = 1.5f;
+            agent.locomotionSystem.navMeshAgent.velocity = Vector3.zero;
+            timer = 2.4f;
+            agent.animationSystem.TriggerAttack();
         }
 
         public override void Exit(int nextState)
@@ -28,24 +30,14 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
-            agent.attackSystem.Attack();
-
             timer -= Time.fixedDeltaTime;
             if (timer > 0) return;
 
-            if (agent.visionSystem.hasTarget)
-            {
-                agent.stateMachine.ChangeState(State.Follow);
-            }
-            else
-            {
-                agent.stateMachine.ChangeState(State.Patrol);
-            }
+            agent.stateMachine.ChangeState(State.Follow);
         }
 
         public override void Update()
         {
-            agent.transform.Rotate(new Vector3(0f, 1f, 0f), 360f * Time.deltaTime);
         }
     }
 }
