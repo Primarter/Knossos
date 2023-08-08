@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Knossos.Map:TilesConfig
   tiles:
   - type: 0
-    prefab: {fileID: 4671169224719902327, guid: 2835bdb8d2d0c624596b11226fa03b8f,
+    prefab: {fileID: 6718220793374102244, guid: 09ee5124a1d4f7644b1cc92c1b96db88,
       type: 3}
     canRotate: 0
     hasConditionN: 0
