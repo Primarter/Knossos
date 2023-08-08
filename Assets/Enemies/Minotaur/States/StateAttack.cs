@@ -19,6 +19,7 @@ namespace Knossos.Minotaur
         public override void Enter(int previousState)
         {
             agent.locomotionSystem.navMeshAgent.isStopped = true;
+            agent.animationSystem.updateVelocity = false;
             agent.locomotionSystem.navMeshAgent.velocity = Vector3.zero;
             timer = 2.4f;
             agent.animationSystem.TriggerAttack();
@@ -26,6 +27,7 @@ namespace Knossos.Minotaur
 
         public override void Exit(int nextState)
         {
+            agent.animationSystem.updateVelocity = true;
         }
 
         public override void FixedUpdate()
