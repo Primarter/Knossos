@@ -28,6 +28,10 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
+        }
+
+        public override void Update()
+        {
             if (!agent.visionSystem.hasTarget)
             {
                 agent.soundSensorSystem.heardSound(agent.visionSystem.targetPosition);
@@ -39,15 +43,10 @@ namespace Knossos.Minotaur
             }
 
             float distanceMinotaurPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
-            if (distanceMinotaurPlayer < 2.5f)
+            if (distanceMinotaurPlayer < 3.5f)
             {
                 agent.stateMachine.ChangeState(State.Attack);
             }
-
-        }
-
-        public override void Update()
-        {
         }
 }
 }

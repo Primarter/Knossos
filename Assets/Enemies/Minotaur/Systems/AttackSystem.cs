@@ -11,25 +11,36 @@ public class AttackSystem : MonoBehaviour
 {
     MinotaurAgent agent;
     [SerializeField] ColliderManager attackColliderManager;
-
     [SerializeField] int damage = 50;
+
+    bool _hitting = false;
+    public bool hitting
+    {
+        get => _hitting;
+        set
+        {
+            hasHit = false;
+            _hitting = value;
+        }
+    }
+
+    bool hasHit = false;
 
     void Awake()
     {
         agent = GetComponent<MinotaurAgent>();
     }
 
-    void Start()
+    private void Update()
     {
-    }
-
-    public void Attack()
-    {
-        foreach (var gameObject in attackColliderManager.getColliding())
+        if (hitting && !hasHit)
         {
-            if (gameObject.tag == "Player")
+            foreach (var gameObject in attackColliderManager.getColliding())
             {
-                bool hit = gameObject.GetComponent<Character.Health>().TakeDamage(damage);
+                if (gameObject.tag == "Player")
+                {
+                    hasHit = gameObject.GetComponent<Character.Health>().TakeDamage(damage);
+                }
             }
         }
     }
