@@ -18,7 +18,7 @@ namespace Knossos.Minotaur
 
         public override void Enter(int previousState)
         {
-            agent.locomotionSystem.navMeshAgent.speed = 5f;
+            agent.locomotionSystem.navMeshAgent.speed = 5.5f;
             agent.locomotionSystem.navMeshAgent.isStopped = false;
         }
 
@@ -43,7 +43,7 @@ namespace Knossos.Minotaur
             }
 
             float distanceMinotaurPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
-            if (distanceMinotaurPlayer < 3.5f)
+            if (distanceMinotaurPlayer < 3f)
             {
                 agent.stateMachine.ChangeState(State.Attack);
             }
