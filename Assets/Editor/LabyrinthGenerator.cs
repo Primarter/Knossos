@@ -139,12 +139,11 @@ public class LabyrinthGenerator : EditorWindow
             (GameObject prefab, float angle) = getTile(map, x, y, width, height);
             if (prefab != null)
             {
-                GameObject obj = Instantiate(
-                    prefab,
-                    new Vector3(x, 0, y) * tileConfig.scale + new Vector3(tileConfig.scale/2f, 0, tileConfig.scale/2f), // because tiles are centered
-                    Quaternion.Euler(0f, angle, 0f),
-                    parent.transform
-                );
+                GameObject obj = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+                obj.transform.position = new Vector3(x, 0, y) * tileConfig.scale + new Vector3(tileConfig.scale/2f, 0, tileConfig.scale/2f);
+                obj.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                obj.transform.parent = parent.transform;
+
                 labyrinthManager.map[index].obj = obj;
             }
             else
