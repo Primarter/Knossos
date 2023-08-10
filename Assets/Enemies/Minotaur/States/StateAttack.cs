@@ -35,6 +35,7 @@ namespace Knossos.Minotaur
             timer -= Time.fixedDeltaTime;
             if (timer > 0) return;
 
+            agent.visionSystem.hasTarget = true;
             agent.stateMachine.ChangeState(State.Follow);
         }
 

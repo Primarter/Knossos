@@ -15,7 +15,7 @@ public class Door : MonoBehaviour
     {
         doorStartPosition = transform.position;
 
-        doorEndPosition = transform.position + new Vector3(0f, GetComponent<Collider>().bounds.center.y, 0f);
+        doorEndPosition = transform.position + new Vector3(0f, GetComponent<Collider>().bounds.center.y * -2, 0f);
     }
 
     public void OpenDoor()

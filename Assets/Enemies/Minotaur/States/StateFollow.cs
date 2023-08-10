@@ -43,8 +43,10 @@ namespace Knossos.Minotaur
             }
 
             float distanceMinotaurPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
-            if (distanceMinotaurPlayer < 3f)
+            float dot = Vector3.Dot((player.transform.position - agent.transform.position).normalized, agent.transform.forward);
+            if (distanceMinotaurPlayer < 3f && dot > 0.5f)
             {
+                Debug.Log(Vector3.Dot(player.transform.position, agent.transform.position));
                 agent.stateMachine.ChangeState(State.Attack);
             }
         }
