@@ -26,7 +26,7 @@ MonoBehaviour:
     hasConditionW: 0
     conditionW: 0
   - type: 1
-    prefab: {fileID: 7715137020788343787, guid: f058b4b2ffce2c04193762864a13a875,
+    prefab: {fileID: 4085924064115468519, guid: 0dbc2ff3a609338439b67f9f3c8848d5,
       type: 3}
     canRotate: 0
     hasConditionN: 1

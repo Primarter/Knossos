@@ -28,7 +28,7 @@ public class Footstep : MonoBehaviour
 
     void Update()
     {
-        Vector3 offset = new Vector3(0f, footHeightBias, 0f);
+        Vector3 offset = new(0f, footHeightBias, 0f);
 
         bool leftHit = Physics.Raycast(leftFoot.position + offset, Vector3.down, footHeightBias + raycastDistance, groundLayer);
         bool rightHit = Physics.Raycast(rightFoot.position + offset, Vector3.down, footHeightBias + raycastDistance, groundLayer);
