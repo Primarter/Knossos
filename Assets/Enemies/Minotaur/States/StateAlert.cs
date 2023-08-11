@@ -20,7 +20,7 @@ namespace Knossos.Minotaur
             agent.soundSensorSystem.heardSuspiciousSound = false;
 
             agent.locomotionSystem.navMeshAgent.isStopped = false;
-            agent.locomotionSystem.navMeshAgent.speed = 5f;
+            agent.locomotionSystem.navMeshAgent.speed = 5.5f;
             agent.locomotionSystem.navMeshAgent.destination = agent.soundSensorSystem.suspiciousSoundPosition;
         }
 

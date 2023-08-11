@@ -42,6 +42,7 @@ namespace Knossos.Minotaur
 
             heardSuspiciousSound = true;
             suspiciousSoundPosition = position;
+            GetComponent<MinotaurAgent>().stateMachine.ChangeState(State.Alert);
         }
     }
 }

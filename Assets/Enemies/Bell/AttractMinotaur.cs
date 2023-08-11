@@ -8,27 +8,27 @@ namespace Knossos.Bell
 public class AttractMinotaur : MonoBehaviour
 {
     public AudioClip bellSound;
-    GameObject minautor;
+    GameObject minotaur;
 
-    MinotaurSpawnPoint[] closeMinautorSpawnPoints;
+    MinotaurSpawnPoint[] closeMinotaurSpawnPoints;
 
     void Awake()
     {
-        minautor = GameObject.FindWithTag("Minotaur");
-        closeMinautorSpawnPoints = transform.parent.GetComponentsInChildren<MinotaurSpawnPoint>();
+        minotaur = GameObject.FindWithTag("Minotaur");
+        closeMinotaurSpawnPoints = transform.parent.GetComponentsInChildren<MinotaurSpawnPoint>();
     }
 
     public void RingBell()
     {
-        if (minautor != null && !minautor.activeInHierarchy) // if not active, place minautor at random spawnPoint and activate it
+        if (minotaur != null && !minotaur.activeInHierarchy) // if not active, place minotaur at random spawnPoint and activate it
         {
-            Vector3 p = closeMinautorSpawnPoints[Random.Range(0, closeMinautorSpawnPoints.Length)].transform.position;
-            minautor.SetActive(true);
-            minautor.GetComponent<Minotaur.LocomotionSystem>().navMeshAgent.Warp(p);
+            Vector3 p = closeMinotaurSpawnPoints[Random.Range(0, closeMinotaurSpawnPoints.Length)].transform.position;
+            minotaur.SetActive(true);
+            minotaur.GetComponent<Minotaur.LocomotionSystem>().navMeshAgent.Warp(p);
         }
 
         LoudSoundManager.playLoudSound(transform.position);
-        SoundManager.PlaySound(transform.position, bellSound, 3, maxDistance: 40, pitch: Random.Range(0.95f, 1.05f));
+        SoundManager.PlaySound(transform.position, bellSound, volume:3, maxDistance: 40, pitch: Random.Range(0.95f, 1.05f));
     }
 }
 

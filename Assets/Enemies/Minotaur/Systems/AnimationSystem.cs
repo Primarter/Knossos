@@ -14,6 +14,8 @@ public class AnimationSystem : MonoBehaviour
 
     public MinotaurAgent minotaurAgent;
 
+    public bool updateVelocity = true;
+
     private void Awake()
     {
         if (animator == null)
@@ -29,9 +31,12 @@ public class AnimationSystem : MonoBehaviour
 
     private void Update()
     {
-        var agent = minotaurAgent.locomotionSystem.navMeshAgent;
-        float v = agent.speed > 0f ? agent.velocity.magnitude / agent.speed : 0f;
-        animator.SetFloat("Velocity", v);
+        if (updateVelocity)
+        {
+            var agent = minotaurAgent.locomotionSystem.navMeshAgent;
+            float v = agent.speed > 0f ? agent.velocity.magnitude / agent.speed : 0f;
+            animator.SetFloat("Velocity", v);
+        }
     }
 
     public void TriggerAttack()
