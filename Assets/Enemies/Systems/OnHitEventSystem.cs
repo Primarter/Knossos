@@ -17,14 +17,12 @@ public class OnHitEventSystem : MonoBehaviour
         public float knockBackDuration;
         public Vector3 hitDirection;
     }
-    public Material damageMaterial;
-
-    public delegate void OnHit(HitInfo hitInfo);
-    public OnHit onHitCallbacks;
 
     public UnityEvent<HitInfo> onHitEvent = new();
 
     [SerializeField] Renderer meshRenderer;
+    public Material damageMaterial;
+    [SerializeField] GameObject damageParticle;
     private Material regularMaterial;
 
     private void Awake()
@@ -43,10 +41,13 @@ public class OnHitEventSystem : MonoBehaviour
             hitDirection=hitDirection,
         };
 
-        StartCoroutine(MaterialChangeCoroutine());
-        if (onHitCallbacks != null)
-            onHitCallbacks(hitInfo);
         onHitEvent.Invoke(hitInfo);
+    }
+
+    public void OnHitDefaultEffect(HitInfo info)
+    {
+        Destroy(GameObject.Instantiate(damageParticle, transform.position, Quaternion.LookRotation(info.hitDirection)), .5f);
+        StartCoroutine(MaterialChangeCoroutine());
     }
 
     IEnumerator MaterialChangeCoroutine()

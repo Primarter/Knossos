@@ -18,11 +18,6 @@ public class StaggerSystem : MonoBehaviour
                 Debug.LogError("StaggerSystem is lacking BustAgent");
     }
 
-    void Start()
-    {
-        agent.onHitEventSystem.onHitCallbacks += OnHitCallback;
-    }
-
     public void OnHitCallback(Enemies.OnHitEventSystem.HitInfo hit)
     {
         if (agent.currentState != State.Attacking && agent.isActiveAndEnabled)

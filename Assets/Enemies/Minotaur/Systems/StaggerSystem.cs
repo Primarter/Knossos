@@ -1,26 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using System.Linq;
+using UnityEngine.VFX;
+using Knossos.Enemies;
 
 namespace Knossos.Minotaur
 {
 
 public class StaggerSystem : MonoBehaviour
 {
-    MinotaurAgent agent;
+    [SerializeField] VisualEffect shieldEffect;
 
-    void Awake()
+    [HideInInspector] public bool stagger = false;
+
+    OnHitEventSystem onHitEventSystem;
+
+    private void Awake()
     {
-        agent = GetComponent<MinotaurAgent>();
-        if (!agent)
+        onHitEventSystem = GetComponent<OnHitEventSystem>();
+        if (onHitEventSystem == null)
+        {
             this.enabled = false;
+        }
     }
 
     public void Stagger()
     {
-        agent.stateMachine.ChangeState(State.Staggered);
+        stagger = true;
+    }
+
+    public void ProcessHit(OnHitEventSystem.HitInfo hit)
+    {
+        if (hit.knockBackStrength > 50)
+        {
+            stagger = true;
+            onHitEventSystem.OnHitDefaultEffect(hit);
+        } else
+        {
+            shieldEffect.Play();
+        }
     }
 }
 

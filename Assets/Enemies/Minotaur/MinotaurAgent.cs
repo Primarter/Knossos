@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Knossos;
+using Knossos.Enemies;
 
 /*
 Minotaur AI
@@ -44,6 +44,8 @@ namespace Knossos.Minotaur
     [RequireComponent(typeof(SoundSensorSystem))]
     [RequireComponent(typeof(AttackSystem))]
     [RequireComponent(typeof(AnimationSystem))]
+    [RequireComponent(typeof(StaggerSystem))]
+    [RequireComponent(typeof(OnHitEventSystem))]
     [RequireComponent(typeof(PlayerMinotaurVisibilitySystem))]
     public class MinotaurAgent : MonoBehaviour
     {
@@ -56,6 +58,8 @@ namespace Knossos.Minotaur
         [HideInInspector] public SoundSensorSystem soundSensorSystem;
         [HideInInspector] public AttackSystem attackSystem;
         [HideInInspector] public AnimationSystem animationSystem;
+        [HideInInspector] public StaggerSystem staggerSystem;
+        [HideInInspector] public OnHitEventSystem onHitEventSystem;
         [HideInInspector] public PlayerMinotaurVisibilitySystem playerMinotaurVisibilitySystem;
 
         void Awake()
@@ -66,6 +70,8 @@ namespace Knossos.Minotaur
             soundSensorSystem = GetComponent<SoundSensorSystem>();
             attackSystem = GetComponent<AttackSystem>();
             animationSystem = GetComponent<AnimationSystem>();
+            staggerSystem = GetComponent<StaggerSystem>();
+            onHitEventSystem = GetComponent<OnHitEventSystem>();
             playerMinotaurVisibilitySystem = GetComponent<PlayerMinotaurVisibilitySystem>();
         }
 

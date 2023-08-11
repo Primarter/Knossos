@@ -91,5 +91,11 @@ namespace Knossos.Minotaur
                 isInDirectVision
             );
         }
+
+        public void TargetPlayer()
+        {
+            hasTarget = true;
+            targetPosition = player.transform.position;
+        }
     }
 }
