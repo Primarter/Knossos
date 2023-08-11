@@ -1120,6 +1120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9041af23c0b3b9a48a2450efe42efc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: b0c3a2d3c23183245be36b5e58a2f9e3, type: 2}
+  playerTransform: {fileID: 3325989323589724547}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  range: {x: 26, y: 47}
 --- !u!1 &3000225110426182222
 GameObject:
   m_ObjectHideFlags: 0
