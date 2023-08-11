@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a424adb492aee84dad61a1acc973b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMaterial: {fileID: 2100000, guid: 7ee0d3ef0a1268b47af2a2488e7b8565, type: 2}
   onHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -166,7 +165,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7251781826864637834}
+        m_TargetAssemblyTypeName: Knossos.Enemies.OnHitEventSystem, Assembly-CSharp
+        m_MethodName: OnHitDefaultEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   meshRenderer: {fileID: 3882211738945492242}
+  damageMaterial: {fileID: 2100000, guid: 7ee0d3ef0a1268b47af2a2488e7b8565, type: 2}
+  damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
+    type: 3}
 --- !u!114 &3464925456595976694
 MonoBehaviour:
   m_ObjectHideFlags: 0

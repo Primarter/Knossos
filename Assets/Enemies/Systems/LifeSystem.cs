@@ -13,10 +13,6 @@ public class LifeSystem : MonoBehaviour
 
     int health;
 
-    private void Awake() {
-        GetComponent<OnHitEventSystem>().onHitCallbacks += TakeDamage;
-    }
-
     private void Start() {
         health = startHealth;
     }

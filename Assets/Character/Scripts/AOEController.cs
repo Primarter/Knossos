@@ -43,7 +43,7 @@ public class AOEController : MonoBehaviour
             if (!hitMinotaur && minotaur != null)
             {
                 hitMinotaur = true;
-                minotaur.Stagger();
+                // minotaur.Stagger();
             }
             yield return null;
         }

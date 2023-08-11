@@ -43,22 +43,16 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
-        {
-            var en = other.GetComponent<Enemies.OnHitEventSystem>();
-            if (en != null)
-                enemies.Add(en);
-        }
+        var en = other.GetComponent<Enemies.OnHitEventSystem>();
+        if (en != null)
+            enemies.Add(en);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Enemy")
-        {
-            var en = other.GetComponent<Enemies.OnHitEventSystem>();
-            if (en != null)
-                enemies.Remove(en);
-        }
+        var en = other.GetComponent<Enemies.OnHitEventSystem>();
+        if (en != null)
+            enemies.Remove(en);
     }
 
     private void Hit(Enemies.OnHitEventSystem enemy)
@@ -68,7 +62,6 @@ public class Hitbox : MonoBehaviour
         enemy.TakeDamage(animationController.config.moves[hitIdx], dir);
         hitEnemies.Add(enemy);
         animationController.OnHitConnectEvent(hitIdx);
-        Destroy(GameObject.Instantiate(damageParticle, enemy.transform.position, player.rotation), .5f);
     }
 
     public void EnableHitbox()

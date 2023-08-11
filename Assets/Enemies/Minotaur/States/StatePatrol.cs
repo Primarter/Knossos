@@ -38,6 +38,8 @@ namespace Knossos.Minotaur
 
         public override void Update()
         {
+            if (agent.staggerSystem.stagger)
+                agent.stateMachine.ChangeState(State.Staggered);
         }
 
         public override void FixedUpdate()
@@ -45,6 +47,7 @@ namespace Knossos.Minotaur
             float distanceMinotaurPlayer = Vector3.Distance(agent.visionSystem.player.transform.position, agent.transform.position);
             if (agent.playerMinotaurVisibilitySystem.timeSinceVisible > 3f && distanceMinotaurPlayer > 30f)
             {
+                agent.stateMachine.ChangeState(State.Sleep);
                 agent.gameObject.SetActive(false);
                 return;
             }

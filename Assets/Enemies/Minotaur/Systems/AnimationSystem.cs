@@ -12,9 +12,9 @@ public class AnimationSystem : MonoBehaviour
     public UnityEvent OnAttackActive;
     public UnityEvent OnAttackInactive;
 
-    public MinotaurAgent minotaurAgent;
+    [HideInInspector] public MinotaurAgent minotaurAgent;
 
-    public bool updateVelocity = true;
+    [HideInInspector] public bool isAttacking = false;
 
     private void Awake()
     {
@@ -31,11 +31,12 @@ public class AnimationSystem : MonoBehaviour
 
     private void Update()
     {
-        if (updateVelocity)
+        if (!isAttacking)
         {
             var agent = minotaurAgent.locomotionSystem.navMeshAgent;
             float v = agent.speed > 0f ? agent.velocity.magnitude / agent.speed : 0f;
             animator.SetFloat("Velocity", v);
+            animator.ResetTrigger("Attack");
         }
     }
 

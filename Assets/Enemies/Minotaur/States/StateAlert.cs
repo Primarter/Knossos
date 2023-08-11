@@ -30,6 +30,12 @@ namespace Knossos.Minotaur
 
         public override void FixedUpdate()
         {
+        }
+
+        public override void Update()
+        {
+            if (agent.staggerSystem.stagger)
+                agent.stateMachine.ChangeState(State.Staggered);
             if (agent.visionSystem.hasTarget)
             {
                 agent.stateMachine.ChangeState(State.Follow);
@@ -39,10 +45,6 @@ namespace Knossos.Minotaur
             {
                 agent.stateMachine.ChangeState(State.Patrol);
             }
-        }
-
-        public override void Update()
-        {
         }
     }
 }

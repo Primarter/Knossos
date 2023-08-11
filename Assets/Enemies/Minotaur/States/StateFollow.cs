@@ -32,6 +32,9 @@ namespace Knossos.Minotaur
 
         public override void Update()
         {
+            if (agent.staggerSystem.stagger)
+                agent.stateMachine.ChangeState(State.Staggered);
+
             if (!agent.visionSystem.hasTarget)
             {
                 agent.soundSensorSystem.heardSound(agent.visionSystem.targetPosition);
@@ -46,7 +49,6 @@ namespace Knossos.Minotaur
             float dot = Vector3.Dot((player.transform.position - agent.transform.position).normalized, agent.transform.forward);
             if (distanceMinotaurPlayer < 3f && dot > 0.5f)
             {
-                Debug.Log(Vector3.Dot(player.transform.position, agent.transform.position));
                 agent.stateMachine.ChangeState(State.Attack);
             }
         }
