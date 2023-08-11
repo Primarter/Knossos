@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03966c01b09c7894f9c5ce62fa546a8f, type: 3}
+  m_Name: TilesConfig_Placeholders 2
+  m_EditorClassIdentifier: Assembly-CSharp:Knossos.Map:TilesConfig
+  tiles:
+  - type: 0
+    prefab: {fileID: 4671169224719902327, guid: 2835bdb8d2d0c624596b11226fa03b8f,
+      type: 3}
+    canRotate: 0
+    hasConditionN: 0
+    conditionN: 0
+    hasConditionE: 0
+    conditionE: 0
+    hasConditionS: 0
+    conditionS: 0
+    hasConditionW: 0
+    conditionW: 0
+  - type: 1
+    prefab: {fileID: 1012827078900356045, guid: 1f003265bbfd0cf458442b5573f31e97,
+      type: 3}
+    canRotate: 0
+    hasConditionN: 1
+    conditionN: 0
+    hasConditionE: 1
+    conditionE: 0
+    hasConditionS: 1
+    conditionS: 0
+    hasConditionW: 1
+    conditionW: 0
+  - type: 1
+    prefab: {fileID: 1692364728323311096, guid: f2d814603b95c6f459267dabae6c5f40,
+      type: 3}
+    canRotate: 1
+    hasConditionN: 1
+    conditionN: 1
+    hasConditionE: 1
+    conditionE: 0
+    hasConditionS: 1
+    conditionS: 1
+    hasConditionW: 1
+    conditionW: 0
+  - type: 1
+    prefab: {fileID: 1012827078900356045, guid: 5474637f2717ff849aa1ded200715ca9,
+      type: 3}
+    canRotate: 1
+    hasConditionN: 1
+    conditionN: 0
+    hasConditionE: 1
+    conditionE: 0
+    hasConditionS: 1
+    conditionS: 1
+    hasConditionW: 1
+    conditionW: 1
+  - type: 1
+    prefab: {fileID: 1012827078900356045, guid: ba9a3017b9ca63f48a13b7c5ef40179a,
+      type: 3}
+    canRotate: 1
+    hasConditionN: 1
+    conditionN: 0
+    hasConditionE: 1
+    conditionE: 1
+    hasConditionS: 1
+    conditionS: 1
+    hasConditionW: 1
+    conditionW: 1
+  - type: 1
+    prefab: {fileID: 1012827078900356045, guid: 42343f29daab915448ca3e1f9e71c6a7,
+      type: 3}
+    canRotate: 1
+    hasConditionN: 1
+    conditionN: 0
+    hasConditionE: 1
+    conditionE: 0
+    hasConditionS: 1
+    conditionS: 1
+    hasConditionW: 1
+    conditionW: 0
+  - type: 1
+    prefab: {fileID: 1012827078900356045, guid: 412bb50468054b440a91aebf32a01107,
+      type: 3}
+    canRotate: 0
+    hasConditionN: 1
+    conditionN: 1
+    hasConditionE: 1
+    conditionE: 1
+    hasConditionS: 1
+    conditionS: 1
+    hasConditionW: 1
+    conditionW: 1
+  scale: 11

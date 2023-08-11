@@ -64,8 +64,8 @@ namespace Knossos.Map
             cameraCoord = new Vector2Int(cameraCoord3D.x, cameraCoord3D.z);
             cameraIndex = CoordToIndex(cameraCoord);
 
-            // updateVisibilityComplex();
-            updateVisibilitySimple();
+            // UpdateVisibilityComplex();
+            UpdateVisibilitySimple();
 
             // HideCollidingWall();
             HideWallBetweenCameraAndPlayer();
@@ -74,7 +74,7 @@ namespace Knossos.Map
         void HideCollidingWall()
         {
             Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
-            Vector2Int tileCameraCoord = new Vector2Int(tileCamera.x, tileCamera.z);
+            Vector2Int tileCameraCoord = new(tileCamera.x, tileCamera.z);
             int tileCameraIndex = CoordToIndex(tileCameraCoord);
             if (map[tileCameraIndex].type == 1)
             {
@@ -84,14 +84,13 @@ namespace Knossos.Map
 
         void HideWallBetweenCameraAndPlayer()
         {
-            RaycastHit hitInfo;
-            if (Physics.Linecast(mainCamera.transform.position, playerTransform.position, out hitInfo, wallLayer))
+            if (Physics.Linecast(mainCamera.transform.position, playerTransform.position, out RaycastHit hitInfo, wallLayer))
             {
                 hitInfo.collider.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
             }
         }
 
-        Vector3[] getCellBorderPosition(Cell cell)
+        Vector3[] GetCellBorderPosition(Cell cell)
         {
             Vector3 center = cell.obj.transform.position;
             var borders = new Vector3[4];
@@ -108,16 +107,16 @@ namespace Knossos.Map
             return coord.y * mapWidth + coord.x;
         }
 
-        bool isInsideMap(Vector2Int coord)
+        bool IsInsideMap(Vector2Int coord)
         {
             return (coord.x >= 0 && coord.x < mapWidth && coord.y >= 0 && coord.y < mapHeight);
         }
 
-        bool isTileVisibleFrom(Cell cell, Vector2 p)
+        bool IsTileVisibleFrom(Cell cell, Vector2 p)
         {
-            p = p / mapScale;
+            p /= mapScale;
 
-            Vector3[] borders = getCellBorderPosition(cell);
+            Vector3[] borders = GetCellBorderPosition(cell);
             foreach (Vector3 border in borders)
             {
                 Vector2 p2 = new Vector2(border.x, border.z) / mapScale;
@@ -125,7 +124,7 @@ namespace Knossos.Map
                 // bool doCheck = false;
                 int count = 0;
                 bool isVisible = true;
-                foreach (Vector2 tile in gridTraverse(p, p2))
+                foreach (Vector2 tile in GridTraverse(p, p2))
                 {
                     var gridPos = Vector2Int.RoundToInt(tile);
                     int index = CoordToIndex(gridPos);
@@ -151,14 +150,14 @@ namespace Knossos.Map
             return false;
         }
 
-        void updateVisibilitySimple()
+        void UpdateVisibilitySimple()
         {
             foreach (Cell cell in visibleCells)
                 // cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
             visibleCells.Clear();
 
-            if (!isInsideMap(cameraCoord))
+            if (!IsInsideMap(cameraCoord))
                 return;
             if (map[cameraIndex].type != 1) // if not inside a wall
                 return;
@@ -168,7 +167,7 @@ namespace Knossos.Map
             bool AddToCullIfWall(Vector2Int coord)
             {
                 int index = CoordToIndex(coord);
-                if (!isInsideMap(coord)) return false;
+                if (!IsInsideMap(coord)) return false;
                 if (map[index].type != 1) return false;
                 visibleCells.Add(map[index]);
                 return true;
@@ -196,13 +195,13 @@ namespace Knossos.Map
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
         }
 
-        void updateVisibilityComplex()
+        void UpdateVisibilityComplex()
         {
             foreach (Cell cell in visibleCells)
                 cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
             visibleCells.Clear();
 
-            if (!isInsideMap(playerCoord) || !isInsideMap(cameraCoord))
+            if (!IsInsideMap(playerCoord) || !IsInsideMap(cameraCoord))
                 return;
             if (map[playerIndex].type == 1) // if player is inside a wall
                 return;
@@ -211,7 +210,7 @@ namespace Knossos.Map
             for (int dy = -2 ; dy < 8; ++dy) {
             for (int dx = -2 ; dx < 8; ++dx) {
                 Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
-                if (!isInsideMap(coord)) continue;
+                if (!IsInsideMap(coord)) continue;
 
                 int index = CoordToIndex(coord);
                 visibleCells.Add(map[index]);
@@ -221,18 +220,18 @@ namespace Knossos.Map
             visibleCells.RemoveAll(cell =>
             {
                 Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
-                Vector3[] bordersTileCamera = getCellBorderPosition(map[cameraIndex]);
-                Vector3[] bordersTilePlayer = getCellBorderPosition(map[playerIndex]);
+                Vector3[] bordersTileCamera = GetCellBorderPosition(map[cameraIndex]);
+                Vector3[] bordersTilePlayer = GetCellBorderPosition(map[playerIndex]);
 
                 foreach (Vector3 border in bordersTileCamera)
                 {
-                    if (isTileVisibleFrom(cell, new Vector2(border.x, border.z)))
+                    if (IsTileVisibleFrom(cell, new Vector2(border.x, border.z)))
                         return false;
                 }
 
                 foreach (Vector3 border in bordersTilePlayer)
                 {
-                    if (isTileVisibleFrom(cell, new Vector2(border.x, border.z)))
+                    if (IsTileVisibleFrom(cell, new Vector2(border.x, border.z)))
                         return false;
                 }
 
@@ -256,7 +255,7 @@ namespace Knossos.Map
             );
         }
 
-        public IEnumerable<Vector2> gridTraverse(Vector2 p0, Vector2 p1)
+        public IEnumerable<Vector2> GridTraverse(Vector2 p0, Vector2 p1)
         {
             Vector2 rd = p1 - p0;
             Vector2 p = new(Mathf.Floor(p0.x), Mathf.Floor(p0.y));
@@ -288,7 +287,7 @@ namespace Knossos.Map
 
             Vector2 p1 = new Vector2(debug1.transform.position.x, debug1.transform.position.z) / mapScale;
             Vector2 p2 = new Vector2(debug2.transform.position.x, debug2.transform.position.z) / mapScale;
-            foreach (Vector2 tile in gridTraverse(p1, p2))
+            foreach (Vector2 tile in GridTraverse(p1, p2))
             {
                 Vector2 v = (tile + Vector2.one*0.5f) * mapScale;
                 Gizmos.DrawCube(new Vector3(v.x, 30f, v.y), Vector3.one * 8f);

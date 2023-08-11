@@ -38,19 +38,19 @@ MonoBehaviour:
     hasConditionW: 1
     conditionW: 0
   - type: 1
-    prefab: {fileID: 7715137020788343787, guid: f058b4b2ffce2c04193762864a13a875,
+    prefab: {fileID: 7310591804913225260, guid: e505643a9fa78104b8f903c6d7817d9e,
       type: 3}
     canRotate: 1
     hasConditionN: 1
-    conditionN: 1
+    conditionN: 0
     hasConditionE: 1
-    conditionE: 0
+    conditionE: 1
     hasConditionS: 1
-    conditionS: 1
+    conditionS: 0
     hasConditionW: 1
-    conditionW: 0
+    conditionW: 1
   - type: 1
-    prefab: {fileID: 7715137020788343787, guid: f058b4b2ffce2c04193762864a13a875,
+    prefab: {fileID: 2297012120913578039, guid: a062b1f3d6c2d074fbc134ecdd55902b,
       type: 3}
     canRotate: 1
     hasConditionN: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
     hasConditionW: 1
     conditionW: 1
   - type: 1
-    prefab: {fileID: 7715137020788343787, guid: f058b4b2ffce2c04193762864a13a875,
+    prefab: {fileID: 7413965511857525582, guid: a8ceb08428dfa074680288ba11c481e1,
       type: 3}
     canRotate: 1
     hasConditionN: 1
@@ -74,7 +74,7 @@ MonoBehaviour:
     hasConditionW: 1
     conditionW: 1
   - type: 1
-    prefab: {fileID: 7715137020788343787, guid: f058b4b2ffce2c04193762864a13a875,
+    prefab: {fileID: 7316748159790428233, guid: 1f93649de4ef4124ab6f00c7abbe8e41,
       type: 3}
     canRotate: 1
     hasConditionN: 1
@@ -82,11 +82,11 @@ MonoBehaviour:
     hasConditionE: 1
     conditionE: 0
     hasConditionS: 1
-    conditionS: 1
+    conditionS: 0
     hasConditionW: 1
-    conditionW: 0
+    conditionW: 1
   - type: 1
-    prefab: {fileID: 7715137020788343787, guid: f058b4b2ffce2c04193762864a13a875,
+    prefab: {fileID: 2934237815248245058, guid: 0add7993158c8ac43bcb61b49b2eeb7b,
       type: 3}
     canRotate: 0
     hasConditionN: 1
