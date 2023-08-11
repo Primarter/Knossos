@@ -65,6 +65,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2d740b89fe5ee394fb4c7aaaa52dbc75,
         type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f70ac7a71af07804abc39b1b0e581ce8, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2d740b89fe5ee394fb4c7aaaa52dbc75,
+        type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: a57a462cc8fb2f849a58bbbfe3cdd851, type: 2}
@@ -2568,7 +2573,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7
+  m_VersionIndex: 10
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
