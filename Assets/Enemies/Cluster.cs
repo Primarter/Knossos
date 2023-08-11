@@ -8,14 +8,11 @@ namespace Knossos.Enemies
 
 public class Cluster : MonoBehaviour
 {
-    [SerializeField] UnityEvent startEncounterEvent;
-    [SerializeField] UnityEvent endEncounterEvent;
+    public UnityEvent startEncounterEvent;
+    public UnityEvent endEncounterEvent;
 
-    public delegate void EncounterEventCallback();
-    public EncounterEventCallback startEncounterCallbacks;
-    public EncounterEventCallback endEncounterCallbacks;
-
-    EnemyAgent[] enemies;
+    private Character.Health player;
+    private EnemyAgent[] enemies;
     protected bool startedEncounter = false;
 
     private void Awake()
@@ -23,6 +20,7 @@ public class Cluster : MonoBehaviour
         enemies = GetComponentsInChildren<EnemyAgent>();
         if (enemies.Length == 0)
             this.gameObject.SetActive(false);
+        player = GameObject.FindWithTag("Player").GetComponent<Character.Health>();
     }
 
     protected virtual void Update()
@@ -35,11 +33,7 @@ public class Cluster : MonoBehaviour
                     return;
             }
             endEncounterEvent.Invoke();
-            if (endEncounterCallbacks != null)
-            {
-                endEncounterCallbacks();
-                this.enabled = false;
-            }
+            this.enabled = false;
         }
     }
 
@@ -48,18 +42,38 @@ public class Cluster : MonoBehaviour
         if (!startedEncounter)
         {
             startEncounterEvent.Invoke();
-            if (startEncounterCallbacks != null)
-                startEncounterCallbacks();
             startedEncounter = true;
             ActivateAgents();
+            player.currentEncounter = this;
         }
     }
 
-    public virtual void ActivateAgents()
+    public void StopEncounter()
+    {
+        if (startedEncounter)
+        {
+            endEncounterEvent.Invoke();
+            startedEncounter = false;
+            DisableAgents();
+            player.currentEncounter = null;
+        }
+    }
+
+    protected virtual void DisableAgents()
     {
         foreach (var agent in enemies)
         {
-            agent.Enable();
+            if (agent.isActiveAndEnabled)
+                agent.Disable();
+        }
+    }
+
+    protected virtual void ActivateAgents()
+    {
+        foreach (var agent in enemies)
+        {
+            if (agent.isActiveAndEnabled)
+                agent.Enable();
         }
     }
 }

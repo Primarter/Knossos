@@ -28,7 +28,6 @@ namespace Knossos.Minotaur
         public override void Exit(int nextState)
         {
             agent.animationSystem.isAttacking = false;
-            agent.staggerSystem.stagger = false;
         }
 
         public override void FixedUpdate()

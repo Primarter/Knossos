@@ -24,6 +24,8 @@ public class Health : MonoBehaviour
 
     [HideInInspector]
     public bool invincible = false;
+    [HideInInspector]
+    public Enemies.Cluster currentEncounter;
     [SerializeField] float invicibilityTime = 1f;
 
     private void Start()
@@ -49,11 +51,33 @@ public class Health : MonoBehaviour
         return true;
     }
 
+    public bool TakeDamage(int value, out bool died)
+    {
+        died = false;
+        if (invincible) return false;
+
+        health -= value;
+        if (health <= 0)
+        {
+            Die();
+            died = true;
+            return false;
+        }
+
+        GetComponent<AnimationController>()?.onDamageAnimStart.Invoke(value);
+
+        StartCoroutine(Invicibility(invicibilityTime));
+
+        return true;
+    }
+
     void Die()
     {
         print("Player is dead!");
         transform.position = spawn.position;
-        health = 100;
+        health = startHealth;
+        if (currentEncounter)
+            currentEncounter.StopEncounter();
     }
 
     IEnumerator Invicibility(float time)

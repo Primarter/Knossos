@@ -39,7 +39,14 @@ public class AttackSystem : MonoBehaviour
             {
                 if (gameObject.tag == "Player")
                 {
-                    hasHit = gameObject.GetComponent<Character.Health>().TakeDamage(damage);
+                    Vector3 playerPos = gameObject.transform.position;
+                    Character.Health health = gameObject.GetComponent<Character.Health>();
+                    hasHit = health.TakeDamage(damage, out bool died);
+                    if (died)
+                    {
+                        agent.visionSystem.hasTarget = false;
+                        agent.stateMachine.ChangeState(State.Patrol);
+                    }
                 }
             }
         }

@@ -25,6 +25,7 @@ namespace Knossos.Bust
         {
             agent.locomotionSystem.navMeshAgent.destination = agent.targetingSystem.target.position;
             agent.capsuleCollider.isTrigger = false;
+            agent.StopAllCoroutines();
         }
 
         public override void FixedUpdate()

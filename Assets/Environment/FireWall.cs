@@ -25,8 +25,8 @@ public class FireWall : MonoBehaviour
             var cluster = transform.parent.GetComponent<Enemies.Cluster>();
             if (cluster != null)
             {
-                cluster.startEncounterCallbacks += TurnOnWall;
-                cluster.endEncounterCallbacks += TurnOffWall;
+                cluster.startEncounterEvent.AddListener(TurnOnWall);
+                cluster.endEncounterEvent.AddListener(TurnOffWall);
             }
         }
     }

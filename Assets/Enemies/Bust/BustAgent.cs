@@ -71,8 +71,10 @@ namespace Knossos.Bust
 
         public override void Disable()
         {
-            targetingSystem.enabled = false;
+            stateMachine.ChangeState(State.Idle);
+            locomotionSystem.navMeshAgent.enabled = false;
             locomotionSystem.enabled = false;
+            targetingSystem.enabled = false;
             staggerSystem.enabled = false;
             detectionSystem.enabled = false;
             onHitEventSystem.enabled = false;
@@ -82,8 +84,9 @@ namespace Knossos.Bust
         public override void Enable()
         {
             this.enabled = true;
-            targetingSystem.enabled = true;
             locomotionSystem.enabled = true;
+            locomotionSystem.navMeshAgent.enabled = true;
+            targetingSystem.enabled = true;
             staggerSystem.enabled = true;
             detectionSystem.enabled = true;
             onHitEventSystem.enabled = true;
