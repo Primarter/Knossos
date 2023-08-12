@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEditor;
+using System;
 
 namespace Knossos.Map
 {
@@ -28,7 +29,9 @@ namespace Knossos.Map
         Transform playerTransform;
         Camera mainCamera;
 
-        List<Cell> visibleCells = new();
+        // List<Cell> visibleCells = new();
+        // List<Cell> culledCells = new();
+        List<GameObject> culledObjects = new();
 
         [SerializeField] Vector2Int playerCoord;
         [SerializeField] int playerIndex;
@@ -58,36 +61,25 @@ namespace Knossos.Map
         {
             Vector3Int playerCoord3D = grid.WorldToCell(playerTransform.position);
             playerCoord = new Vector2Int(playerCoord3D.x, playerCoord3D.z);
-            playerIndex = CoordToIndex(playerCoord);// (playerCoord.y * mapWidth) + playerCoord.x;
+            playerIndex = CoordToIndex(playerCoord);
 
             Vector3Int cameraCoord3D = grid.WorldToCell(mainCamera.transform.position);
             cameraCoord = new Vector2Int(cameraCoord3D.x, cameraCoord3D.z);
             cameraIndex = CoordToIndex(cameraCoord);
 
-            // UpdateVisibilityComplex();
-            UpdateVisibilitySimple();
 
+            foreach (GameObject obj in culledObjects) // turn back on all culled object
+                obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
+            culledObjects.Clear();
+
+
+            UpdateVisibilitySimple();
+            // UpdateVisibilityComplex();
             // HideCollidingWall();
             HideWallBetweenCameraAndPlayer();
-        }
 
-        void HideCollidingWall()
-        {
-            Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
-            Vector2Int tileCameraCoord = new(tileCamera.x, tileCamera.z);
-            int tileCameraIndex = CoordToIndex(tileCameraCoord);
-            if (map[tileCameraIndex].type == 1)
-            {
-                map[tileCameraIndex].obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-            }
-        }
-
-        void HideWallBetweenCameraAndPlayer()
-        {
-            if (Physics.Linecast(mainCamera.transform.position, playerTransform.position, out RaycastHit hitInfo, wallLayer))
-            {
-                hitInfo.collider.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-            }
+            foreach (GameObject obj in culledObjects) // turn off visibility of culled objects
+                obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
         }
 
         Vector3[] GetCellBorderPosition(Cell cell)
@@ -150,28 +142,21 @@ namespace Knossos.Map
             return false;
         }
 
+        bool AddToCullIfWall(Vector2Int coord)
+        {
+            int index = CoordToIndex(coord);
+            if (!IsInsideMap(coord)) return false;
+            if (map[index].type != 1) return false;
+            culledObjects.Add(map[index].obj);
+            return true;
+        }
+
         void UpdateVisibilitySimple()
         {
-            foreach (Cell cell in visibleCells)
-                // cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
-            visibleCells.Clear();
-
             if (!IsInsideMap(cameraCoord))
                 return;
             if (map[cameraIndex].type != 1) // if not inside a wall
                 return;
-
-            // Logic ->
-
-            bool AddToCullIfWall(Vector2Int coord)
-            {
-                int index = CoordToIndex(coord);
-                if (!IsInsideMap(coord)) return false;
-                if (map[index].type != 1) return false;
-                visibleCells.Add(map[index]);
-                return true;
-            }
 
             for (int i = 0 ; i < 5; ++i) // +X
                 if (AddToCullIfWall(new(cameraCoord.x + i, cameraCoord.y)) == false) break;
@@ -190,57 +175,87 @@ namespace Knossos.Map
                 if (AddToCullIfWall(new(cameraCoord.x - 1, cameraCoord.y + i)) == false) break;
             for (int i = 0 ; i < 5; ++i) // -Y
                 if (AddToCullIfWall(new(cameraCoord.x - 1, cameraCoord.y - i)) == false) break;
-
-            foreach (Cell cell in visibleCells)
-                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
         }
 
-        void UpdateVisibilityComplex()
+        void HideWallBetweenCameraAndPlayer()
         {
-            foreach (Cell cell in visibleCells)
-                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-            visibleCells.Clear();
-
-            if (!IsInsideMap(playerCoord) || !IsInsideMap(cameraCoord))
-                return;
-            if (map[playerIndex].type == 1) // if player is inside a wall
-                return;
-
-            // [-2, 8] approximately frustum of camera
-            for (int dy = -2 ; dy < 8; ++dy) {
-            for (int dx = -2 ; dx < 8; ++dx) {
-                Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
-                if (!IsInsideMap(coord)) continue;
-
-                int index = CoordToIndex(coord);
-                visibleCells.Add(map[index]);
-            }
-            }
-
-            visibleCells.RemoveAll(cell =>
+            if (Physics.Linecast(mainCamera.transform.position, playerTransform.position, out RaycastHit hitInfo, wallLayer))
             {
-                Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
-                Vector3[] bordersTileCamera = GetCellBorderPosition(map[cameraIndex]);
-                Vector3[] bordersTilePlayer = GetCellBorderPosition(map[playerIndex]);
+                Vector3Int coord3D = grid.WorldToCell(hitInfo.point);
+                Vector2Int coord = new(coord3D.x, coord3D.z);
+                int index = CoordToIndex(coord);
+                culledObjects.Add(map[index].obj);
 
-                foreach (Vector3 border in bordersTileCamera)
-                {
-                    if (IsTileVisibleFrom(cell, new Vector2(border.x, border.z)))
-                        return false;
-                }
-
-                foreach (Vector3 border in bordersTilePlayer)
-                {
-                    if (IsTileVisibleFrom(cell, new Vector2(border.x, border.z)))
-                        return false;
-                }
-
-                return true;
-            });
-
-            foreach (Cell cell in visibleCells)
-                cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
+                // if (map[index].type != 1) // if not inside a wall
+                //     return;
+                // for (int i = 0 ; i < 5; ++i) // +X
+                //     if (AddToCullIfWall(new(coord.x + i, coord.y)) == false) break;
+                // for (int i = 0 ; i < 5; ++i) // -X
+                //     if (AddToCullIfWall(new(coord.x - i, coord.y)) == false) break;
+                // for (int i = 0 ; i < 5; ++i) // +Y
+                //     if (AddToCullIfWall(new(coord.x, coord.y + i)) == false) break;
+                // for (int i = 0 ; i < 5; ++i) // -Y
+                //     if (AddToCullIfWall(new(coord.x, coord.y - i)) == false) break;
+            }
         }
+
+        void HideCollidingWall()
+        {
+            Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
+            Vector2Int tileCameraCoord = new(tileCamera.x, tileCamera.z);
+            int tileCameraIndex = CoordToIndex(tileCameraCoord);
+            if (map[tileCameraIndex].type == 1)
+            {
+                map[tileCameraIndex].obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+            }
+        }
+
+        // void UpdateVisibilityComplex()
+        // {
+        //     foreach (Cell cell in visibleCells)
+        //         cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+        //     visibleCells.Clear();
+
+        //     if (!IsInsideMap(playerCoord) || !IsInsideMap(cameraCoord))
+        //         return;
+        //     if (map[playerIndex].type == 1) // if player is inside a wall
+        //         return;
+
+        //     // [-2, 8] approximately frustum of camera
+        //     for (int dy = -2 ; dy < 8; ++dy) {
+        //     for (int dx = -2 ; dx < 8; ++dx) {
+        //         Vector2Int coord = new(playerCoord.x + dx, playerCoord.y + dy);
+        //         if (!IsInsideMap(coord)) continue;
+
+        //         int index = CoordToIndex(coord);
+        //         visibleCells.Add(map[index]);
+        //     }
+        //     }
+
+        //     visibleCells.RemoveAll(cell =>
+        //     {
+        //         Vector3Int tileCamera = grid.WorldToCell(mainCamera.transform.position);
+        //         Vector3[] bordersTileCamera = GetCellBorderPosition(map[cameraIndex]);
+        //         Vector3[] bordersTilePlayer = GetCellBorderPosition(map[playerIndex]);
+
+        //         foreach (Vector3 border in bordersTileCamera)
+        //         {
+        //             if (IsTileVisibleFrom(cell, new Vector2(border.x, border.z)))
+        //                 return false;
+        //         }
+
+        //         foreach (Vector3 border in bordersTilePlayer)
+        //         {
+        //             if (IsTileVisibleFrom(cell, new Vector2(border.x, border.z)))
+        //                 return false;
+        //         }
+
+        //         return true;
+        //     });
+
+        //     foreach (Cell cell in visibleCells)
+        //         cell.obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.On;
+        // }
 
         Vector2 Vector2Abs(Vector2 v)
         {
