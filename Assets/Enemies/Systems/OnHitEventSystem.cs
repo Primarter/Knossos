@@ -46,7 +46,8 @@ public class OnHitEventSystem : MonoBehaviour
 
     public void OnHitDefaultEffect(HitInfo info)
     {
-        Destroy(GameObject.Instantiate(damageParticle, transform.position, Quaternion.LookRotation(info.hitDirection)), .5f);
+        if (info.hitDirection != Vector3.zero)
+            Destroy(GameObject.Instantiate(damageParticle, transform.position, Quaternion.LookRotation(info.hitDirection)), .5f);
         if (isActiveAndEnabled)
             StartCoroutine(MaterialChangeCoroutine());
     }

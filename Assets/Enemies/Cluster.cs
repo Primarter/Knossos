@@ -29,7 +29,7 @@ public class Cluster : MonoBehaviour
         {
             foreach (var bust in enemies)
             {
-                if (bust.gameObject.activeSelf)
+                if (bust && bust.gameObject.activeSelf)
                     return;
             }
             endEncounterEvent.Invoke();
@@ -63,7 +63,7 @@ public class Cluster : MonoBehaviour
     {
         foreach (var agent in enemies)
         {
-            if (agent.isActiveAndEnabled)
+            if (agent && agent.isActiveAndEnabled)
                 agent.Disable();
         }
     }
@@ -72,7 +72,7 @@ public class Cluster : MonoBehaviour
     {
         foreach (var agent in enemies)
         {
-            if (agent.isActiveAndEnabled)
+            if (agent)
                 agent.Enable();
         }
     }

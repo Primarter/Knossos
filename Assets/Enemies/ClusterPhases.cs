@@ -59,7 +59,7 @@ public class ClusterPhases : Cluster
         {
             foreach (var agent in phases[currentPhase].enemies)
             {
-                if(agent.isActiveAndEnabled)
+                if(agent && agent.isActiveAndEnabled)
                     agent.Disable();
             }
         }
@@ -71,7 +71,8 @@ public class ClusterPhases : Cluster
         {
             foreach (var agent in phases[currentPhase].enemies)
             {
-                agent.Enable();
+                if (agent)
+                    agent.Enable();
             }
         }
     }

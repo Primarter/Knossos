@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2085671820}
   - component: {fileID: 2085671821}
   - component: {fileID: 2085671822}
+  - component: {fileID: 1991504057319743192}
   m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -52,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.09467, y: 2.7602549, z: 6.0045633}
-  m_Center: {x: 0, y: -0.44044876, z: 2.214231}
+  m_Size: {x: 4.1802993, y: 2.7602549, z: 3.211623}
+  m_Center: {x: 0, y: -0.44044876, z: 3.1624362}
 --- !u!114 &2085671822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +70,27 @@ MonoBehaviour:
   tags:
   - Player
   collidingGameObjects: []
+--- !u!65 &1991504057319743192
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085671819}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7399135, y: 2.5479748, z: 2.0537486}
+  m_Center: {x: 0, y: -0.53630793, z: 0.52687424}
 --- !u!1 &964195057944810207
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +327,7 @@ MonoBehaviour:
   attackSystem: {fileID: 0}
   animationSystem: {fileID: 0}
   staggerSystem: {fileID: 0}
+  onHitEventSystem: {fileID: 0}
   playerMinotaurVisibilitySystem: {fileID: 0}
 --- !u!114 &4942555519413303855
 MonoBehaviour:

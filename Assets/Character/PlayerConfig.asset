@@ -78,7 +78,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   dashStrength: 2
   dashDuration: 0.6
-  dashCooldown: 0.1
+  dashCooldown: 0.25
   lastDashCooldown: 1
   quickDashTiming: 0.1
   maxQuickDash: 2
@@ -104,4 +104,5 @@ MonoBehaviour:
     knockBackDuration: 0.2
     staggerDuration: 2
   damageAnimationDurations: 0f000000140000001900000014000000
+  specialCooldown: 5
   DodgeAnimationSpeedMultiplier: 1.7499999
