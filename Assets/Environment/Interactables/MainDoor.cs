@@ -8,7 +8,15 @@ namespace Knossos.Interaction
 [RequireComponent(typeof(Interactable))]
 public class MainDoor : MonoBehaviour
 {
-    [SerializeField] Door[] doors = new Door[4];
+    [System.Serializable]
+    public struct Step
+    {
+        public Door door;
+        public Material material;
+        public GameObject sigilToActivate;
+        public Renderer[] renderers;
+    }
+    [SerializeField] Step[] steps = new Step[4];
 
     int sigilsToCollect;
 
@@ -19,7 +27,7 @@ public class MainDoor : MonoBehaviour
 
     private void Start()
     {
-        sigilsToCollect = doors.Length;
+        sigilsToCollect = steps.Length;
     }
 
     public void TryUseSigil(GameObject player)
@@ -28,7 +36,10 @@ public class MainDoor : MonoBehaviour
         if (sm != null && sm.hasSigil)
         {
             Debug.Log("Used sigil");
-            doors[doors.Length - sigilsToCollect].OpenDoor();
+            steps[^sigilsToCollect].door.OpenDoor();
+            steps[^sigilsToCollect].sigilToActivate.SetActive(true);
+            foreach (var rend in steps[^sigilsToCollect].renderers)
+                rend.material = steps[^sigilsToCollect].material;
             sigilsToCollect -= 1;
             sm.hasSigil = false;
             if (sigilsToCollect == 0)

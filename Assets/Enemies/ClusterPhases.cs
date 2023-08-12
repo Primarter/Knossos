@@ -35,7 +35,7 @@ public class ClusterPhases : Cluster
     protected override void Update()
     {
         base.Update();
-        if (startedEncounter)
+        if (startedEncounter && currentPhase < phases.Length)
         {
             foreach (var enemy in phases[currentPhase].enemies)
             {
