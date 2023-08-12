@@ -39,7 +39,7 @@ public class ClusterPhases : Cluster
         {
             foreach (var enemy in phases[currentPhase].enemies)
             {
-                if (enemy.isActiveAndEnabled)
+                if (enemy && enemy.isActiveAndEnabled)
                     return;
             }
             currentPhase += 1;

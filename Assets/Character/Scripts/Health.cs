@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     public int health
     {
         get => _health;
-        private set => _health = Mathf.Clamp(value, 0, startHealth);
+        private set { _health = Mathf.Clamp(value, 0, startHealth); print($"{health} {startHealth}");}
     }
 
     [HideInInspector]
@@ -33,15 +33,21 @@ public class Health : MonoBehaviour
         health = startHealth;
     }
 
+    private void Update()
+    {
+    }
+
     public bool TakeDamage(int value)
     {
+        // print($"{health} {startHealth}");
         if (invincible) return false;
 
         health -= value;
         if (health <= 0)
         {
             Die();
-            return false;
+            print($"Death {health} {startHealth}");
+            return true;
         }
 
         GetComponent<AnimationController>()?.onDamageAnimStart.Invoke(value);
@@ -53,6 +59,7 @@ public class Health : MonoBehaviour
 
     public bool TakeDamage(int value, out bool died)
     {
+        // print($"{health} {startHealth}");
         died = false;
         if (invincible) return false;
 
@@ -61,6 +68,7 @@ public class Health : MonoBehaviour
         {
             Die();
             died = true;
+            print($"Death {health} {startHealth}");
             return false;
         }
 

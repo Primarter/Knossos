@@ -19,12 +19,9 @@ public class AttackSystem : MonoBehaviour
         get => _hitting;
         set
         {
-            hasHit = false;
             _hitting = value;
         }
     }
-
-    bool hasHit = false;
 
     void Awake()
     {
@@ -33,7 +30,7 @@ public class AttackSystem : MonoBehaviour
 
     private void Update()
     {
-        if (hitting && !hasHit)
+        if (hitting)
         {
             foreach (var gameObject in attackColliderManager.getColliding())
             {
@@ -41,7 +38,9 @@ public class AttackSystem : MonoBehaviour
                 {
                     Vector3 playerPos = gameObject.transform.position;
                     Character.Health health = gameObject.GetComponent<Character.Health>();
-                    hasHit = health.TakeDamage(damage, out bool died);
+                    bool hasHit = health.TakeDamage(damage, out bool died);
+                    if (hasHit)
+                        hitting = false;
                     if (died)
                     {
                         agent.visionSystem.hasTarget = false;
