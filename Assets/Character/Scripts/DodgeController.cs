@@ -54,8 +54,7 @@ public class DodgeController : MonoBehaviour
             health.invincible = true;
 
         dashing = true;
-        canDash = false;
-        dodgesLeft -= 1;
+        // dodgesLeft -= 1;
 
         if (mainController.movement.magnitude == 0f)
         {
@@ -75,15 +74,16 @@ public class DodgeController : MonoBehaviour
         if (health != null)
             health.invincible = false;
 
+        canDash = false;
         yield return new WaitForSeconds(config.dashCooldown);
         canDash = true;
 
-        yield return new WaitForSeconds(config.quickDashTiming);
-        canDash = false;
+        // yield return new WaitForSeconds(config.quickDashTiming);
+        // canDash = false;
 
-        yield return new WaitForSeconds(config.lastDashCooldown);
-        canDash = true;
-        dodgesLeft = config.maxQuickDash;
+        // yield return new WaitForSeconds(config.lastDashCooldown);
+        // canDash = true;
+        // dodgesLeft = config.maxQuickDash;
     }
 
     public void TriggerDash()

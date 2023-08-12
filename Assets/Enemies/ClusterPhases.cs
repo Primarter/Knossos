@@ -53,13 +53,26 @@ public class ClusterPhases : Cluster
         }
     }
 
-    public override void ActivateAgents()
+    protected override void DisableAgents()
     {
         if (phases.Length > 0)
         {
-            foreach (var agent in phases[0].enemies)
+            foreach (var agent in phases[currentPhase].enemies)
             {
-                agent.Enable();
+                if(agent && agent.isActiveAndEnabled)
+                    agent.Disable();
+            }
+        }
+    }
+
+    protected override void ActivateAgents()
+    {
+        if (phases.Length > 0)
+        {
+            foreach (var agent in phases[currentPhase].enemies)
+            {
+                if (agent)
+                    agent.Enable();
             }
         }
     }

@@ -22,7 +22,7 @@ public class LifeSystem : MonoBehaviour
         health -= hitInfo.damage;
         if (health <= 0)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

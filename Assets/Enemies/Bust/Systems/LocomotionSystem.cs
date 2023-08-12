@@ -38,5 +38,18 @@ namespace Knossos.Bust
                 Gizmos.DrawSphere(navMeshAgent.destination, 1f);
             }
         }
+
+        private void OnDisable()
+        {
+            // navMeshAgent.velocity = Vector3.zero;
+            // if (isActiveAndEnabled)
+            //     navMeshAgent.isStopped = true;
+        }
+
+        private void OnEnable()
+        {
+            // if (isActiveAndEnabled)
+            //     navMeshAgent.isStopped = false;
+        }
     }
 }

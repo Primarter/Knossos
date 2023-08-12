@@ -16,10 +16,6 @@ namespace Knossos.Bust
             get => _hasTarget;
             set
             {
-                if (value && !_hasTarget)
-                    agent.detectionSystem.AlertPlayer();
-                else if (!value && _hasTarget)
-                    agent.detectionSystem.LosePlayer();
                 _hasTarget = value;
             }
         }
@@ -50,8 +46,8 @@ namespace Knossos.Bust
 
             if (!hasTarget && !usesTriggerZones && distanceToTarget < agent.config.detectionRange)
                 hasTarget = true;
-            // if (distanceToTarget > agent.config.maxDetectionRange)
-            //     hasTarget = false;
+            if (distanceToTarget > agent.config.maxDetectionRange)
+                hasTarget = false;
         }
 
         bool CheckLineOfSight()

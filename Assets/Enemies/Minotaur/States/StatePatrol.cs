@@ -45,7 +45,7 @@ namespace Knossos.Minotaur
         public override void FixedUpdate()
         {
             float distanceMinotaurPlayer = Vector3.Distance(agent.visionSystem.player.transform.position, agent.transform.position);
-            if (agent.playerMinotaurVisibilitySystem.timeSinceVisible > 3f && distanceMinotaurPlayer > 30f)
+            if (distanceMinotaurPlayer > 30f || agent.playerMinotaurVisibilitySystem.timeSinceVisible > 3f)
             {
                 agent.stateMachine.ChangeState(State.Sleep);
                 agent.gameObject.SetActive(false);
