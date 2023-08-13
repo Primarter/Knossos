@@ -33,6 +33,10 @@ public class Health : MonoBehaviour
         health = startHealth;
     }
 
+    private void Update()
+    {
+    }
+
     public bool TakeDamage(int value)
     {
         if (invincible) return false;
@@ -41,7 +45,8 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             Die();
-            return false;
+            print($"Death {health} {startHealth}");
+            return true;
         }
 
         GetComponent<AnimationController>()?.onDamageAnimStart.Invoke(value);
@@ -61,7 +66,7 @@ public class Health : MonoBehaviour
         {
             Die();
             died = true;
-            return false;
+            return true;
         }
 
         GetComponent<AnimationController>()?.onDamageAnimStart.Invoke(value);
