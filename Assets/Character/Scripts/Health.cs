@@ -7,6 +7,9 @@ namespace Knossos.Character
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] Texture2D[] texture = new Texture2D[10];
+    [SerializeField] Material material;
+
     [SerializeField] Transform spawn;
     [SerializeField] int _startHealth = 100;
     public int startHealth
@@ -33,8 +36,15 @@ public class Health : MonoBehaviour
         health = startHealth;
     }
 
+    private void OnDestroy()
+    {
+        material.SetTexture("_BaseMap", texture[9]);
+    }
+
     private void Update()
     {
+        int idx = Mathf.Clamp(health/10 - 1, 0, 10);
+        material.SetTexture("_BaseMap", texture[idx]);
     }
 
     public bool TakeDamage(int value)

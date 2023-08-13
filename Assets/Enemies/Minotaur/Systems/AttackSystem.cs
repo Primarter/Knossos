@@ -39,12 +39,15 @@ public class AttackSystem : MonoBehaviour
                     Vector3 playerPos = gameObject.transform.position;
                     Character.Health health = gameObject.GetComponent<Character.Health>();
                     bool hasHit = health.TakeDamage(damage, out bool died);
-                    if (hasHit)
-                        hitting = false;
                     if (died)
                     {
                         agent.visionSystem.hasTarget = false;
                         agent.stateMachine.ChangeState(State.Patrol);
+                    }
+                    if (hasHit)
+                    {
+                        hitting = false;
+                        break;
                     }
                 }
             }
