@@ -45,5 +45,6 @@ public class Door : MonoBehaviour
             yield return null;
         }
         opened = true;
+        GetComponent<Collider>().enabled = false;
     }
 }

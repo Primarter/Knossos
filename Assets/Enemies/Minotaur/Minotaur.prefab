@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 3636172897626415632}
   - component: {fileID: 5946607996780098476}
   - component: {fileID: 3077240680277352726}
+  - component: {fileID: 699068070091960070}
   m_Layer: 7
   m_Name: Minotaur
   m_TagString: Minotaur
@@ -579,6 +580,24 @@ MonoBehaviour:
   damageMaterial: {fileID: 2100000, guid: 7ee0d3ef0a1268b47af2a2488e7b8565, type: 2}
   damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
     type: 3}
+--- !u!114 &699068070091960070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703805930383705206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c3343ec930de94eabc80ac7f66794f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSounds:
+  - {fileID: 8300000, guid: 1b9ff6ad393927046a96078f683c037a, type: 3}
+  - {fileID: 8300000, guid: 5a83ea608e5f90746a864951b143a7b8, type: 3}
+  - {fileID: 8300000, guid: 5035da31f571f124c8d720bc788d9861, type: 3}
+  - {fileID: 8300000, guid: e7549528df2cb4946bdf573736f6576f, type: 3}
+  - {fileID: 8300000, guid: 28dda65aa28a00844b7790623b9fc170, type: 3}
 --- !u!1 &7791379564380965426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,3 +1974,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationSystem: {fileID: 3636172897626415632}
+  soundSystem: {fileID: 699068070091960070}

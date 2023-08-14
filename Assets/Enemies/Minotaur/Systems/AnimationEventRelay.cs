@@ -8,6 +8,7 @@ namespace Knossos.Minotaur
 public class AnimationEventRelay : MonoBehaviour
 {
     [SerializeField] AnimationSystem animationSystem;
+    [SerializeField] SoundSystem soundSystem;
 
     public void OnAttackActiveEvent()
     {
@@ -17,6 +18,11 @@ public class AnimationEventRelay : MonoBehaviour
     public void OnAttackInactiveEvent()
     {
         animationSystem.OnAttackInactiveEvent();
+    }
+
+    public void OnFootstepEvent()
+    {
+        soundSystem.PlayFootstepSound();
     }
 }
 
