@@ -22,7 +22,8 @@ public class LifeSystem : MonoBehaviour
         health -= hitInfo.damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            this.gameObject.SetActive(false); // disable instead of destroy because cluster hold an array of reference
+            // Destroy(gameObject);
         }
     }
 }

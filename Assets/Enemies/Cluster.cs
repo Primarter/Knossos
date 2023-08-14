@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 namespace Knossos.Enemies
 {
@@ -41,6 +42,12 @@ public class Cluster : MonoBehaviour
     {
         if (!startedEncounter)
         {
+            if (enemies.All(enemy => enemy.gameObject.activeSelf == false)) // if all enemies are dead, don't start encounter
+            {
+                print("Not starting encounter because all enemies of this cluster are dead!");
+                return;
+            }
+
             startEncounterEvent.Invoke();
             startedEncounter = true;
             ActivateAgents();
