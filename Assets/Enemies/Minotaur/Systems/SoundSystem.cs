@@ -6,6 +6,7 @@ namespace Knossos.Minotaur
 {
     public class SoundSystem : MonoBehaviour
     {
+        [SerializeField] AudioClip attackSound;
         [SerializeField] AudioClip[] footstepSounds;
 
         public void PlayFootstepSound()
@@ -16,6 +17,17 @@ namespace Knossos.Minotaur
                 spatialBlend: 0.9f,
                 volume: 0.4f,
                 pitch: Random.Range(0.7f, 1.3f)
+            );
+        }
+
+        public void PlayAttackSound()
+        {
+            SoundManager.PlaySound(
+                transform.position,
+                attackSound,
+                spatialBlend: 0.8f,
+                volume: 0.45f,
+                pitch: Random.Range(0.7f, 1.5f)
             );
         }
     }

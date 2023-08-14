@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void MainMenu()
     {
         SceneManager.LoadScene("Build Menu");
@@ -16,5 +21,10 @@ public class GameSceneManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("ThanksForPlaying");
     }
 }
