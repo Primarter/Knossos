@@ -8,6 +8,8 @@ namespace Knossos.Interaction
 [RequireComponent(typeof(Interactable))]
 public class Sigil : MonoBehaviour
 {
+    [SerializeField] AudioClip pickUpSound;
+
     private void Awake()
     {
         GetComponent<Interactable>().onInteractCallbacks += PickUpSigil;
@@ -21,6 +23,8 @@ public class Sigil : MonoBehaviour
             sm.hasSigil = true;
             Debug.Log("Picked up sigil");
             Destroy(this.gameObject);
+
+            SoundManager.PlaySound(transform.position, pickUpSound, spatialBlend: 0.5f, volume: 0.5f);
         }
     }
 }

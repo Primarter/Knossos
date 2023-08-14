@@ -28,7 +28,7 @@ public class AttractMinotaur : MonoBehaviour
         }
 
         LoudSoundManager.playLoudSound(transform.position);
-        SoundManager.PlaySound(transform.position, bellSound, volume:3, maxDistance: 40, pitch: Random.Range(0.95f, 1.05f));
+        SoundManager.PlaySound(transform.position, bellSound, volume:3, maxDistance: 40, spatialBlend: 0.75f, pitch: Random.Range(0.95f, 1.05f));
     }
 }
 

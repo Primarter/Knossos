@@ -6,6 +6,7 @@ public class SoundController : MonoBehaviour
 {
     [SerializeField] AudioClip specialAttackSound;
     [SerializeField] AudioClip[] swooshSounds;
+    [SerializeField] AudioClip[] takeDamageSounds;
 
     public void PlaySwooshSound()
     {
@@ -25,6 +26,17 @@ public class SoundController : MonoBehaviour
             specialAttackSound,
             spatialBlend: 0.5f,
             volume: 0.5f
+        );
+    }
+
+    public void PlayTakeDamageSound()
+    {
+        SoundManager.PlaySound(
+            transform.position,
+            ArrayHelper.PickRandom(takeDamageSounds),
+            spatialBlend: 0.75f,
+            volume: 0.8f,
+            pitch: Random.Range(0.7f, 1.4f)
         );
     }
 }

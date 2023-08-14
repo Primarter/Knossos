@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 525265911}
   - component: {fileID: 857862034391331933}
   - component: {fileID: 7251781826864637834}
+  - component: {fileID: 296588942362685046}
   m_Layer: 0
   m_Name: Scarecrow
   m_TagString: Enemy
@@ -221,7 +222,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 296588942362685046}
+        m_TargetAssemblyTypeName: Knossos.Bust.SoundSystem, Assembly-CSharp
+        m_MethodName: PlayTakeDamageSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   meshRenderer: {fileID: 3882211738399043803}
   damageMaterial: {fileID: 2100000, guid: 7ee0d3ef0a1268b47af2a2488e7b8565, type: 2}
   damageParticle: {fileID: 6065271941520806695, guid: bdaf4abe9b959e948844ce9671166507,
     type: 3}
+--- !u!114 &296588942362685046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882211738945492244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719a3ce69b973fe4492545a9ffb9755a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeDamageSound: {fileID: 8300000, guid: 6fdfee4ee2452404da1f0c768d210bef, type: 3}
