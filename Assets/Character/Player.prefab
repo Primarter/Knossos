@@ -958,7 +958,7 @@ PositionConstraint:
   serializedVersion: 2
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0.0564, z: 0}
-  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_TranslationOffset: {x: 0, y: 0.0564, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -1611,7 +1611,7 @@ Transform:
   m_GameObject: {fileID: 3000225111823255534}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30337554, y: 0.43390182, z: -0.1579273, w: 0.8335176}
-  m_LocalPosition: {x: -10.981374, y: 12.268783, z: -7.6892385}
+  m_LocalPosition: {x: 114.24865, y: 12.325181, z: 127.46079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3371,6 +3371,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8707686826105622532}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fc0a4c54f6e07264ea72c907ca283e34,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3094798046824761103}
     - targetCorrespondingSourceObject: {fileID: -8411076229119726979, guid: fc0a4c54f6e07264ea72c907ca283e34,
         type: 3}
       insertIndex: -1
@@ -3818,6 +3822,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8b3029aeafda8604b87143e53fa956f8, type: 3}
   - {fileID: 8300000, guid: 629769803100ed94eb99ccda18cd71b2, type: 3}
   - {fileID: 8300000, guid: d595962a7f25a54449e2182f0aabc99f, type: 3}
+--- !u!114 &3094798046824761103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694165254857749305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c72b652723712d41a15afddf23af2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialAttackSound: {fileID: 8300000, guid: 57d51bae63fd2df40b03ce115370aae9, type: 3}
 --- !u!4 &3325989323589724547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc0a4c54f6e07264ea72c907ca283e34,

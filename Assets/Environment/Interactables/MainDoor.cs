@@ -19,6 +19,7 @@ public class MainDoor : MonoBehaviour
     [SerializeField] Step[] steps = new Step[4];
 
     int sigilsToCollect;
+    [SerializeField] AudioClip placeSigilSound;
 
     private void Awake()
     {
@@ -35,6 +36,8 @@ public class MainDoor : MonoBehaviour
         Character.SigilManager sm = player.GetComponent<Character.SigilManager>();
         if (sm != null && sm.hasSigil)
         {
+            SoundManager.PlaySound(transform.position, placeSigilSound, spatialBlend: 0.5f, volume: 0.6f);
+
             Debug.Log("Used sigil");
             steps[^sigilsToCollect].door.OpenDoor();
             steps[^sigilsToCollect].sigilToActivate.SetActive(true);

@@ -69,6 +69,7 @@ public class AttackController : MonoBehaviour
 
     public void StartSpecial()
     {
+        // GetComponent<SoundController>().PlaySpecialAttackSound();
         StartCoroutine(SpecialCooldown());
     }
 

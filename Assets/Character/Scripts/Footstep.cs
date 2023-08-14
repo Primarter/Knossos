@@ -21,10 +21,7 @@ public class Footstep : MonoBehaviour
     const float raycastDistance = 0.2f;
     // TODO: add foot speed affecting volume
 
-    AudioClip PickRandom(AudioClip[] sounds)
-    {
-        return sounds[Random.Range(0, sounds.Length)];
-    }
+
 
     void Update()
     {
@@ -35,12 +32,12 @@ public class Footstep : MonoBehaviour
 
         if (leftHit && lastLeftHit == false)
         {
-            SoundManager.PlaySound(leftFoot.position, PickRandom(footstepSounds), pitch: Random.Range(0.5f, 0.8f), minDistance: 5f, maxDistance: 50f);
+            SoundManager.PlaySound(leftFoot.position, ArrayHelper.PickRandom(footstepSounds), pitch: Random.Range(0.5f, 0.8f), minDistance: 5f, maxDistance: 50f);
         }
 
         if (rightHit && lastRightHit == false)
         {
-            SoundManager.PlaySound(rightFoot.position, PickRandom(footstepSounds), pitch: Random.Range(0.5f, 0.8f), minDistance: 5f, maxDistance: 50f);
+            SoundManager.PlaySound(rightFoot.position, ArrayHelper.PickRandom(footstepSounds), pitch: Random.Range(0.5f, 0.8f), minDistance: 5f, maxDistance: 50f);
         }
 
         lastLeftHit = leftHit;

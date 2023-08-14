@@ -5,11 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Door : MonoBehaviour
 {
-    [SerializeField] float openingDuration = 3f;
+    [SerializeField] float openingDuration = 3.0f;
     private Vector3 doorStartPosition;
     private Vector3 doorEndPosition;
     private System.Diagnostics.Stopwatch sw = new();
     private bool opened = false;
+
+    [SerializeField] AudioClip doorOpeningSound;
 
     private void Start()
     {
@@ -21,7 +23,15 @@ public class Door : MonoBehaviour
     public void OpenDoor()
     {
         if (!opened)
+        {
             StartCoroutine(OpenDoorCoroutine());
+            SoundManager.PlaySound(
+                transform.position,
+                doorOpeningSound,
+                spatialBlend: 0.5f,
+                volume: 0.8f
+            );
+        }
     }
 
     private IEnumerator OpenDoorCoroutine()
