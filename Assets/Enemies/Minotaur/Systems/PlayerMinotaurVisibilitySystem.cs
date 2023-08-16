@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 using System.Linq;
 
 namespace Knossos.Minotaur
@@ -30,12 +31,15 @@ public class PlayerMinotaurVisibilitySystem : MonoBehaviour
         timeSinceVisible += Time.fixedDeltaTime;
 
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
-        if (
-            GeometryUtility.TestPlanesAABB(planes, objectCollider.bounds) &&
-            !Physics.Linecast(mainCamera.transform.position, transform.position, occlusionLayer))
+        if (GeometryUtility.TestPlanesAABB(planes, objectCollider.bounds))
         {
-            timeSinceVisible = 0f;
-            isVisible = true;
+            Vector3 dir = transform.position - mainCamera.transform.position;
+            RaycastHit[] hits = Physics.RaycastAll(mainCamera.transform.position, dir.normalized, dir.magnitude, occlusionLayer);
+            if (hits.Length == 0 || hits.All(hit => hit.collider.gameObject.GetComponent<MeshRenderer>().shadowCastingMode == ShadowCastingMode.ShadowsOnly))
+            {
+                timeSinceVisible = 0f;
+                isVisible = true;
+            }
         }
         else
         {
