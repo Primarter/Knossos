@@ -28,11 +28,11 @@ public class AttackSystem : MonoBehaviour
         agent = GetComponent<MinotaurAgent>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (hitting)
         {
-            foreach (var gameObject in attackColliderManager.getColliding())
+            foreach (var gameObject in attackColliderManager.GetColliding())
             {
                 if (gameObject.tag == "Player")
                 {
