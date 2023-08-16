@@ -13,12 +13,14 @@ public class FireWall : MonoBehaviour
     VisualEffect fire;
     BoxCollider boxCollider;
     NavMeshObstacle navMeshObstacle;
+    OffMeshLink offMeshLink;
 
     private void Awake()
     {
         fire = GetComponent<VisualEffect>();
         boxCollider = GetComponent<BoxCollider>();
         navMeshObstacle = GetComponent<NavMeshObstacle>();
+        offMeshLink = GetComponent<OffMeshLink>();
 
         if (transform.parent != null && transform.parent.tag == "Cluster")
         {
@@ -36,6 +38,7 @@ public class FireWall : MonoBehaviour
         fire.Stop();
         boxCollider.enabled = false;
         navMeshObstacle.enabled = false;
+        offMeshLink.enabled = false;
     }
 
     public void TurnOnWall()
@@ -43,6 +46,7 @@ public class FireWall : MonoBehaviour
         fire.Play();
         boxCollider.enabled = true;
         navMeshObstacle.enabled = true;
+        offMeshLink.enabled = true;
     }
 
     public void TurnOffWall()
@@ -50,6 +54,7 @@ public class FireWall : MonoBehaviour
         fire.Stop();
         boxCollider.enabled = false;
         navMeshObstacle.enabled = false;
+        offMeshLink.enabled = false;
     }
 }
 
