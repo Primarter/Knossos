@@ -31,12 +31,12 @@ public class DamageVisualEffect : MonoBehaviour
             Health healthManager = GetComponent<Health>();
             if (healthManager == null)
                 frames = 10;
-            else if ((float)healthManager.health / (float)healthManager.startHealth <= .25)
+            else if ((float)healthManager.health / (float)healthManager.startHealth <= .25 || damage >= healthManager.startHealth / 2)
             {
                 bound = 1f;
                 frames = animationController.config.damageAnimationDurations[2];
             }
-            else if ((float)healthManager.health / (float)healthManager.startHealth <= .50)
+            else if ((float)healthManager.health / (float)healthManager.startHealth <= .50 || damage >= healthManager.startHealth / 4)
             {
                 bound = .5f;
                 frames = animationController.config.damageAnimationDurations[1];

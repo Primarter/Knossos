@@ -103,6 +103,6 @@ MonoBehaviour:
     knockBackStrength: 100
     knockBackDuration: 0.2
     staggerDuration: 2
-  damageAnimationDurations: 0f000000140000001900000014000000
+  damageAnimationDurations: 140000001900000023000000
   specialCooldown: 5
   DodgeAnimationSpeedMultiplier: 1.7499999

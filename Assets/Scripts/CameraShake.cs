@@ -47,12 +47,12 @@ public class CameraShake : MonoBehaviour
             frames = defaultDuration;
             curve = defaultCurve;
         }
-        else if ((float)healthManager.health / (float)healthManager.startHealth <= .25)
+        else if ((float)healthManager.health / (float)healthManager.startHealth <= .25 || damage >= healthManager.startHealth / 2)
         {
             frames = config.damageAnimationDurations[2];
             curve = curves[2];
         }
-        else if ((float)healthManager.health / (float)healthManager.startHealth <= .50)
+        else if ((float)healthManager.health / (float)healthManager.startHealth <= .50 || damage >= healthManager.startHealth / 4)
         {
             frames = config.damageAnimationDurations[1];
             curve = curves[1];

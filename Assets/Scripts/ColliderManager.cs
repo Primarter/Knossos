@@ -31,8 +31,6 @@ public class ColliderManager : MonoBehaviour
     {
         if (tags.Contains(other.tag))
         {
-            print(other.tag);
-            print("IN");
             collidingGameObjects.Add(other.gameObject);
         }
     }
