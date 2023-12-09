@@ -151,6 +151,41 @@ namespace Knossos.Map
             return true;
         }
 
+        bool AddToCull(Vector2Int coord)
+        {
+            int index = CoordToIndex(coord);
+            if (!IsInsideMap(coord)) return false;
+            culledObjects.Add(map[index].obj);
+            return true;
+        }
+
+        public Vector2Int GetGridCoordinates(Vector3 worldCoordinates)
+        {
+            Vector3Int coord3D = grid.WorldToCell(worldCoordinates);
+            return new(coord3D.x, coord3D.z);
+        }
+
+        void PropagateWallCulling(Vector2Int coord)
+        {
+            for (int i = 0 ; i < 5; ++i) // +X
+                if (AddToCullIfWall(new(coord.x + i, coord.y)) == false) break;
+            for (int i = 0 ; i < 5; ++i) // -X
+                if (AddToCullIfWall(new(coord.x - i, coord.y)) == false) break;
+            for (int i = 0 ; i < 5; ++i) // +Y
+                if (AddToCullIfWall(new(coord.x, coord.y + i)) == false) break;
+            for (int i = 0 ; i < 5; ++i) // -Y
+                if (AddToCullIfWall(new(coord.x, coord.y - i)) == false) break;
+
+            for (int i = 0 ; i < 5; ++i) // +X
+                if (AddToCullIfWall(new(coord.x + i, coord.y - 1)) == false) break;
+            for (int i = 0 ; i < 5; ++i) // -X
+                if (AddToCullIfWall(new(coord.x - i, coord.y - 1)) == false) break;
+            for (int i = 0 ; i < 5; ++i) // +Y
+                if (AddToCullIfWall(new(coord.x - 1, coord.y + i)) == false) break;
+            for (int i = 0 ; i < 5; ++i) // -Y
+                if (AddToCullIfWall(new(coord.x - 1, coord.y - i)) == false) break;
+        }
+
         void UpdateVisibilitySimple()
         {
             if (!IsInsideMap(cameraCoord))
@@ -158,23 +193,7 @@ namespace Knossos.Map
             if (map[cameraIndex].type != 1) // if not inside a wall
                 return;
 
-            for (int i = 0 ; i < 5; ++i) // +X
-                if (AddToCullIfWall(new(cameraCoord.x + i, cameraCoord.y)) == false) break;
-            for (int i = 0 ; i < 5; ++i) // -X
-                if (AddToCullIfWall(new(cameraCoord.x - i, cameraCoord.y)) == false) break;
-            for (int i = 0 ; i < 5; ++i) // +Y
-                if (AddToCullIfWall(new(cameraCoord.x, cameraCoord.y + i)) == false) break;
-            for (int i = 0 ; i < 5; ++i) // -Y
-                if (AddToCullIfWall(new(cameraCoord.x, cameraCoord.y - i)) == false) break;
-
-            for (int i = 0 ; i < 5; ++i) // +X
-                if (AddToCullIfWall(new(cameraCoord.x + i, cameraCoord.y - 1)) == false) break;
-            for (int i = 0 ; i < 5; ++i) // -X
-                if (AddToCullIfWall(new(cameraCoord.x - i, cameraCoord.y - 1)) == false) break;
-            for (int i = 0 ; i < 5; ++i) // +Y
-                if (AddToCullIfWall(new(cameraCoord.x - 1, cameraCoord.y + i)) == false) break;
-            for (int i = 0 ; i < 5; ++i) // -Y
-                if (AddToCullIfWall(new(cameraCoord.x - 1, cameraCoord.y - i)) == false) break;
+            PropagateWallCulling(cameraCoord);
         }
 
         void HideWallBetweenCameraAndPlayer()
@@ -184,7 +203,9 @@ namespace Knossos.Map
                 Vector3Int coord3D = grid.WorldToCell(hitInfo.point);
                 Vector2Int coord = new(coord3D.x, coord3D.z);
                 int index = CoordToIndex(coord);
+
                 culledObjects.Add(map[index].obj);
+                PropagateWallCulling(coord);
 
                 // if (map[index].type != 1) // if not inside a wall
                 //     return;

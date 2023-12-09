@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0f752a4b300ee644977938088e1ba60, type: 3}
   m_Name: InputConfig
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   dodgeBufferDuration: 250
-  attackBufferDuration: 100
+  attackBufferDuration: 250
   specialBufferDuration: 250

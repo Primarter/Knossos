@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Knossos.Map;
+using Codice.CM.Common.Merge;
 
 public class LabyrinthGenerator : EditorWindow
 {
@@ -51,19 +52,19 @@ public class LabyrinthGenerator : EditorWindow
 
         // South
         if (y > 0)
-            neigbours[2] = map[(y - 1) * width + x].type;
+            neigbours[2] = map[(y - 1) * width + x].type > 0 ? 1 : 0;
 
         // East
         if (x < width - 1)
-            neigbours[1] = map[y * width + (x + 1)].type;
+            neigbours[1] = map[y * width + (x + 1)].type > 0 ? 1 : 0;
 
         // North
         if (y < width - 1)
-            neigbours[0] = map[(y + 1) * width + x].type;
+            neigbours[0] = map[(y + 1) * width + x].type > 0 ? 1 : 0;
 
         // West
         if (x > 0)
-            neigbours[3] = map[y * width + (x - 1)].type;
+            neigbours[3] = map[y * width + (x - 1)].type > 0 ? 1 : 0;
 
         return neigbours;
     }
@@ -145,6 +146,7 @@ public class LabyrinthGenerator : EditorWindow
                 obj.transform.parent = parent.transform;
 
                 labyrinthManager.map[index].obj = obj;
+                labyrinthManager.map[index].type = labyrinthManager.map[index].type >= 1 ? 1 : 0;
             }
             else
             {
@@ -157,6 +159,8 @@ public class LabyrinthGenerator : EditorWindow
     public (Cell[] map, int width, int height) imageToMap(Texture2D imageMap)
     {
         string[] colorWalls = {"000080", "0000FF"};
+        const string entranceColor = "1EFF00";
+        const string endDoorColor = "FFAF00";
         int width = imageMap.width;
         int height = imageMap.height;
 
@@ -171,8 +175,15 @@ public class LabyrinthGenerator : EditorWindow
             Color32 pixel = pixels[index];
             string colorHex = ColorUtility.ToHtmlStringRGB(pixel);
 
-            bool isWall = colorWalls.Contains(colorHex);
-            map[index].type = isWall ? 1 : 0;
+            if (colorHex == entranceColor)
+                map[index].type = 2;
+            else if (colorHex == endDoorColor)
+                map[index].type = 3;
+            else if (colorWalls.Contains(colorHex))
+                map[index].type = 1;
+            else
+                map[index].type = 0;
+
             map[index].obj = null;
         }
         }

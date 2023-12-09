@@ -97,4 +97,28 @@ MonoBehaviour:
     conditionS: 1
     hasConditionW: 1
     conditionW: 1
+  - type: 2
+    prefab: {fileID: 2729356303139232246, guid: 8098c6c6113583a42951b135f5909e43,
+      type: 3}
+    canRotate: 0
+    hasConditionN: 1
+    conditionN: 1
+    hasConditionE: 1
+    conditionE: 1
+    hasConditionS: 1
+    conditionS: 0
+    hasConditionW: 1
+    conditionW: 1
+  - type: 3
+    prefab: {fileID: 5364939266492140761, guid: 724c743a03da96e4e9345da29062966f,
+      type: 3}
+    canRotate: 0
+    hasConditionN: 1
+    conditionN: 1
+    hasConditionE: 1
+    conditionE: 0
+    hasConditionS: 1
+    conditionS: 0
+    hasConditionW: 1
+    conditionW: 1
   scale: 11
