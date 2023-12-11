@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413813bf93851a744b8e28dbb940a193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorTile: {fileID: 0}
+  doorTile: {fileID: 5869575315291942156}
 --- !u!4 &3157083182696938229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3666215990863357923, guid: 96b055792914c974cb930382c692fae6,
@@ -362,6 +362,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 11, y: 0, z: 11}
   m_Center: {x: 0, y: 0.05, z: 0}
+--- !u!23 &5869575315291942156 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3403e3cb1d17a6d4b8ff1c3ea0b75289,
+    type: 3}
+  m_PrefabInstance: {fileID: 5095117123861229960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9218529921306065947
 PrefabInstance:
   m_ObjectHideFlags: 0

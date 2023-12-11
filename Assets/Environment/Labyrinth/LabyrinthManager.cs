@@ -18,13 +18,13 @@ namespace Knossos.Map
     [RequireComponent(typeof(Grid))]
     public class LabyrinthManager : MonoBehaviour
     {
-        [SerializeField] public Cell[] map;
-        [SerializeField] public int mapHeight;
-        [SerializeField] public int mapWidth;
-        [SerializeField] public Vector3 mapOrigin;
-        [SerializeField] public float mapScale;
+        public Cell[] map;
+        public int mapHeight;
+        public int mapWidth;
+        public Vector3 mapOrigin;
+        public float mapScale;
+        public LayerMask wallLayer;
 
-        [SerializeField] LayerMask wallLayer;
         Grid grid;
         Transform playerTransform;
         Camera mainCamera;
@@ -38,9 +38,9 @@ namespace Knossos.Map
         [SerializeField] Vector2Int cameraCoord;
         [SerializeField] int cameraIndex;
 
-        [SerializeField] public bool debugOn = false;
-        [SerializeField] public GameObject debug1;
-        [SerializeField] public GameObject debug2;
+        public bool debugOn = false;
+        public GameObject debug1;
+        public GameObject debug2;
 
         void Awake()
         {
@@ -146,6 +146,7 @@ namespace Knossos.Map
         {
             int index = CoordToIndex(coord);
             if (!IsInsideMap(coord)) return false;
+            if (map[index].type > 1) Debug.Log(map[index].type);
             if (map[index].type != 1) return false;
             culledObjects.Add(map[index].obj);
             return true;

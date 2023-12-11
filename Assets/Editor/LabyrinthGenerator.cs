@@ -30,11 +30,11 @@ public class LabyrinthGenerator : EditorWindow
         {
             if (tileConfig == null)
             {
-                Debug.LogError("Image is not set!");
+                Debug.LogError("Missing tile config.");
             }
             else if (image == null)
             {
-                Debug.LogError("Image is not set!");
+                Debug.LogError("Missing map image.");
             }
             else
             {
@@ -127,6 +127,8 @@ public class LabyrinthGenerator : EditorWindow
         GameObject parent = new GameObject("Labyrinth");
         LabyrinthManager labyrinthManager = parent.AddComponent<LabyrinthManager>();
 
+        labyrinthManager.wallLayer = LayerMask.NameToLayer("Walls");
+
         labyrinthManager.map = map;
         labyrinthManager.mapWidth = width;
         labyrinthManager.mapHeight = height;
@@ -147,6 +149,7 @@ public class LabyrinthGenerator : EditorWindow
 
                 labyrinthManager.map[index].obj = obj;
                 labyrinthManager.map[index].type = labyrinthManager.map[index].type >= 1 ? 1 : 0;
+                
             }
             else
             {

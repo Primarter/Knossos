@@ -481,6 +481,18 @@ MonoBehaviour:
   OnAttackActive:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 411562396021717394}
+        m_TargetAssemblyTypeName: UnityEngine.VFX.VisualEffect, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 2550917536028846964}
         m_TargetAssemblyTypeName: Knossos.Minotaur.AttackSystem, Assembly-CSharp
         m_MethodName: set_hitting
@@ -493,9 +505,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 411562396021717394}
-        m_TargetAssemblyTypeName: UnityEngine.VFX.VisualEffect, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 699068070091960070}
+        m_TargetAssemblyTypeName: Knossos.Minotaur.SoundSystem, Assembly-CSharp
+        m_MethodName: PlayAttackSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -592,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c3343ec930de94eabc80ac7f66794f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSound: {fileID: 8300000, guid: 6585669c5a709a845b4414a8140a3a1c, type: 3}
   footstepSounds:
   - {fileID: 8300000, guid: 1b9ff6ad393927046a96078f683c037a, type: 3}
   - {fileID: 8300000, guid: 5a83ea608e5f90746a864951b143a7b8, type: 3}
@@ -738,17 +751,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b1dff181b1340f642a8844e8e08c8c23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0005771671
+      value: -0.00096
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b1dff181b1340f642a8844e8e08c8c23,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0025726939
+      value: 0.00201
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b1dff181b1340f642a8844e8e08c8c23,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0008913129
+      value: 0.00159
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b1dff181b1340f642a8844e8e08c8c23,
         type: 3}
