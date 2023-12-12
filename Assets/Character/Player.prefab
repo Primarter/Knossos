@@ -3477,6 +3477,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bushTag: Bush
   isHiding: 0
+  focusDuration: 0.5
+  volumeProfile: {fileID: 11400000, guid: 8f609fabbdf854f48b079394d4531cbd, type: 2}
 --- !u!114 &1754580896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3742,13 +3744,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3094798046824761103}
+        m_TargetAssemblyTypeName: SoundController, Assembly-CSharp
+        m_MethodName: PlayTakeDamageSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDamageAnimEnd:
     m_PersistentCalls:
       m_Calls: []
   onSpecialAvailable:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6123616619482419341}
         m_TargetAssemblyTypeName: UnityEngine.VFX.VisualEffect, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -3834,7 +3848,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c72b652723712d41a15afddf23af2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialAttackSound: {fileID: 8300000, guid: 57d51bae63fd2df40b03ce115370aae9, type: 3}
+  specialAttackSound: {fileID: 8300000, guid: 7cf7107c98a1c98418090a298d9f7b92, type: 3}
+  swooshSounds:
+  - {fileID: 8300000, guid: ddfef344cef594f41b5835ae049d8fce, type: 3}
+  - {fileID: 8300000, guid: 243c2465553d9124f890ed79b5810ab4, type: 3}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 9c3b08fd4a032af46a9a2fdc6ac93a64, type: 3}
+  - {fileID: 8300000, guid: 1d3231fede4df654280d66214142653b, type: 3}
 --- !u!4 &3325989323589724547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc0a4c54f6e07264ea72c907ca283e34,
