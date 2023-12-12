@@ -14,7 +14,7 @@ public class Hiding : MonoBehaviour
     public bool isHiding;
     public float focusDuration = .5f;
     public float regularVignette = .25f;
-    public float focusVignette = .5f;
+    public float focusVignette = .4f;
 
     private Vignette vignette;
     private float progress = 0f;
@@ -43,7 +43,7 @@ public class Hiding : MonoBehaviour
             isHiding = true;
             if (vignette)
             {
-                StopCoroutine(currentEffect);
+                if (currentEffect != null) StopCoroutine(currentEffect);
                 currentEffect = StartCoroutine(Focus());
             }
         }
@@ -56,7 +56,7 @@ public class Hiding : MonoBehaviour
             isHiding = false;
             if (vignette)
             {
-                StopCoroutine(currentEffect);
+                if (currentEffect != null) StopCoroutine(currentEffect);
                 currentEffect = StartCoroutine(Unfocus());
             }
         }
@@ -69,7 +69,7 @@ public class Hiding : MonoBehaviour
         while (Time.time < startTime + timeLeft)
         {
             progress = (Time.time - startTime) / focusDuration;
-            vignette.intensity.value = regularVignette + Easing.easeOutQuint(progress) * (regularVignette - focusVignette);
+            vignette.intensity.value = regularVignette + Easing.easeOutQuint(progress) * (focusVignette - regularVignette);
             yield return null;
         }
     }
@@ -80,9 +80,8 @@ public class Hiding : MonoBehaviour
         float timeLeft = progress * focusDuration;
         while (Time.time < startTime + timeLeft)
         {
-            // TEST AND FIX
             progress = 1 - ((Time.time - startTime) / focusDuration);
-            vignette.intensity.value = regularVignette + Easing.easeOutQuint(progress) * (regularVignette - focusVignette);
+            vignette.intensity.value = regularVignette + Easing.easeOutQuint(progress) * (focusVignette - regularVignette);
             yield return null;
         }
     }

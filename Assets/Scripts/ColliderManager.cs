@@ -14,7 +14,6 @@ public class ColliderManager : MonoBehaviour
     private void Awake()
     {
         colliders = GetComponents<BoxCollider>();
-        print((colliders, colliders.Length));
     }
 
     public GameObject[] GetColliding()
