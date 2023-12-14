@@ -17,7 +17,6 @@ public class Hiding : MonoBehaviour
     public float focusVignette = .4f;
 
     private Vignette vignette;
-    private float progress = 0f;
     Coroutine currentEffect;
 
     void Start()
@@ -34,6 +33,11 @@ public class Hiding : MonoBehaviour
             vignette = postProcessingVolume.sharedProfile.Add<Vignette>();
             Debug.Log("Didn't find vignette effect, added it to volume profile");
         }
+    }
+
+    void OnDestroy()
+    {
+        vignette.intensity.value = regularVignette;
     }
 
     void OnTriggerEnter(Collider collider)
@@ -64,9 +68,10 @@ public class Hiding : MonoBehaviour
 
     IEnumerator Focus()
     {
-        float startTime = Time.time;
-        float timeLeft = (1 - progress) * focusDuration;
-        while (Time.time < startTime + timeLeft)
+        float progress = (vignette.intensity.value - regularVignette) / (focusVignette - regularVignette);
+        float elapsedTime = progress * focusDuration;
+        float startTime = Time.time - elapsedTime;
+        while (Time.time < startTime + focusDuration)
         {
             progress = (Time.time - startTime) / focusDuration;
             vignette.intensity.value = regularVignette + Easing.easeOutQuint(progress) * (focusVignette - regularVignette);
@@ -76,12 +81,13 @@ public class Hiding : MonoBehaviour
 
     IEnumerator Unfocus()
     {
-        float startTime = Time.time;
-        float timeLeft = progress * focusDuration;
-        while (Time.time < startTime + timeLeft)
+        float progress = 1 - (vignette.intensity.value - regularVignette) / (focusVignette - regularVignette);
+        float elapsedTime = progress * focusDuration;
+        float startTime = Time.time - elapsedTime;
+        while (Time.time < startTime + focusDuration)
         {
-            progress = 1 - ((Time.time - startTime) / focusDuration);
-            vignette.intensity.value = regularVignette + Easing.easeOutQuint(progress) * (focusVignette - regularVignette);
+            progress = (Time.time - startTime) / focusDuration;
+            vignette.intensity.value = regularVignette + Easing.easeOutQuint(1 - progress) * (focusVignette - regularVignette);
             yield return null;
         }
     }
