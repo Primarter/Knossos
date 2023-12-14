@@ -1,3 +1,4 @@
+# OUTDATED README, USELESS AS IS
 # Knossos
 
 This is the repository for the *Knossos* game made for Rafale25 and my Master's project. It will be developped over the course of our 3rd semester in Heriot-Watt University's Games Design & Development MDes.
