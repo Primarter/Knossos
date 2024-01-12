@@ -113,6 +113,15 @@ public class InputManager : MonoBehaviour
 
         return false;
     }
+
+    public static void EmptyBuffer()
+    {
+        inputBuffer.Clear();
+        foreach(var i in Enum.GetValues(typeof(BufferedInput)))
+        {
+            inputCounts[(BufferedInput)(int)i] = 0;
+        }
+    }
 }
 
 }

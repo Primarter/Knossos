@@ -7,12 +7,12 @@ namespace Knossos.Minotaur
 {
     public class LocomotionSystem : MonoBehaviour
     {
-        MinotaurAgent agent;
+        // MinotaurAgent agent;
         public NavMeshAgent navMeshAgent;
 
         void Awake()
         {
-            agent = GetComponent<MinotaurAgent>();
+            // agent = GetComponent<MinotaurAgent>();
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
 

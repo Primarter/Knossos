@@ -12,8 +12,8 @@ namespace Knossos.Minotaur
 
         // Waypoint targetWaypoint;
         Vector3 targetWaypoint;
-        bool hasTarget = false;
-        float timeOnTarget = 0f;
+        // bool hasTarget = false;
+        // float timeOnTarget = 0f;
 
         public float patrolTime = 60f;
         [SerializeField] float patrolTimeRemaining;
@@ -80,7 +80,7 @@ namespace Knossos.Minotaur
 
         void setTarget(Vector3 target)
         {
-            hasTarget = true;
+            // hasTarget = true;
             targetWaypoint = target;
             agent.locomotionSystem.navMeshAgent.destination = targetWaypoint;
         }
