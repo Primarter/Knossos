@@ -1,6 +1,6 @@
 # Knossos
 
-This is the repository for the *Knossos* game made for Rafale25 and I's Master's degree final project. It has been developped over the course of our 3rd semester in Heriot-Watt University's Games Design & Development MDes. The game itself is available on [itch.io]()
+This is the repository for the *Knossos* game made for Rafale25 and I's Master's degree final project. It has been developped over the course of our 3rd semester in Heriot-Watt University's Games Design & Development MDes. The game itself is available on [itch.io](https://primarter.itch.io/knossos)
 
 This game is an exploration/action game centered around discovering a maze and escaping the Minotaur within it. The player is thrust into Daedalus' maze for the annual sacrifice to the Minotaur. Upon arrival they picked up Daedalus' magic hammer, their only weapon in this hostile place. Even that weapon isn't enough to kill the Minotaur though. They can merely stagger it by unleashing the hammer's power. Regardless, it is well-known that Daedalus built an escape into that maze and they need to figure it out.
 
